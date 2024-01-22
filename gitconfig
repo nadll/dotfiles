@@ -59,3 +59,8 @@
 
 [init]
   defaultBranch = master
+
+[user]
+
+	email = niko@2themoon.me
+	name = niko
