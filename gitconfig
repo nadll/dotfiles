@@ -1,64 +1,233 @@
-[color]
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
-  ui = auto
+[alias]
+    co = checkout
+    st = status -sb
+    br = branch
+    ci = commit
+    fo = fetch origin
+    d = !git --no-pager diff
+    dt  = difftool
+    stat = !git --no-pager diff --stat
 
-[color "branch"]
-  current = green
-  remote = yellow
+    # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
+    remoteSetHead = remote set-head origin --auto
+
+    # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
+    defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
+
+    # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
+    sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
+
+    # http://www.jukie.net/bart/blog/pimping-out-git-log
+    lg = log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'
+
+    # Serve local repo. http://coderwall.com/p/eybtga
+    # Then other can access via `git clone git://#{YOUR_IP_ADDRESS}/
+    serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+
+    # Checkout to defaultBranch
+    m = !git checkout $(git defaultBranch)
+
+    # Removes a file from the index
+    unstage = reset HEAD --
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+	# View the current working tree status using the short format
+	s = status -s
+
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
+	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+	# Pull in remote changes for the current repository and all its submodules
+	p = pull --recurse-submodules
+
+	# Clone a repository including all submodules
+	c = clone --recursive
+
+	# Commit all changes
+	ca = !git add -A && git commit -av
+
+	# Switch to a branch, creating it if necessary
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+	# Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+
+	# List aliases
+	aliases = config --get-regexp alias
+
+	# Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
+
+	# Credit an author on the latest commit
+	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+	# Interactive rebase with the given number of latest commits
+	reb = "!r() { git rebase -i HEAD~$1; }; r"
+
+	# Remove the old tag with this name and tag the latest commit with it.
+	retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+
+	# Find branches containing commit
+	fb = "!f() { git branch -a --contains $1; }; f"
+
+	# Find tags containing commit
+	ft = "!f() { git describe --always --contains $1; }; f"
+
+	# Find commits by source code
+	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+	# Remove branches that have already been merged with main
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+	# List contributors with number of commits
+	contributors = shortlog --email --summary --numbered
+
+	# Show the user email for the current repository.
+	whoami = config user.email
+
+    # Remove last commits (by default it removes the last commit).
+
+    rlc = "!f() { \
+        number_of_commits=\"${1:-1}\"; \
+        git reset --hard \"HEAD~$number_of_commits\"; \
+    }; f"
+
+    # Undo last commits (by default it undoes the last commit).
+    ulc = "!f() { \
+        number_of_commits=\"${1:-1}\"; \
+        git reset --soft \"HEAD~$number_of_commits\"; \
+    }; f"
+
+    # Update the content of the last commit by including all
+    # local changes.
+    ua = !git add --all && git commit --amend --no-edit
+
+    # Show custom text-based graphical log of the commit history.
+    g = log --graph --pretty=custom
+
+    # Show custom log of the commit history.
+    l = log --pretty=custom
+
+[apply]
+
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
 
 [core]
-  pager = less -FRSX
-  editor = code --wait
 
-[alias]
-  co = checkout
-  st = status -sb
-  br = branch
-  ci = commit
-  fo = fetch origin
-  d = !git --no-pager diff
-  dt  = difftool
-  stat = !git --no-pager diff --stat
+	# Use custom `.gitignore`
+	excludesfile = ~/.gitignore
 
-  # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
-  remoteSetHead = remote set-head origin --auto
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
-  # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
-  defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
+	# Make `git rebase` safer on macOS
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
 
-  # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
-  sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
+	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
+	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+	precomposeunicode = false
 
-  # http://www.jukie.net/bart/blog/pimping-out-git-log
-  lg = log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'
+	# Speed up commands involving untracked files such as `git status`.
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
 
-  # Serve local repo. http://coderwall.com/p/eybtga
-  # Then other can access via `git clone git://#{YOUR_IP_ADDRESS}/
-  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+    pager = less -FRSX
+    editor = code --wait
 
-  # Checkout to defaultBranch
-  m = !git checkout $(git defaultBranch)
+[color]
 
-  # Removes a file from the index
-  unstage = reset HEAD --
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+    ui = auto
+
+[color "branch"]
+
+    current = green bold
+    local = green
+    remote = yellow
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[color "status"]
+
+	added = green
+	changed = yellow
+	untracked = cyan
+
+[commit]
+
+	# https://help.github.com/articles/signing-commits-using-gpg/
+	# gpgsign = true
+
+[diff]
+
+	# Detect copies as well as renames
+	renames = copies
+
+[diff "bin"]
+
+	# Use `hexdump` to diff binary files
+	textconv = hexdump -v -C
 
 [help]
-  autocorrect = 1
+
+	# Automatically correct and execute mistyped commands
+	autocorrect = immediate
+
+[merge]
+
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
 
 [push]
-  default = simple
+
+	# https://git-scm.com/docs/git-config#git-config-pushdefault
+	default = simple
+	# Make `git push` push relevant annotated tags when pushing branches out.
+	# followTags = true
+
 
 [branch "master"]
-  mergeoptions = --no-edit
+
+    mergeoptions = --no-edit
 
 [pull]
-  rebase = false
+
+    rebase = false
 
 [init]
-  defaultBranch = master
+    defaultBranch = master
+
+[pretty]
+
+    custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
+    #                     │        │            │            │             └─ author name
+    #                     │        │            │            └─ message
+    #                     │        │            └─ date (relative)
+    #                     │        └─ decorations (branch, heads or tags)
+    #                     └─ hash (abbreviated)
 
 [user]
 
