@@ -17,7 +17,8 @@
     ],
     "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "top",
-    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    //"editor.tabSize": 4,
     "emmet.includeLanguages": {
         "erb": "html"
     },
