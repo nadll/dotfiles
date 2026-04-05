@@ -63,6 +63,9 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
+# brew update
+alias bupdate="brew update && brew upgrade && brew upgrade --cask && brew cleanup"
+
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
