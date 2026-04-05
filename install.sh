@@ -21,11 +21,23 @@ symlink() {
   fi
 }
 
+brew install fzf
+brew install fd
+brew install bat
+brew install eza
+brew install tlrc
+brew install thefuck
+brew install zoxide
+
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
-for name in aliases gitconfig rspec zprofile zshrc; do
+for name in aliases gitconfig rspec zprofile zshrc fzf-git.sh; do
   if [ ! -d "$name" ]; then
-    target="$HOME/.$name"
+    if [ "$name" = "fzf-git.sh" ]; then
+      target="$HOME/fzf-git.sh"
+    else
+      target="$HOME/.$name"
+    fi
     backup $target
     symlink $PWD/$name $target
   fi
