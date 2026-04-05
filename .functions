@@ -5,6 +5,15 @@ function mkd() {
     mkdir -p "$@" && cd "$_";
 }
 
+function showwifipwd() {
+    security find-generic-password -wa "$1"
+}
+
+function fcd() {
+    local dir
+    dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
+}
+
 # Change working directory to the top-most Finder window location
 function cdf() { # short for `cdfinder`
     cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
