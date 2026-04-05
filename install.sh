@@ -28,6 +28,7 @@ brew install eza
 brew install tlrc
 brew install thefuck
 brew install zoxide
+brew install pcre
 
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
