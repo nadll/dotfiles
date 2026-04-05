@@ -82,3 +82,6 @@ alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+# ---- Zoxide (better cd) ----
+alias cd="z"
