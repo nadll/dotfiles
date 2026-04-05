@@ -3,7 +3,7 @@
         "editor.bracketPairColorization.enabled": false,
         "editor.guides.bracketPairs": false,
         "editor.insertSpaces": true,
-        "editor.tabSize": 4,
+        "editor.tabSize": 2,
         "editor.formatOnSaveMode": "file",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
@@ -25,7 +25,7 @@
     "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "top",
     "editor.insertSpaces": true,
-    "editor.tabSize": 4,
+    "editor.tabSize": 2,
     "emmet.includeLanguages": {
         "erb": "html"
     },
@@ -99,7 +99,11 @@
     },
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "terminal.integrated.env.osx": {
-        "FIG_NEW_SESSION": "1",
-        "CW_NEW_SESSION": "1"
+      "FIG_NEW_SESSION": "1",
+      "CW_NEW_SESSION": "1"
     },
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "security.workspace.trust.untrustedFiles": "open",
 }
