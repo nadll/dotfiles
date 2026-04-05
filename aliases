@@ -75,5 +75,10 @@ alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
 
+# ---- Eza (better ls) -----
+
+alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+#alias ls="eza"
+
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
