@@ -114,4 +114,4 @@ eval $(thefuck --alias fk)
 eval "$(zoxide init zsh)"
 
 # ---- BAT -----
-export BAT_PAGET="less -R"
+export BAT_PAGER="less -R"
