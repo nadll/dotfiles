@@ -75,6 +75,9 @@ alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
 
+# sets the default output format for ps
+alias psf='ps -eo pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
+
 # ---- Eza (better ls) -----
 
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
