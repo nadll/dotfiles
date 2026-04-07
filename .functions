@@ -135,3 +135,80 @@ function o() {
 function tre() {
     tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# Create directory (with parents) and cd into it immediately
+function mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Search your Command History
+function hist() {
+    history | grep -i "$1"
+}
+
+# Fast recursive file finder (name search)
+function ff() {
+    find . -type f -iname "*$1*" 2>/dev/null
+}
+# ff .pdf    → finds all PDFs anywhere below current dir
+
+# Quick Python HTTP server (Python 3)
+function serve() {
+    local port=${1:-8000}
+    echo "Serving on http://localhost:$port"
+    python3 -m http.server "$port"
+}
+
+# Display 256-color terminal test palette
+function colors() {
+    for i in {0..255}; do
+        printf '\e[48;5;%dm%3d ' "$i" "$i"
+        (((i+3) % 18)) || printf '\e[0m\n'
+    done
+    printf '\e[0m\n'
+}
+
+# Pretty-print your $PATH
+function path() {
+    echo "$PATH" | tr ":" "\n"
+}
+
+# Search within a Man page
+function mans() {
+    man "$1" | grep -iC 5 "$2"
+}
+# Usage: mans tar extract  -> Shows 'tar' man page entries near 'extract'
+
+# A "Safe" Delete
+function trash() {
+    mkdir -p ~/.local/share/Trash/files
+    mv "$@" ~/.local/share/Trash/files/
+    echo "Moved to ~/.local/share/Trash/files/"
+}
+
+# What's listening?
+function ports() {
+    lsof -iTCP -sTCP:LISTEN -P -n
+}
+
+# The "Panic Button"
+function git-undo() {
+    git reset --soft HEAD~1
+}
+
+# Pull IPs from any text
+function extract-ip() {
+    grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" "$1" | sort -u
+}
+# Usage: extract-ip access.log
+
+# Find the space hogs
+function top-size() {
+    du -hs * | sort -rh | head -10
+}
+
+# Git "Commit All and Push"
+function gcap() {
+    git add . && git commit -m "$*" && git push
+}
+# Usage: gcap "Fixed the header padding and updated README"
