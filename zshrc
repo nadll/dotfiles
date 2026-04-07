@@ -45,6 +45,8 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
+
 # ---- FZF -----
 
 # Set up fzf key bindings and fuzzy completion
