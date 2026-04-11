@@ -18,11 +18,5 @@ Host *
   AddKeysToAgent yes
   UseKeychain yes
 
-Host github.com
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/samoshkin_at_github
-
-Host bitbucket.org
-  HostName bitbucket.org
-  IdentityFile ~/.ssh/alexey.samoshkin_at_bitbucket.org.key
+Host *
+  IdentityFile ~/.ssh/id_ed25519
