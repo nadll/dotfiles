@@ -5,27 +5,69 @@ IFS=$'\n\t'
 # =====================
 # Brew
 # =====================
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-sudo tee -a "/etc/zshenv" >/dev/null << EOF
-eval "\$(/opt/homebrew/bin/brew shellenv)"
-EOF
+#/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+else
+  echo "brew not found after installation" >&2
+  exit 1
+fi
+
+#sudo tee -a "/etc/zshenv" >/dev/null << EOF
+#eval "\$(/opt/homebrew/bin/brew shellenv)"
+#EOF
+
+# ==================
+# ZSH
+# ==================
+brew install zsh
+
+# make just installed "zsh" binary a default shell
+#echo "$(which zsh)" | sudo tee -a /etc/shells
+echo "$(which zsh)"
+#chsh -s "$(which zsh)"
+
+# ==================
+# ohmyzsh
+# ==================
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "Oh My Zsh already installed, skipping."
+fi
+
+# Install zsh-syntax-highlighting plugin
+CURRENT_DIR=`pwd`
+ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
+mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
+
+if [ ! -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]; then
+  echo "-----> Installing zsh plugin 'zsh-autosuggestions'..."
+  git clone https://github.com/zsh-users/zsh-autosuggestions
+fi
+
+if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
+  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting
+fi
+
+cd "$CURRENT_DIR"
 
 # =====================
 # git
 # =====================
 brew install git
 
-# make just installed "zsh" binary a default shell
-echo "$(which zsh)" | sudo tee -a /etc/shells
-chsh -s "$(which zsh)"
-
 # ======================
 #  Fonts
 # ======================
 
-brew tap homebrew/cask-fonts
-brew install font-droid-sans-mono font-droid-sans-mono-nerd-font
-brew install font-meslo-lg-nerd-font
+brew install --cask font-meslo-lg-nerd-font
+brew install --cask font-droid-sans-mono-for-powerline
+brew install --cask font-droid-sans-mono-nerd-font
 
 # =======================================
 # GNU utils instead of MacOS equivalents
@@ -43,9 +85,9 @@ brew install bash less nano curl make
 # =====================
 
 brew install python
-brew install pyenv
-pyenv install 3.14.13
-pyenv global system
+#brew install pyenv
+#pyenv install 3.14.13
+#pyenv global system
 
 # GitHub - ranger/ranger: A VIM-inspired filemanager for the console https://github.com/ranger/ranger
 #pip3 install ranger-fm
@@ -56,7 +98,7 @@ pyenv global system
 # =====================
 
 # Diff tools
-brew cask install sourcetree
+brew install --cask sourcetree
 
 # A viewer for git and diff output
 # https://github.com/dandavison/delta
@@ -69,8 +111,14 @@ brew install lazygit
 
 # GitHub - bigH/git-fuzzy: interactive `git` with the help of `fzf` https://github.com/bigH/git-fuzzy
 PREFIX=$(brew --prefix)
+TARGET="$PREFIX/share/git-fuzzy"
 mkdir -p "$PREFIX/share"
-git clone https://github.com/bigH/git-fuzzy "$PREFIX/share/git-fuzzy"
+if [ ! -d "$TARGET" ]; then
+  git clone https://github.com/bigH/git-fuzzy "$TARGET"
+else
+  echo "git-fuzzy already exists, updating..."
+  git -C "$TARGET" pull
+fi
 ln -sf "$PREFIX/share/git-fuzzy/bin/git-fuzzy" "$PREFIX/bin/git-fuzzy"
 
 # =========================
@@ -119,88 +167,14 @@ brew install sevenzip
 brew install bandwhich
 
 # Docker
-brew cask install docker
+brew install --cask docker
 
 # ===============================
 #  GUI apps from 'brew cask'
 # ================================
 
 # Video player
-#brew cask install vlc
-
-# Define a function which rename a `target` file to `target.backup` if the file
-# exists and if it's a 'real' file, ie not a symlink
-backup() {
-  target=$1
-  if [ -e "$target" ]; then
-    if [ ! -L "$target" ]; then
-      mv "$target" "$target.backup"
-      echo "-----> Moved your old $target config file to $target.backup"
-    fi
-  fi
-}
-
-symlink() {
-  file=$1
-  link=$2
-  if [ ! -e "$link" ]; then
-    echo "-----> Symlinking your new $link"
-    ln -s $file $link
-  fi
-}
-
-
-# For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
-# and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
-for name in aliases gitconfig rspec zprofile zshrc fzf-git.sh; do
-  if [ ! -d "$name" ]; then
-    if [ "$name" = "fzf-git.sh" ]; then
-      target="$HOME/fzf-git.sh"
-    else
-      target="$HOME/.$name"
-    fi
-    backup $target
-    symlink $PWD/$name $target
-  fi
-done
-
-# Install zsh-syntax-highlighting plugin
-CURRENT_DIR=`pwd`
-ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
-mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
-if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
-  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
-  git clone https://github.com/zsh-users/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting
-fi
-cd "$CURRENT_DIR"
-
-# Symlink VS Code settings and keybindings to the present `settings.json` and `keybindings.json` files
-# If it's a macOS
-if [[ `uname` =~ "Darwin" ]]; then
-  CODE_PATH=~/Library/Application\ Support/Code/User
-# Else, it's a Linux
-else
-  CODE_PATH=~/.config/Code/User
-  # If this folder doesn't exist, it's a WSL
-  if [ ! -e $CODE_PATH ]; then
-    CODE_PATH=~/.vscode-server/data/Machine
-  fi
-fi
-
-for name in settings.json keybindings.json; do
-  target="$CODE_PATH/$name"
-  backup $target
-  symlink $PWD/$name $target
-done
-
-# Symlink SSH config file to the present `config` file for macOS and add SSH passphrase to the keychain
-#if [[ `uname` =~ "Darwin" ]]; then
-#  target=~/.ssh/config
-#  backup $target
-#  symlink $PWD/config $target
-#  ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-#fi
+brew install --cask vlc
 
 # Refresh the current terminal with the newly installed configuration
 exec zsh
