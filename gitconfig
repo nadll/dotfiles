@@ -234,6 +234,5 @@
     #                     └─ hash (abbreviated)
 
 [user]
-
-	email = niko@2themoon.me
-	name = niko
+    email = niko@2themoon.me
+    name = niko

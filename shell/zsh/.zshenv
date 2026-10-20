@@ -7,7 +7,6 @@ export EDITOR="vim"
 export VISUAL="editor_in_split_pane"
 
 export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:/usr/local/opt/mysql-client/bin"
 
 # Locale
 export LANG=en_US.UTF-8

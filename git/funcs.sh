@@ -15,6 +15,12 @@ alias gcm="git commit"
 alias gce="git commit --amend --reuse-message HEAD"
 alias gcE="git commit --amend"
 
+# Git "Commit All and Push"
+function gcap() {
+    git add . && git commit -m "$*" && git push
+}
+# Usage: gcap "Fixed the header padding and updated README"
+
 # ==================================================
 # Status
 # ==================================================
@@ -43,6 +49,14 @@ function gdi(){
     git difftool "$@" -- "${files[@]}"
   fi
 }
+
+# Use Git’s colored diff when available
+hash git &>/dev/null;
+    if [ $? -eq 0 ]; then
+    function diff() {
+        git diff --no-index --color-words "$@";
+    }
+    fi;
 
 alias d2h="diff2html -i stdin --summary open --style side"
 
@@ -212,4 +226,9 @@ function git_review_pr(){
 # Open any git object in a Vim (using :Gedit command)
 function gitvim() {
   vim -c "Gedit $*"
+}
+
+# The "Panic Button"
+function git-undo() {
+    git reset --soft HEAD~1
 }

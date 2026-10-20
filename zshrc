@@ -117,3 +117,6 @@ eval "$(zoxide init zsh)"
 
 # ---- BAT -----
 export BAT_PAGER="less -R"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$HOME/.local/bin:$PATH"
