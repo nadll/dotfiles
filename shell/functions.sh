@@ -215,14 +215,6 @@ function fs() {
     fi;
 }
 
-# Use Git’s colored diff when available
-hash git &>/dev/null;
-    if [ $? -eq 0 ]; then
-    function diff() {
-        git diff --no-index --color-words "$@";
-    }
-    fi;
-
 # Compare original and gzipped file size
 function gz() {
     local origsize=$(wc -c < "$1");
@@ -335,11 +327,6 @@ function ports() {
     lsof -iTCP -sTCP:LISTEN -P -n
 }
 
-# The "Panic Button"
-function git-undo() {
-    git reset --soft HEAD~1
-}
-
 # Pull IPs from any text
 function extract-ip() {
     grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" "$1" | sort -u
@@ -351,8 +338,23 @@ function top-size() {
     du -hs * | sort -rh | head -10
 }
 
-# Git "Commit All and Push"
-function gcap() {
-    git add . && git commit -m "$*" && git push
+# Define a function which rename a `target` file to `target.backup` if the file
+# exists and if it's a 'real' file, ie not a symlink
+backup() {
+  target=$1
+  if [ -e "$target" ]; then
+    if [ ! -L "$target" ]; then
+      mv "$target" "$target.backup"
+      echo "-----> Moved your old $target config file to $target.backup"
+    fi
+  fi
 }
-# Usage: gcap "Fixed the header padding and updated README"
+
+symlink() {
+  file=$1
+  link=$2
+  if [ ! -e "$link" ]; then
+    echo "-----> Symlinking your new $link"
+    ln -s $file $link
+  fi
+}

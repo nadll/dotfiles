@@ -1,6 +1,4 @@
-# CodeWhisperer pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zprofile.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zprofile.pre.zsh"
-eval "$(/opt/homebrew/bin/brew shellenv 2> /dev/null)"
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/nadell/.docker/bin"
+# End of Docker Desktop section.
 
-# CodeWhisperer post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zprofile.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zprofile.post.zsh"

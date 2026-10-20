@@ -4,12 +4,12 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-
+Desktop.ini
 
 # Thumbnails
 ._*
 
-# Files that might appear in the root of a volume
+# Files that might appear in the root of a volume / on external disks
 .DocumentRevisions-V100
 .fseventsd
 .Spotlight-V100
@@ -27,3 +27,10 @@ Temporary Items
 
 # local environment variables
 .envrc
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Compiled Python files
+*.pyc

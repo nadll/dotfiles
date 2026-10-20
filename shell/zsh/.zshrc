@@ -24,20 +24,9 @@ export KEYTIMEOUT=1
 export DOCKER_CLIENT_TIMEOUT=120
 export COMPOSE_HTTP_TIMEOUT=120
 
-export ANDROID_HOME="$HOME/android"
-
-export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
-
-# Setup antigen
-export ADOTDIR="$ZDOTDIR/.antigen"
-
 zstyle ':autocomplete:tab:*' insert-unambiguous yes
 zstyle ':autocomplete:tab:*' widget-style menu-select
 zstyle ':autocomplete:*' recent-dirs z.sh
-
-# load antigen (installed via brew) and init plugins
-source "$(brew --prefix)/share/antigen/antigen.zsh"
-antigen init "${DOTFILES}/shell/zsh/.antigenrc"
 
 # fast man page access with <esc-h>
 autoload run-help
