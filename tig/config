@@ -1,0 +1,6 @@
+# tig settings, linked to ~/.config/tig/config
+# Defaults and every option: man tigrc
+
+# Selected line: tig's default is white on green, which is unreadable with the
+# bright lime green of the coolnight iTerm2 colors. Keep the green bar, black text.
+color cursor black green bold

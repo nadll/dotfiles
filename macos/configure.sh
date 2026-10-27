@@ -1,6 +1,6 @@
-#!/bin/sh
+# Sourced by install.sh (uses its link/run helpers and $DOTFILES, $SHELLRCDIR, $SHELLENVDIR)
 
-ln -sf -t "$SHELLRCDIR" "$DOTFILES/macos/macos.rc.sh"
+link "$DOTFILES/macos/macos.rc.sh" "$SHELLRCDIR/"
 
 # system-wide key bindings mapping
-# ln -sf "$DOTFILES/macos/DefaultKeyBinding.Dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.Dict"
+# link "$DOTFILES/macos/DefaultKeyBinding.Dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.Dict"

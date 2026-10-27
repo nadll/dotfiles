@@ -27,11 +27,6 @@ function gcap() {
 alias gws="git status --short"
 alias gwsi="git fuzzy status"
 
-# Git status in Vim using vim-fugitive plugin
-function gwsvim(){
-  vim -c ":Git"
-}
-
 # ==================================================
 # Diff
 # ==================================================
@@ -57,8 +52,6 @@ hash git &>/dev/null;
         git diff --no-index --color-words "$@";
     }
     fi;
-
-alias d2h="diff2html -i stdin --summary open --style side"
 
 # ==================================================
 # Merging
@@ -110,6 +103,22 @@ function gbback(){
   git checkout $head_prev_name
 }
 
+# Check out the commit before HEAD (first parent)
+function prec() {
+    git checkout HEAD^1
+}
+
+# Check out the commit after HEAD on a branch (default master); undoes prec
+# $ nextc feature-x
+function nextc() {
+    git log --reverse --pretty=%H "${1:-master}" | grep -A 1 $(git rev-parse HEAD) | tail -n1 | xargs git checkout
+}
+
+# Interactive rebase of the last N commits
+# $ griii 3
+function griii() {
+    git rebase -i HEAD~$1;
+}
 
 # ==================================================
 # Explore single commit
@@ -140,35 +149,27 @@ alias gla="glo --topo-order --boundary --graph --all"
 # $ gllr HEAD...MERGE_HEAD
 alias gllr="git log --oneline --graph --left-right --boundary --decorate"
 
-# git log interactive. Opens selected commit in Vim via :Gedit command
-function gli() {
-  local commit=$(git fuzzy log "$@")
+# List authors by number of commits, with their email
+alias glistauthors="git shortlog -nse"
+# List remote branches by last commit date, with its author
+alias glistb="git for-each-ref --format='%(color:cyan)%(authordate:format:%m/%d/%Y %I:%M %p)    %(align:25,left)%(color:yellow)%(authorname)%(end) %(color:reset)%(refname:strip=3)' --sort=authordate refs/remotes"
 
-  if [ -n "$commit" ]; then
-    vim -c ":Gedit $commit"
-  fi
+# Show every commit by an author, with its diff
+# $ gitlistcommits nadell
+function gitlistcommits() {
+   git log --author="$1" --format=%H | xargs git show
 }
 
-# Git file history, shows only commits affecting given file. Open selected file from selected commit in Vim
-function glf() {
-  if [ "$#" -eq 0 ]; then echo "Usage: gfh <file> <revision>"; return 1; fi
-  if [[ ! -f "$1" ]]; then echo "Non existent file: $1"; return 1; fi
+# One line per commit by an author: hash, author, age, subject
+# $ listbyauthor nadell
+function listbyauthor() {
+   git log --author="$1" --pretty=format:"%h - %an, %ar : %s"
+}
 
-  local file="$1"
-  local filename=$(basename -- "$file")
-  local ext="${filename##*.}"
-  local rev="$2"
-
-  local source_command="git log --color=always --oneline $rev -- $file"
-  local preview_command="git show {1}:$file | bat --color=always -l $ext"
-
-  local selection=$($source_command | fzf +m --ansi --preview-window="right:70%:nohidden:wrap" --preview "$preview_command")
-
-  if [[ -n "$selection" ]]; then
-    local commit=$(echo $selection | awk '{ print $1 }')
-    # use vim-fugitive Gedit command to open file at specific revision
-    vim -c "Gedit $commit:$file"
-  fi
+# Count commits on either side of HEAD...<rev> (in one but not both)
+# $ gsince master
+function gsince()  {
+   git log HEAD...$^1 --oneline | wc -l
 }
 
 # ==================================================
@@ -176,8 +177,7 @@ function glf() {
 # ==================================================
 
 alias gp="git push"
-# TODO: fix this, git-branch-current does not work any more
-alias gP='git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'
+alias gP='git push --set-upstream origin "$(git branch --show-current)"'
 alias gpl="git pull"
 
 # ==================================================
@@ -201,32 +201,8 @@ function gsi() {
 
 
 # ==================================================
-# Pull requests
-# ==================================================
-
-# Review PR: show list of affected files, complete diff, and open selected file in Vim
-# NOTE: requires you to "git checkout <pr>" first
-function git_review_pr(){
-  echo "PR: $(git symbolic-ref --short HEAD)"
-  echo "Upstream: $REVIEW_UPSTREAM"
-
-  read -s -k '?Press any key to continue...'
-
-  local files=$(git fuzzy diff $REVIEW_UPSTREAM..HEAD)
-
-  if [ -n "$files" ]; then
-    vim -c "let g:gitgutter_diff_base = '$REVIEW_UPSTREAM'" $files
-  fi
-}
-
-# ==================================================
 # Misc
 # ==================================================
-
-# Open any git object in a Vim (using :Gedit command)
-function gitvim() {
-  vim -c "Gedit $*"
-}
 
 # The "Panic Button"
 function git-undo() {

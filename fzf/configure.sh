@@ -1,3 +1,3 @@
-#!/bin/sh
+# Sourced by install.sh (uses its link/run helpers and $DOTFILES, $SHELLRCDIR, $SHELLENVDIR)
 
-ln -sf "$DOTFILES/fzf/fzf.rc.sh" "$SHELLRCDIR"
+link "$DOTFILES/fzf/fzf.rc.sh" "$SHELLRCDIR/"

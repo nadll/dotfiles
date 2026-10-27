@@ -2,7 +2,7 @@
 # manually source env variables
 # in newer versions of brew, it's enough to put
 # brew.env file at $(brew --prefix)/etc/homebrew/brew.env
-if [ "$(brew --prefix)" = "/usr/local" ]; then
+if [ "${HOMEBREW_PREFIX:-}" = "/usr/local" ]; then
   source "$DOTFILES/brew/brew.env"
 fi
 

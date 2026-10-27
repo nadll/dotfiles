@@ -1,5 +1,5 @@
-#!/bin/sh
+# Sourced by install.sh (uses its link/run helpers and $DOTFILES, $SHELLRCDIR, $SHELLENVDIR)
 
-ln -sf "$DOTFILES/git/.gitconfig" "$HOME"
-ln -sf "$DOTFILES/git/.gitignore_global" "$HOME/.gitignore"
-ln -sf "$DOTFILES/git/git.rc.sh" "$SHELLRCDIR"
+link "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+link "$DOTFILES/git/.gitignore_global" "$HOME/.gitignore"
+link "$DOTFILES/git/git.rc.sh" "$SHELLRCDIR/"

@@ -1,12 +1,13 @@
-#!/bin/sh
+# Sourced by install.sh (uses its link/run helpers and $DOTFILES, $SHELLRCDIR, $SHELLENVDIR)
 
-TMUX_PLUGIN_MANAGER_PATH="$DOTFILES/vendor/tpm"
+link "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
 
-ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
-# git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_MANAGER_PATH"
+# Tmux plugin manager, in the default location that tmux.conf runs it from
+clone_or_update https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 
-printf "export TMUX_PLUGIN_MANAGER_PATH=\"%s\"" \
-  "$TMUX_PLUGIN_MANAGER_PATH" \
-  > "$SHELLRCDIR"/tmux.rc.sh
+# earlier versions exported TMUX_PLUGIN_MANAGER_PATH="$DOTFILES/vendor/tpm", which didn't match tmux.conf
+if [ -e "$SHELLRCDIR/tmux.rc.sh" ]; then
+  run rm "$SHELLRCDIR/tmux.rc.sh"
+fi
 
 # NOTE: when opening Tmux for the first time, make sure to install all plugins manually (<prefix>+I)

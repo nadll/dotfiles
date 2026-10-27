@@ -27,53 +27,13 @@ function system_info(){
   system_profiler -json -detailLevel mini SPHardwareDataType SPDisplaysDataType SPMemoryDataType SPNetworkDataType SPPowerDataType SPSoftwareDataType SPStartupItemDataType SPStorageDataType
 }
 
-# Search with ripgrep
-# Usage frg <query>
-frg() {
-  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-
-  local rg_command="rg --column --line-number --no-heading --color=always --smart-case $*"
-  selection=$(($rg_command || true) | fzf +m --ansi \
-    --preview-window="right:wrap" --preview "$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}")
-
-  if [[ -n "$selection" ]]; then
-    local file=$(echo $selection | awk -F: '{ print $1 }')
-    local line=$(echo $selection | awk -F: '{ print $2 }')
-    local column=$(echo $selection | awk -F: '{ print $3 }')
-    vim "+call cursor($line, $column)" "$file"
-  fi
-}
-
-# Search with ripgrep with live query reload
-# Query can be changed on a fly and will spawn rg command once again instantly
-# fzf disables its fuzzy find features, and acts as a dumb selector
-# Usage: frgi <query>
-rgi() {
-  local rg_command="rg --column --line-number --no-heading --color=always --smart-case "
-  local query="$1"
-  selection=$(($rg_command '$query' || true ) | \
-    fzf +m --bind "change:reload:$rg_command {q} || true" --ansi --disabled --query "$query" \
-      --preview-window="right:wrap" --preview "$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}")
-
-  if [[ -n "$selection" ]]; then
-    local file=$(echo $selection | awk -F: '{ print $1 }')
-    local line=$(echo $selection | awk -F: '{ print $2 }')
-    local column=$(echo $selection | awk -F: '{ print $3 }')
-    vim "+call cursor($line, $column)" "$file"
-  fi
-}
-
-# Search with ripgrep
-# Show only matching files instead of individual matches
-# Preview shows individual matches
-# Usage: frgl <query>
-rgl() {
-  local file
-  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-  file=$(rg --files-with-matches --no-messages "$1" | fzf +m --preview-window="right:wrap" --preview "bat --style=numbers --color=always {} 2> /dev/null | rg --color always --colors 'match:bg:yellow' --context 10 '$1' || rg --color always --context 10 '$1' {}")
-  if [[ -n "$file" ]]; then
-    $EDITOR "$file"
-  fi
+# Open a file at line:column in $EDITOR (used by the rg/fzf search functions below)
+_open_at() {
+  case "$EDITOR" in
+    code*) code -g "$1:$2:$3" ;;
+    *vim*) "$EDITOR" "+call cursor($2, $3)" "$1" ;;
+    *)     "$EDITOR" "$1" ;;
+  esac
 }
 
 # Open rg search results in a Vim quickfix list
@@ -83,19 +43,19 @@ rgq() {
 
 # Search with ripgrep and open results in fzf
 # Usage frg <query>
-# FIXME: preview is broken
 frg() {
   if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
 
   local rg_command="rg --column --line-number --no-heading --color=always --smart-case $*"
   selection=$(($rg_command || true) | fzf +m --ansi \
-    --preview-window="right:wrap" --preview "$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}")
+    --delimiter : --preview-window="right:wrap:+{2}-/2" \
+    --preview "bat --style=numbers --color=always --highlight-line {2} {1}")
 
   if [[ -n "$selection" ]]; then
     local file=$(echo $selection | awk -F: '{ print $1 }')
     local line=$(echo $selection | awk -F: '{ print $2 }')
     local column=$(echo $selection | awk -F: '{ print $3 }')
-    vim "+call cursor($line, $column)" "$file"
+    _open_at "$file" "$line" "$column"
   fi
 }
 
@@ -108,13 +68,14 @@ frgi() {
   local query="$1"
   selection=$(($rg_command '$query' || true ) | \
     fzf +m --bind "change:reload:$rg_command {q} || true" --ansi --disabled --query "$query" \
-    --preview-window="right:wrap" --preview "$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}")
+    --delimiter : --preview-window="right:wrap:+{2}-/2" \
+    --preview "bat --style=numbers --color=always --highlight-line {2} {1}")
 
   if [[ -n "$selection" ]]; then
     local file=$(echo $selection | awk -F: '{ print $1 }')
     local line=$(echo $selection | awk -F: '{ print $2 }')
     local column=$(echo $selection | awk -F: '{ print $3 }')
-    vim "+call cursor($line, $column)" "$file"
+    _open_at "$file" "$line" "$column"
   fi
 }
 
@@ -141,6 +102,15 @@ frgl() {
 #   fi
 # }
 
+# Update the dotfiles repo, re-link its files and install new Brewfile packages
+# (plus brew/Brewfile.pro on machines set up with install.sh --pro)
+function dotfiles-update() {
+  git -C "$DOTFILES" pull --ff-only &&
+    "$DOTFILES/install.sh" --skip-brew &&
+    brew bundle --file="$DOTFILES/brew/Brewfile" &&
+    { [ ! -f ~/.dotfiles-pro ] || brew bundle --file="$DOTFILES/brew/Brewfile.pro"; }
+}
+
 # Create a new directory and enter it
 function mkd() {
     mkdir -p "$@" && cd "$_";
@@ -160,11 +130,6 @@ function showwifipwd() {
 function fcd() {
     local dir
     dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
-}
-
-# Change working directory to the top-most Finder window location
-function cdf() { # short for `cdfinder`
-    cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
 }
 
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
@@ -336,25 +301,4 @@ function extract-ip() {
 # Find the space hogs
 function top-size() {
     du -hs * | sort -rh | head -10
-}
-
-# Define a function which rename a `target` file to `target.backup` if the file
-# exists and if it's a 'real' file, ie not a symlink
-backup() {
-  target=$1
-  if [ -e "$target" ]; then
-    if [ ! -L "$target" ]; then
-      mv "$target" "$target.backup"
-      echo "-----> Moved your old $target config file to $target.backup"
-    fi
-  fi
-}
-
-symlink() {
-  file=$1
-  link=$2
-  if [ ! -e "$link" ]; then
-    echo "-----> Symlinking your new $link"
-    ln -s $file $link
-  fi
 }
