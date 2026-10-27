@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# WARNING: inherited from samoshkin/dotfiles and not reviewed yet. Read it before running:
+# it disables Gatekeeper (`spctl --master-disable`) and download quarantine (LSQuarantine),
+# sets the time zone to Europe/Kiev and the locale to en_UA, and changes Dock, Finder,
+# trackpad and keyboard settings. install.sh runs it only with --macos, after asking.
+
 set -e
 set -o pipefail
 

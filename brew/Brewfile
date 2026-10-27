@@ -1,0 +1,168 @@
+# Installed by install.sh via `brew bundle --file=brew/Brewfile`
+# Add a package here, then re-run `./install.sh` (or `brew bundle --file=brew/Brewfile` from the repo root)
+
+# =====================
+# Taps
+# =====================
+# Docker Sandboxes (sbx)
+tap "docker/tap", trusted: true
+
+# =====================
+# Shell
+# =====================
+brew "zsh"
+brew "bash"
+
+# =======================================
+# GNU utils instead of macOS equivalents
+# (put on PATH by coreutils/coreutils.env.sh)
+# =======================================
+brew "coreutils"
+brew "findutils"
+brew "diffutils"
+brew "gnu-indent"
+brew "gnu-sed"
+brew "ed"
+brew "gnu-tar"
+brew "gnutls"
+brew "grep"
+brew "gnu-which"
+brew "gawk"
+brew "gzip"
+brew "watch"
+brew "wget"
+
+# Upgrade old tools shipped with macOS
+brew "less"
+brew "nano"
+brew "curl"
+brew "make"
+
+# =====================
+# git & friends
+# =====================
+brew "git"
+
+# A viewer for git and diff output https://github.com/dandavison/delta
+# https://github.com/dandavison/delta
+# TODO: choose between side-by-side and inline based on viewport width
+# 🚀 automatic side-by-side based on column width? · Issue #359 · dandavison/delta https://github.com/dandavison/delta/issues/359
+brew "git-delta"
+
+# A simple terminal UI for git commands
+brew "lazygit"
+
+# Text interface for Git repositories https://github.com/jonas/tig
+brew "tig"
+
+# Command-line Git information tool
+brew "onefetch"
+
+# =========================
+#  Apps & utilities
+# =========================
+# A command-line fuzzy finder https://github.com/junegunn/fzf
+brew "fzf"
+
+# Modern, maintained replacement for ls https://github.com/eza-community/eza
+brew "eza"
+
+# Simple, fast and user-friendly alternative to find https://github.com/sharkdp/fd
+brew "fd"
+
+# GitHub - sharkdp/bat: A cat(1) clone with wings. https://github.com/sharkdp/bat
+brew "bat"
+
+# Fast grep replacement, used by rg* functions in shell/functions.sh
+brew "ripgrep"
+
+# Directory tree listing, used by fzf previews
+brew "tree"
+
+# LS_COLORS generator, used by coreutils/coreutils.rc.sh https://github.com/sharkdp/vivid
+brew "vivid"
+
+# Official tldr client written in Rust. https://tldr.sh/tlrc/
+brew "tlrc"
+
+# Programmatically correct mistyped console commands. https://github.com/nvbn/thefuck
+brew "thefuck"
+
+# Shell extension to navigate your filesystem faster. https://github.com/ajeetdsouza/zoxide
+brew "zoxide"
+
+# Perl compatible regular expressions library. https://www.pcre.org/
+brew "pcre"
+
+# antonmedv/fx: Command-line tool and terminal JSON viewer 🔥 https://github.com/antonmedv/fx
+brew "fx"
+
+# HTTP client, used by `https` / `httpless` in shell/alias.sh
+brew "httpie"
+
+# htop - an interactive process viewer https://htop.dev/
+brew "htop"
+
+# Shell script analysis tool https://www.shellcheck.net/
+# find bugs in your shell scripts
+brew "shellcheck"
+
+# File archiver https://7-zip.org/
+brew "sevenzip"
+
+# Terminal bandwidth utilization tool https://github.com/imsnif/bandwhich
+brew "bandwhich"
+
+# Terminal multiplexer, configured by tmux/
+brew "tmux"
+
+# Terminal file manager https://github.com/jarun/nnn
+# opens files with $VISUAL; shell/bin/editor_in_split_pane opens $EDITOR in a tmux split
+brew "nnn"
+
+# Lightweight and flexible command-line JSON processor https://jqlang.org
+brew "jq"
+
+# NCurses Disk Usage https://dev.yorhel.nl/ncdu
+brew "ncdu"
+
+# Apple Silicon Monitor Top (CPU, GPU, power) https://github.com/context-labs/mactop
+brew "mactop"
+
+# Deep clean and optimize your Mac https://github.com/tw93/Mole
+brew "mole"
+
+# Pack repository contents into a single AI-friendly file https://github.com/yamadashy/repomix
+brew "repomix"
+
+# =====================
+# Python
+# =====================
+brew "python"
+
+# =====================
+# Fonts
+# =====================
+cask "font-meslo-lg-nerd-font"
+cask "font-droid-sans-mono-for-powerline"
+cask "font-droid-sans-mono-nerd-font"
+
+# ===============================
+#  GUI apps from 'brew cask'
+# ================================
+cask "visual-studio-code"
+
+# Terminal emulator, profiles linked by iterm2/configure.sh
+cask "iterm2"
+
+# Diff tools
+cask "sourcetree"
+
+# One menu bar icon doing the job of a dozen paid Mac apps
+cask "vorssaint"
+
+# Docker Sandboxes: run coding agents in isolated sandboxes
+cask "docker/tap/sbx", trusted: true
+
+# Pro-only packages (e.g. jfrog-cli) are in brew/Brewfile.pro,
+# installed only on machines set up with ./install.sh --pro

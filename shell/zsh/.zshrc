@@ -1,3 +1,23 @@
+# Profile shell startup: ZPROF=1 zsh -i -c exit (report printed at the end of this file)
+[[ -n "$ZPROF" ]] && zmodload zsh/zprof
+
+# Disable XON/XOFF flow control to free up <C-s> and <C-q> shortcuts in terminal
+# By default <C-s> and <C-q> pause and resume the terminal output,
+# but we might use them in a Vim or somewhere else, so let's unbind them
+# NOTE: do this only for interactive shell, and before the instant prompt below:
+# after it stdin is no longer the terminal, so stty fails with "Operation not supported by device"
+[[ $- == *i* ]] && stty -ixon
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# CodeWhisperer pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh"
+
 # Disable bracketed-paste-magic, url-quote-magic and whatever-magic plugins
 # NOTE: should be run before sourcing oh-my-zsh
 # See: https://github.com/ohmyzsh/ohmyzsh/issues/5569
@@ -24,6 +44,29 @@ export KEYTIMEOUT=1
 export DOCKER_CLIENT_TIMEOUT=120
 export COMPOSE_HTTP_TIMEOUT=120
 
+# ==================
+# oh-my-zsh
+# loaded before the options and key bindings below, so those override its defaults
+# ==================
+ZSH=$HOME/.oh-my-zsh
+
+# You can change the theme with another one from https://github.com/robbyrussell/oh-my-zsh/wiki/themes
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Useful oh-my-zsh plugins
+plugins=(git gitfast last-working-dir common-aliases zsh-autosuggestions zsh-syntax-highlighting history-substring-search web-search)
+
+# Disable warning about insecure completion-dependent directories
+ZSH_DISABLE_COMPFIX=true
+
+source "${ZSH}/oh-my-zsh.sh"
+unalias rm # No interactive rm by default (brought by plugins/common-aliases)
+
+# machine-local aliases and functions, not tracked in this repo
+[[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
+[[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
+
 zstyle ':autocomplete:tab:*' insert-unambiguous yes
 zstyle ':autocomplete:tab:*' widget-style menu-select
 zstyle ':autocomplete:*' recent-dirs z.sh
@@ -42,12 +85,6 @@ setopt auto_cd
 # so equals test works [ "$1" == "value" ]
 # see http://www.zsh.org/mla/users/2011/msg00161.html
 unsetopt equals
-
-# Disable XON/XOFF flow control to free up <C-s> and <C-q> shortcuts in terminal
-# By default <C-s> and <C-q> pause and resume the terminal output,
-# but we might use them in a Vim or somewhere else, so let's unbind them
-# NOTE: do this only for interactive shell
-[[ $- == *i* ]] && stty -ixon
 
 # TODO: report non-zero exit status in terminal somehow
 
@@ -79,9 +116,6 @@ bindkey -M menuselect '?' history-incremental-search-backward
 
 # close completion on ESC
 bindkey -M menuselect '^[' undo
-
-# use LS_COLORS colors in tab completion for files and directories
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 zstyle ':completion:*' menu select
 
@@ -117,3 +151,13 @@ export SHELLRCDIR="$ZDOTDIR/.rc"
 for rcFile in "$SHELLRCDIR"/*(N); do
   source "$rcFile"
 done
+
+# use LS_COLORS colors in tab completion for files and directories
+# (after the .rc files, so it picks up LS_COLORS from coreutils/coreutils.rc.sh)
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# with ZDOTDIR set, `p10k configure` writes to $ZDOTDIR/.p10k.zsh
+[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh
+
+[[ -n "$ZPROF" ]] && zprof

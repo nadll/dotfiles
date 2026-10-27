@@ -1,67 +1,39 @@
-#!/bin/sh
-
-ZDOTDIR="$HOME/.config/zsh"
-SHELLENVDIR="$ZDOTDIR/.env"
-SHELLRCDIR="$ZDOTDIR/.rc"
-
-# Define a function which rename a `target` file to `target.backup` if the file
-# exists and if it's a 'real' file, ie not a symlink
-backup() {
-  target=$1
-  if [ -e "$target" ]; then
-    if [ ! -L "$target" ]; then
-      mv "$target" "$target.backup"
-      echo "-----> Moved your old $target config file to $target.backup"
-    fi
-  fi
-}
-
-symlink() {
-  file=$1
-  link=$2
-  if [ ! -e "$link" ]; then
-    echo "-----> Symlinking your new $link"
-    ln -s $file $link
-  fi
-}
+# Sourced by install.sh (uses its link/run helpers and $DOTFILES, $ZDOTDIR, $SHELLRCDIR, $SHELLENVDIR)
 
 # specify custom location for zsh configuration files via ZDOTDIR variable
-# should be defined in /etc/zshenv
-if [ ! -f /etc/zshenv ] || ! grep -q 'ZDOTDIR' /etc/zshenv; then
-  sudo tee -a "/etc/zshenv" >/dev/null << EOF
-export ZDOTDIR="$HOME/.config/zsh"
-EOF
+# set in ~/.zshenv (no sudo needed); the PATH ordering fix for macOS path_helper lives in .zprofile
+link "$DOTFILES/shell/zsh/home.zshenv" "$HOME/.zshenv"
+
+# earlier versions of this repo wrote ZDOTDIR and a path_helper block into /etc/zshenv (with sudo)
+if grep -qs -E 'ZDOTDIR|path_helper' /etc/zshenv; then
+  warn "/etc/zshenv still has lines from the old setup (ZDOTDIR, path_helper). They're harmless;"
+  warn "remove them with: sudo \$EDITOR /etc/zshenv"
 fi
 
-# /usr/libexec/path_helper builds $PATH from PATHS specified in /etc/paths
-# however, it is flawed and PREPENDs paths defined in /etc/paths instead of appending them (while still appending paths defined in /etc/paths.d)
-# Since OSX El Capitan it happens in /etc/zprofile
-# and given the order of execution of zsh configuration files
-# /etc/zshenv, ~/.zshenv, /etc/zprofile, ~/.zshrc
-# any PATH modifications made in zshenv will be shifted to the end
-# by "/usr/libexec/path_helper" running in /etc/zprofile
-# the workaround is to move it back to /etc/zshenv
-# so this it runs the first one (we're prepending to the file)
-# NOTE: first, make sure to remove this logic from "/etc/zprofile".
-# see https://stackoverflow.com/a/14101578
-if ! grep -q '/usr/libexec/path_helper' /etc/zshenv; then
-  echo "if [ -x /usr/libexec/path_helper ]; then
-  eval \$(/usr/libexec/path_helper -s)
-fi" | cat - /etc/zshenv | sudo tee "/etc/zshenv" >/dev/null
-fi
+run mkdir -p "$SHELLENVDIR" "$SHELLRCDIR"
+link "$DOTFILES/shell/zsh/.zshenv" "$ZDOTDIR/.zshenv"
+link "$DOTFILES/shell/zsh/.zprofile" "$ZDOTDIR/.zprofile"
+link "$DOTFILES/shell/zsh/.zshrc" "$ZDOTDIR/.zshrc"
+link "$DOTFILES/shell/.inputrc" "$HOME/.inputrc"
 
-mkdir -p "$SHELLENVDIR" "$SHELLRCDIR"
-ln -sf "$DOTFILES/shell/zsh/.zshenv" "$DOTFILES/shell/zsh/.zshrc" "$ZDOTDIR"
-ln -sf "$DOTFILES/shell/.inputrc" "$HOME"
+# zsh now reads everything from $ZDOTDIR: carry over history and powerlevel10k config from $HOME once
+for file in .zsh_history .p10k.zsh; do
+  if [ -f "$HOME/$file" ] && [ ! -e "$ZDOTDIR/$file" ]; then
+    info "Copying ~/$file to $(pretty "$ZDOTDIR/$file")"
+    run cp "$HOME/$file" "$ZDOTDIR/$file"
+  fi
+done
 
 # disable "Last Login" prompt when terminal starts new login shell
 # macos - Remove "Last login" message for new tabs in terminal - Stack Overflow https://stackoverflow.com/questions/15769615/remove-last-login-message-for-new-tabs-in-terminal
-touch "$HOME/.hushlogin"
+run touch "$HOME/.hushlogin"
 
 # symlink executable scripts that should be on PATH to $HOME/bin
-mkdir -p "$HOME/bin"
-ln -sf "$DOTFILES/shell/bin/"* "$HOME/bin"
+for script in "$DOTFILES"/shell/bin/*; do
+  [ -e "$script" ] || continue
+  link "$script" "$HOME/bin/$(basename "$script")"
+done
 
 # symlink alias and functions to be sourced at shell startup
-ln -sf "$DOTFILES/shell/alias.sh" "$SHELLRCDIR/shell-alias.rc.sh"
-ln -sf "$DOTFILES/shell/functions.sh" "$SHELLRCDIR/shell-functions.rc.sh"
+link "$DOTFILES/shell/alias.sh" "$SHELLRCDIR/shell-alias.rc.sh"
+link "$DOTFILES/shell/functions.sh" "$SHELLRCDIR/shell-functions.rc.sh"

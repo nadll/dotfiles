@@ -1,9 +1,12 @@
-#!/bin/sh
+# Sourced by install.sh (uses its link/run helpers and $DOTFILES, $SHELLRCDIR, $SHELLENVDIR)
 
-mkdir -p "$HOME/.ssh"
+run mkdir -p "$HOME/.ssh"
+# ssh refuses keys and config that other users can read
+run chmod 700 "$HOME/.ssh"
 
 if [ ! -f "$HOME/.ssh/config" ]; then
-  cp "$DOTFILES/ssh/config" "$HOME/.ssh/config"
+  run cp "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 fi
+run chmod 600 "$HOME/.ssh/config"
 
-ln -sf "$DOTFILES/ssh/ssh.rc.sh" "$SHELLRCDIR"
+link "$DOTFILES/ssh/ssh.rc.sh" "$SHELLRCDIR/"

@@ -1,182 +1,256 @@
 #!/usr/bin/env bash
+# Bootstrap a new Mac: Homebrew, packages (brew/Brewfile), oh-my-zsh, then every <tool>/configure.sh
+# Safe to re-run: existing real files are backed up, symlinks are refreshed.
+#
+# Usage: ./install.sh [--dry-run] [--skip-brew] [--macos] [--pro]
 set -euo pipefail
-IFS=$'\n\t'
+
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export DOTFILES
+
+export ZDOTDIR="$HOME/.config/zsh"
+export SHELLENVDIR="$ZDOTDIR/.env"
+export SHELLRCDIR="$ZDOTDIR/.rc"
+
+DRY_RUN=0
+SKIP_BREW=0
+MACOS_PREFS=0
+PRO=0
+
+usage() {
+  sed -n '2,5p' "$0" | sed 's/^# \{0,1\}//'
+}
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -n|--dry-run) DRY_RUN=1 ;;
+    --skip-brew) SKIP_BREW=1 ;;
+    --macos) MACOS_PREFS=1 ;;
+    --pro) PRO=1 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown option: $1" >&2; usage >&2; exit 1 ;;
+  esac
+  shift
+done
 
 # =====================
-# Brew
+# Helpers, also used by <tool>/configure.sh
 # =====================
-#/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-if [ -x /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [ -x /usr/local/bin/brew ]; then
-  eval "$(/usr/local/bin/brew shellenv)"
-else
-  echo "brew not found after installation" >&2
-  exit 1
+info() { printf '\033[1;34m-----> %s\033[0m\n' "$*"; }
+warn() { printf '\033[1;33m-----> %s\033[0m\n' "$*" >&2; }
+
+# Run a command, or only print it in dry-run mode
+run() {
+  if [ "$DRY_RUN" = 1 ]; then
+    printf '[dry-run] %s\n' "$*"
+  else
+    "$@"
+  fi
+}
+
+# Shorten paths in messages: $DOTFILES/... and ~/...
+pretty() {
+  local p=${1/#$DOTFILES/\$DOTFILES}
+  printf '%s' "${p/#$HOME/\~}"
+}
+
+# Move a real file (not a symlink) out of the way before replacing it
+backup() {
+  local target=$1
+  if [ -e "$target" ] && [ ! -L "$target" ]; then
+    local dest
+    dest="$target.backup.$(date +%Y%m%d%H%M%S)"
+    info "Moving your old $(pretty "$target") to $(pretty "$dest")"
+    run mv "$target" "$dest"
+  fi
+}
+
+# link <source> <target>
+# A <target> ending with "/" is a directory: link into it under the source's name
+link() {
+  local src=$1 target=$2
+  case "$target" in
+    */) target="$target$(basename "$src")" ;;
+  esac
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$src" ]; then
+    return
+  fi
+  if [ ! -e "$src" ] && [ "$DRY_RUN" = 0 ]; then
+    warn "Skipping missing $(pretty "$src")"
+    return
+  fi
+  backup "$target"
+  info "Linking $(pretty "$target") -> $(pretty "$src")"
+  if [ "$DRY_RUN" = 0 ]; then
+    mkdir -p "$(dirname "$target")"
+    ln -sfn "$src" "$target"
+  fi
+}
+
+# write_file <target> <content>
+write_file() {
+  local target=$1 content=$2
+  info "Writing $(pretty "$target")"
+  if [ "$DRY_RUN" = 0 ]; then
+    mkdir -p "$(dirname "$target")"
+    printf '%s\n' "$content" > "$target"
+  fi
+}
+
+# clone_or_update <repo-url> <dir>
+clone_or_update() {
+  local url=$1 dir=$2
+  if [ -d "$dir/.git" ]; then
+    info "Updating $(basename "$dir")"
+    run git -C "$dir" pull --ff-only --quiet
+  else
+    info "Cloning $(basename "$dir")"
+    run git clone --depth 1 --quiet "$url" "$dir"
+  fi
+}
+
+if [ "$(uname)" != "Darwin" ]; then
+  warn "This installer targets macOS; non-macOS steps may fail."
 fi
 
-#sudo tee -a "/etc/zshenv" >/dev/null << EOF
-#eval "\$(/opt/homebrew/bin/brew shellenv)"
-#EOF
+# =====================
+# Homebrew
+# =====================
 
-# ==================
-# ZSH
-# ==================
-brew install zsh
+load_brew() {
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+}
 
-# make just installed "zsh" binary a default shell
-#echo "$(which zsh)" | sudo tee -a /etc/shells
-echo "$(which zsh)"
-#chsh -s "$(which zsh)"
+load_brew
+if [ "$SKIP_BREW" = 0 ]; then
+  if ! command -v brew >/dev/null 2>&1; then
+    info "Installing Homebrew"
+    if [ "$DRY_RUN" = 1 ]; then
+      echo "[dry-run] install Homebrew from https://brew.sh"
+    else
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      load_brew
+    fi
+  fi
 
-# ==================
-# ohmyzsh
-# ==================
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-  echo "Oh My Zsh already installed, skipping."
+  info "Installing packages from brew/Brewfile"
+  run brew bundle --file="$DOTFILES/brew/Brewfile"
+
 fi
 
-# Install zsh-syntax-highlighting plugin
-CURRENT_DIR=`pwd`
-ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
-mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
-
-if [ ! -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]; then
-  echo "-----> Installing zsh plugin 'zsh-autosuggestions'..."
-  git clone https://github.com/zsh-users/zsh-autosuggestions
+# Pro packages (brew/Brewfile.pro) only on machines that opted in with --pro,
+# remembered by ~/.dotfiles-pro so later runs and dotfiles-update install them too
+if [ "$PRO" = 1 ] && [ ! -f "$HOME/.dotfiles-pro" ]; then
+  info "Marking this machine as a pro machine (~/.dotfiles-pro)"
+  run touch "$HOME/.dotfiles-pro"
+fi
+if [ "$SKIP_BREW" = 0 ] && { [ "$PRO" = 1 ] || [ -f "$HOME/.dotfiles-pro" ]; }; then
+  info "Installing packages from brew/Brewfile.pro"
+  run brew bundle --file="$DOTFILES/brew/Brewfile.pro"
 fi
 
-if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
-  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting
+# =====================
+# oh-my-zsh, theme & plugins
+# =====================
+
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_CUSTOM_DIR="$ZSH/custom"
+ZSH_PLUGINS_DIR="$ZSH_CUSTOM_DIR/plugins"
+
+if [ ! -d "$ZSH" ]; then
+  info "Installing oh-my-zsh"
+  if [ "$DRY_RUN" = 1 ]; then
+    echo "[dry-run] install oh-my-zsh into $ZSH"
+  else
+    # --unattended: don't change the login shell, don't start zsh; KEEP_ZSHRC: never touch our .zshrc
+    KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  fi
 fi
 
-cd "$CURRENT_DIR"
+echo "-----> Installing/updating zsh theme 'powerlevel10k'..."
+clone_or_update https://github.com/romkatv/powerlevel10k "$ZSH_CUSTOM_DIR/themes/powerlevel10k"
+echo "-----> Installing/updating zsh plugin 'zsh-autosuggestions'..."
+clone_or_update https://github.com/zsh-users/zsh-autosuggestions "$ZSH_PLUGINS_DIR/zsh-autosuggestions"
+echo "-----> Installing/updating zsh plugin 'zsh-syntax-highlighting'..."
+clone_or_update https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting"
 
 # =====================
-# git
-# =====================
-brew install git
-
-# ======================
-#  Fonts
-# ======================
-
-brew install --cask font-meslo-lg-nerd-font
-brew install --cask font-droid-sans-mono-for-powerline
-brew install --cask font-droid-sans-mono-nerd-font
-
-# =======================================
-# GNU utils instead of MacOS equivalents
-# =======================================
-
-brew install coreutils findutils diffutils \
-  gnu-indent gnu-sed ed gnu-tar gnutls grep \
-  gnu-which gawk gzip watch wget
-
-# Upgrade old tools on Mac
-brew install bash less nano curl make
-
-# =====================
-#  Python
+# Tools not available in Homebrew
 # =====================
 
-brew install python
-#brew install pyenv
-#pyenv install 3.14.13
-#pyenv global system
+# Interactive `git` with the help of `fzf` https://github.com/bigH/git-fuzzy
+clone_or_update https://github.com/bigH/git-fuzzy "$DOTFILES/vendor/git-fuzzy"
+link "$DOTFILES/vendor/git-fuzzy/bin/git-fuzzy" "$HOME/bin/git-fuzzy"
 
-# GitHub - ranger/ranger: A VIM-inspired filemanager for the console https://github.com/ranger/ranger
-#pip3 install ranger-fm
-#ranger --copy-config=rifle
+# Git object pickers for fzf https://github.com/junegunn/fzf-git.sh, sourced by fzf/fzf.rc.sh
+clone_or_update https://github.com/junegunn/fzf-git.sh "$DOTFILES/vendor/fzf-git.sh"
 
 # =====================
-# git friends
+# Per-tool configuration
 # =====================
 
-# Diff tools
-brew install --cask sourcetree
+configure() {
+  local tool=$1
+  info "Configuring $tool"
+  # subshell: a script that fails or changes directory can't affect the others
+  # shellcheck source=/dev/null
+  ( . "$DOTFILES/$tool/configure.sh" )
+}
 
-# A viewer for git and diff output
-# https://github.com/dandavison/delta
-# TODO: choose between side-by-side and inline based on viewport width
-# 🚀 automatic side-by-side based on column width? · Issue #359 · dandavison/delta https://github.com/dandavison/delta/issues/359
-brew install git-delta
+# shell first: it creates $ZDOTDIR and the .env/.rc directories the others link into
+configure shell
 
-# A simple terminal UI for git commands
-brew install lazygit
+# Record where the repo lives so shell config can find it at runtime
+write_file "$SHELLENVDIR/00-dotfiles.env.sh" "export DOTFILES=\"$DOTFILES\""
 
-# GitHub - bigH/git-fuzzy: interactive `git` with the help of `fzf` https://github.com/bigH/git-fuzzy
-PREFIX=$(brew --prefix)
-TARGET="$PREFIX/share/git-fuzzy"
-mkdir -p "$PREFIX/share"
-if [ ! -d "$TARGET" ]; then
-  git clone https://github.com/bigH/git-fuzzy "$TARGET"
-else
-  echo "git-fuzzy already exists, updating..."
-  git -C "$TARGET" pull
+for script in "$DOTFILES"/*/configure.sh; do
+  tool="$(basename "$(dirname "$script")")"
+  case "$tool" in
+    shell) continue ;;
+    macos|iterm2) [ "$(uname)" = "Darwin" ] || continue ;;
+  esac
+  configure "$tool"
+done
+
+# =====================
+# macOS preferences, only with --macos
+# =====================
+
+if [ "$MACOS_PREFS" = 1 ]; then
+  if [ "$(uname)" != "Darwin" ]; then
+    warn "--macos: not on macOS, skipping macos/preferences.sh"
+  elif [ "$DRY_RUN" = 1 ]; then
+    echo "[dry-run] sh $DOTFILES/macos/preferences.sh (after asking for confirmation)"
+  else
+    warn "macos/preferences.sh changes system settings, including turning off Gatekeeper and"
+    warn "download quarantine, and sets the time zone to Europe/Kiev and the locale to en_UA."
+    printf 'Apply macOS preferences now? [y/N] '
+    read -r answer || answer=""
+    case "$answer" in
+      [yY]*) info "Applying macOS preferences"; sh "$DOTFILES/macos/preferences.sh" ;;
+      *) info "Skipped macos/preferences.sh" ;;
+    esac
+  fi
 fi
-ln -sf "$PREFIX/share/git-fuzzy/bin/git-fuzzy" "$PREFIX/bin/git-fuzzy"
 
-# =========================
-#  Apps & utilities
-# =========================
+# =====================
+# Login shell
+# =====================
 
-# GitHub - junegunn/fzf: A command-line fuzzy finder https://github.com/junegunn/fzf
-brew install fzf
-$(brew --prefix)/opt/fzf/install
+case "${SHELL:-}" in
+  */zsh) ;;
+  *)
+    info "Making zsh your login shell"
+    run chsh -s /bin/zsh
+    ;;
+esac
 
-# Modern, maintained replacement for ls. https://github.com/eza-community/eza
-brew install eza
-
-# Simple, fast and user-friendly alternative to find. https://github.com/sharkdp/fd
-brew install fd
-
-# Official tldr client written in Rust. https://tldr.sh/tlrc/
-brew install tlrc
-
-# Programmatically correct mistyped console commands. https://github.com/nvbn/thefuck
-brew install thefuck
-
-# Shell extension to navigate your filesystem faster. https://github.com/ajeetdsouza/zoxide
-brew install zoxide
-
-# Perl compatible regular expressions library. https://www.pcre.org/
-brew install pcre
-
-# antonmedv/fx: Command-line tool and terminal JSON viewer 🔥 - https://github.com/antonmedv/fx
-brew install fx
-
-# GitHub - sharkdp/bat: A cat(1) clone with wings. https://github.com/sharkdp/bat
-brew install bat
-
-# htop - an interactive process viewer https://htop.dev/
-brew install htop
-
-# ShellCheck – shell script analysis tool https://www.shellcheck.net/
-# find bugs in your shell scripts
-brew install shellcheck
-
-# 7-Zip is a file archiver with a high compression ratio https://7-zip.org/
-brew install sevenzip
-
-# GitHub - imsnif/bandwhich: Terminal bandwidth utilization tool https://github.com/imsnif/bandwhich
-brew install bandwhich
-
-# Docker
-brew install --cask docker
-
-# ===============================
-#  GUI apps from 'brew cask'
-# ================================
-
-# Video player
-brew install --cask vlc
-
-# Refresh the current terminal with the newly installed configuration
-exec zsh
-
-echo "👌 Carry on with git setup!"
+echo
+info "👌 Done. Next steps:"
+echo "  1. Open a new terminal (or run: exec zsh)"
+echo "  2. Set your git identity: $DOTFILES/git_setup.sh"
