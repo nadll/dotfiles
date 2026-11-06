@@ -73,13 +73,13 @@ unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 
 # ==================
 # History
-# set after oh-my-zsh, which turns on hist_ignore_space in lib/history.zsh
+# set after oh-my-zsh (lib/history.zsh), so these win over its defaults
+# oh-my-zsh also turns on HIST_IGNORE_SPACE: commands that start with a space are not saved
 # ==================
 setopt EXTENDED_HISTORY        # save when each command ran and how long it took
 setopt HIST_IGNORE_DUPS        # don't save a command twice in a row
 setopt HIST_EXPIRE_DUPS_FIRST  # when history is full, drop duplicates first
 setopt SHARE_HISTORY           # share history between open terminals
-unsetopt HIST_IGNORE_SPACE     # keep commands that start with a space in history too
 
 # machine-local aliases and functions, not tracked in this repo
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
