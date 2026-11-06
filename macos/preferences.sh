@@ -22,7 +22,8 @@ defaults write -g NSDisableAutomaticTermination -bool true
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # make menu bar translucent
-defaults write -g AppleEnableMenuBarTransparency -bool true
+# Obsolete (OS X 10.7 era), no effect on current macOS
+# defaults write -g AppleEnableMenuBarTransparency -bool true
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock
 # in the login window
@@ -43,7 +44,8 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 # Set Help Viewer windows to non-floating mode
-defaults write com.apple.helpviewer DevMode -bool true
+# Obsolete, the current Tips/Help viewer ignores it
+# defaults write com.apple.helpviewer DevMode -bool true
 
 # =====================
 # Quarantine
@@ -64,12 +66,13 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # on power
 sudo pmset -c displaysleep 10
 sudo pmset -c sleep 11
-sudo pmset -c disksleep 20
+# disksleep only spins down hard disks, no effect on an SSD
+# sudo pmset -c disksleep 20
 
 # on battery
 sudo pmset -b displaysleep 5
 sudo pmset -b sleep 6
-sudo pmset -b disksleep 10
+# sudo pmset -b disksleep 10
 
 # Wake up the machine when lid is opened
 sudo pmset -a lidwake 1
@@ -85,8 +88,10 @@ sudo pmset -a halfdim 0
 defaults -currentHost write com.apple.screensaver idleTime 0
 
 # Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+# Ignored since macOS 10.13 High Sierra; use System Settings -> Lock Screen,
+# or `sysadminctl -screenLock immediate -password -`
+# defaults write com.apple.screensaver askForPassword -int 1
+# defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 
 # =======================
@@ -102,9 +107,10 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # see http://hints.macworld.com/article.php?story=20131123074223584
 # see http://osxnotes.net/keybindings.html for valid key chords
-defaults write -g NSUserKeyEquivalents '{
-  "System Preferences..."="@$,";
-}'
+# Since macOS 13 Ventura the menu item is "System Settings…", so this matches nothing
+# defaults write -g NSUserKeyEquivalents '{
+#   "System Preferences..."="@$,";
+# }'
 
 # Disable automatic capitalization as it’s annoying when typing code
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
@@ -136,6 +142,8 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 # ===========================
 
 # Trackpad: enable tap to click for this user and for the login screen
+# Note: com.apple.driver.AppleBluetoothMultitouch.trackpad is the Magic Trackpad only;
+# the built-in trackpad reads com.apple.AppleMultitouchTrackpad
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -143,7 +151,8 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
-# drag with three fingers
+# drag with three fingers (Magic Trackpad only; on current macOS it's an Accessibility
+# setting: System Settings -> Accessibility -> Pointer Control -> Trackpad Options)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
 
 # Mouse sensitivity
@@ -183,7 +192,8 @@ defaults write com.apple.dock mineffect -string "scale"
 defaults write com.apple.dock launchanim -bool false
 
 # Disable Dashboard
-defaults write com.apple.dashboard mcx-disabled -bool true
+# Dashboard was removed in macOS 10.15 Catalina
+# defaults write com.apple.dashboard mcx-disabled -bool true
 
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
@@ -212,6 +222,9 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bo
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 
+# Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
 # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
@@ -227,7 +240,7 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 #  4: Desktop
 #  5: Start screen saver
 #  6: Disable screen saver
-#  7: Dashboard
+#  7: Dashboard (removed in Catalina)
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
@@ -374,7 +387,8 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Finder: allow text selection in Quick Look
-defaults write com.apple.finder QLEnableTextSelection -bool true
+# Obsolete, Quick Look allows text selection by default
+# defaults write com.apple.finder QLEnableTextSelection -bool true
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -401,7 +415,8 @@ defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Empty Trash securely by default
-defaults write com.apple.finder EmptyTrashSecurely -bool true
+# Secure empty was removed in OS X 10.11 El Capitan
+# defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 # disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
@@ -437,20 +452,6 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desk
 
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
-
-# ======================================
-# Activity monitor
-# ======================================
-
-# Show the main window when launching Activity Monitor
-defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-
-# Show all processes in Activity Monitor
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
-
-# Sort Activity Monitor results by CPU usage
-defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
-defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 # =================================
 # Mac App Store
