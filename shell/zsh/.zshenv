@@ -14,10 +14,6 @@ export VISUAL="code"
 export PATH="$PATH:$HOME/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
-# The following lines were added by Docker Desktop to add commands to your PATH.
-export PATH="$PATH:$HOME/.docker/bin"
-# End of Docker Desktop section.
-
 # Locale
 # Encoding stuff for the terminal
 export LANG=en_US.UTF-8

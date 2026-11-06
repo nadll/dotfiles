@@ -31,10 +31,6 @@ export HISTFILE="${ZDOTDIR}/.zsh_history"
 # disable timeout for ESC keypress
 export KEYTIMEOUT=1
 
-# increase "docker" client  and "docker-compose" client timeouts from 60s to 120s
-export DOCKER_CLIENT_TIMEOUT=120
-export COMPOSE_HTTP_TIMEOUT=120
-
 # ==================
 # oh-my-zsh
 # loaded before the options and key bindings below, so those override its defaults

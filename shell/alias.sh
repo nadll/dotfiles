@@ -9,12 +9,6 @@ function httpless {
     http --pretty=all --print=hb "$@" | less -R;
 }
 
-# Alias to work with AWS CLI through the docker image
-# alias aws='docker run --rm -it -e AWS_PROFILE -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli'
-
-# Alias to work with Sentry CLI through the docker image
-alias sentry-cli='docker run --rm -v $(pwd)/.localenv/.sentryclirc:/root/.sentryclirc getsentry/sentry-cli'
-
 # Aliases to Chrome browser executables
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
