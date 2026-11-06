@@ -119,5 +119,5 @@ On a Mac that ran an earlier version of these dotfiles:
 
 - `/etc/zshenv` may still contain `export ZDOTDIR=...` and a `path_helper` block. Both are harmless; remove them with `sudo` if you like.
 - `~/.rspec` and `~/.pryrc` point to files that were removed: `rm ~/.rspec ~/.pryrc`.
-- `~/.ssh/config` is copied only when missing. If yours has a bare `IdentityFile ~/.ssh/` line, change it to `IdentityFile ~/.ssh/id_ed25519`.
+- `~/.ssh/config` is now a link to `ssh/config`. The first run moves your old one to `~/.ssh/config.local`, which `ssh/config` includes at the top, so your hosts keep working. Trim the `Host *` settings out of it that `ssh/config` already has (and a bare `IdentityFile ~/.ssh/` line, if any).
 - `~/.zshrc` and `~/.fzf.zsh` are no longer read and can be deleted.

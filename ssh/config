@@ -1,3 +1,7 @@
+# Machine-specific hosts and keys, not tracked in this repo. At the top so it can
+# override the settings below: ssh uses the first value it finds for each option.
+Include ~/.ssh/config.local
+
 Host *
   # use only identifies provided by ssh_config. Don't use identities provided by ssh-agent
   IdentitiesOnly yes
@@ -20,5 +24,3 @@ Host *
 
 Host *
   IdentityFile ~/.ssh/id_rsa
-
-Include ~/.ssh/config.local
