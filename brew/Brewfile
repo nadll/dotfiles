@@ -95,9 +95,6 @@ brew "thefuck"
 # Shell extension to navigate your filesystem faster. https://github.com/ajeetdsouza/zoxide
 brew "zoxide"
 
-# Perl compatible regular expressions library. https://www.pcre.org/
-brew "pcre"
-
 # antonmedv/fx: Command-line tool and terminal JSON viewer 🔥 https://github.com/antonmedv/fx
 brew "fx"
 
