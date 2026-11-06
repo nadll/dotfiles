@@ -17,4 +17,8 @@ if [ -f "$HOME/.ssh/config.local" ]; then
   run chmod 600 "$HOME/.ssh/config.local"
 fi
 
-link "$DOTFILES/ssh/ssh.rc.sh" "$SHELLRCDIR/"
+# ssh/ssh.rc.sh (all commented out) was removed; drop its old link, or zsh fails to source it
+if [ -L "$SHELLRCDIR/ssh.rc.sh" ]; then
+  info "Removing the old link $(pretty "$SHELLRCDIR/ssh.rc.sh")"
+  run rm "$SHELLRCDIR/ssh.rc.sh"
+fi
