@@ -31,11 +31,13 @@ export PURE_PROMPT_SYMBOL=">"
 # the max execution time of a process before its run time is shown when it exits
 export PURE_CMD_MAX_EXEC_TIME=0
 
-# configure zsh history behavior
-export SAVEHIST=10000
-export HISTSIZE=10000
+# configure zsh history behavior (history options are set after oh-my-zsh, see "History" below)
+# HISTSIZE: lines kept in memory, SAVEHIST: lines saved to HISTFILE
+export SAVEHIST=100000
+export HISTSIZE=100000
 export HISTFILE="${ZDOTDIR}/.zsh_history"
-export HISTCONTROL=ignorespace:ignoredups
+# HISTCONTROL is a bash setting, zsh ignores it; replaced by the setopt lines under "History"
+# export HISTCONTROL=ignorespace:ignoredups
 
 # disable timeout for ESC keypress
 export KEYTIMEOUT=1
@@ -62,6 +64,16 @@ ZSH_DISABLE_COMPFIX=true
 
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
+
+# ==================
+# History
+# set after oh-my-zsh, which turns on hist_ignore_space in lib/history.zsh
+# ==================
+setopt EXTENDED_HISTORY        # save when each command ran and how long it took
+setopt HIST_IGNORE_DUPS        # don't save a command twice in a row
+setopt HIST_EXPIRE_DUPS_FIRST  # when history is full, drop duplicates first
+setopt SHARE_HISTORY           # share history between open terminals
+unsetopt HIST_IGNORE_SPACE     # keep commands that start with a space in history too
 
 # machine-local aliases and functions, not tracked in this repo
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
