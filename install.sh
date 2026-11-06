@@ -178,6 +178,9 @@ echo "-----> Installing/updating zsh plugin 'zsh-autosuggestions'..."
 clone_or_update https://github.com/zsh-users/zsh-autosuggestions "$ZSH_PLUGINS_DIR/zsh-autosuggestions"
 echo "-----> Installing/updating zsh plugin 'zsh-syntax-highlighting'..."
 clone_or_update https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting"
+echo "-----> Installing/updating zsh plugin 'zsh-autocomplete'..."
+# not in plugins=(): .zshrc sources it before oh-my-zsh, so it runs compinit itself
+clone_or_update https://github.com/marlonrichert/zsh-autocomplete "$ZSH_PLUGINS_DIR/zsh-autocomplete"
 
 # =====================
 # Tools not available in Homebrew

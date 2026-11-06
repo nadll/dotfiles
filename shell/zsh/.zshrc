@@ -62,6 +62,12 @@ plugins=(git gitfast last-working-dir common-aliases zsh-autosuggestions zsh-syn
 # Disable warning about insecure completion-dependent directories
 ZSH_DISABLE_COMPFIX=true
 
+# zsh-autocomplete: completion menu shown while you type https://github.com/marlonrichert/zsh-autocomplete
+# must be sourced before oh-my-zsh: it runs compinit itself and turns oh-my-zsh's compinit call into a no-op
+# (so it is not in plugins=() above, which oh-my-zsh loads after its compinit)
+[[ -f "${ZSH}/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]] &&
+  source "${ZSH}/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 
@@ -79,9 +85,25 @@ unsetopt HIST_IGNORE_SPACE     # keep commands that start with a space in histor
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
 
-zstyle ':autocomplete:tab:*' insert-unambiguous yes
-zstyle ':autocomplete:tab:*' widget-style menu-select
-zstyle ':autocomplete:*' recent-dirs z.sh
+# ==================
+# zsh-autocomplete settings (see its CONFIGURATION.md)
+# the three zstyle lines below were for an older version of the plugin, replaced by the settings after them
+# ==================
+# zstyle ':autocomplete:tab:*' insert-unambiguous yes
+# zstyle ':autocomplete:tab:*' widget-style menu-select
+# zstyle ':autocomplete:*' recent-dirs z.sh
+
+# <Tab> first inserts the part common to all listed completions
+zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+# <Tab> and <Shift-Tab> enter the completion menu (instead of inserting the first completion)
+bindkey '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
+# recent directories (<Ctrl-x /> and in directory completions) come from zoxide instead of cdr
+# zoxide records directories with its own hook, so chpwd_recent_dirs has nothing to do
+chpwd_recent_filehandler() {
+  reply=( ${(f)"$(zoxide query --list 2>/dev/null)"} )
+}
+chpwd_recent_dirs() {}
 
 # fast man page access with <esc-h>
 autoload run-help

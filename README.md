@@ -40,7 +40,7 @@ Then:
 ## What `install.sh` does
 
 1. Installs Homebrew if it's missing, then the packages in `brew/Brewfile` with `brew bundle`, plus `brew/Brewfile.pro` on pro machines.
-2. Installs oh-my-zsh, the powerlevel10k theme and the `zsh-autosuggestions` and `zsh-syntax-highlighting` plugins.
+2. Installs oh-my-zsh, the powerlevel10k theme and the `zsh-autosuggestions`, `zsh-syntax-highlighting` and `zsh-autocomplete` plugins.
 3. Clones tools that aren't in Homebrew, git-fuzzy and fzf-git.sh, into `vendor/` (ignored by git).
 4. Runs every `<tool>/configure.sh`, `shell` first. These link the config files into place; `tmux/configure.sh` also clones tpm into `~/.tmux/plugins/tpm`.
 5. Makes zsh the login shell if it isn't already.
