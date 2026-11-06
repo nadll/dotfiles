@@ -19,7 +19,9 @@ alias as-tree='tree --fromfile'
 
 # Get External IP / Internet Speed
 alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
-alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
+# macOS built-in test (Apple's servers); -s measures download and upload one after the other
+# was: curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -
+alias speedtest="networkQuality -s"
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
