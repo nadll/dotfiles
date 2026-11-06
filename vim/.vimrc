@@ -22,8 +22,10 @@ set encoding=utf-8 nobomb
 " Change mapleader
 let mapleader=","
 " Don’t add empty newlines at the end of files
-set binary
-set noeol
+" (was `set binary` + `set noeol`; binary mode also turns off expandtab, textwidth and more)
+" set binary
+" set noeol
+set nofixendofline
 
 " Respect modeline in files
 set modeline
@@ -90,8 +92,9 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 if has("autocmd")
 	" Enable file type detection
 	filetype on
-	" Treat .json files as .js
-	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+	" Vim has its own json filetype and syntax (was `setfiletype json syntax=javascript`,
+	" but setfiletype takes only one name)
+	autocmd BufNewFile,BufRead *.json setfiletype json
 	" Treat .md files as Markdown
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
