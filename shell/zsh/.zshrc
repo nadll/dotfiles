@@ -129,6 +129,8 @@ bindkey "\eOH" beginning-of-line
 bindkey "\eOF" end-of-line
 
 # Hook up zsh-users/zsh-history-substring-search
+# Up/Down step through matching commands; bound after zsh-autocomplete on purpose, so they win over its menus
+# zsh-autocomplete's menus stay on Alt-Up (history list) and Alt-Down (completion menu)
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
