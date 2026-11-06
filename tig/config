@@ -4,3 +4,34 @@
 # Selected line: tig's default is white on green, which is unreadable with the
 # bright lime green of the coolnight iTerm2 colors. Keep the green bar, black text.
 color cursor black green bold
+
+# tig settings, linked to ~/.config/tig/config
+# Defaults and every option: man tigrc
+
+# Selected line: tig's default is white on green, which is unreadable with the
+# bright lime green of the coolnight iTerm2 colors. Keep the green bar, black text.
+color cursor black green bold
+
+# Compact metadata: email usernames and short relative dates.
+# Blame keeps every line number and colors commit IDs to distinguish changes.
+set blame-view  = id:yes,color file-name:auto author:email-user date:relative-compact line-number:yes,interval=1 text
+# Keep filenames visible so matches across files remain distinguishable.
+set grep-view	= file-name:yes line-number:yes,interval=1 text
+set main-view	= line-number:no,interval=5 id:no date:relative-compact author:email-user commit-title:yes,graph,refs,overflow=no
+set refs-view	= line-number:no id:no date:relative-compact author:email-user ref commit-title
+set stash-view	= line-number:no,interval=5 id:no date:relative-compact author:email-user commit-title
+set status-view	= line-number:no,interval=5 status:short file-name
+set tree-view	= line-number:no,interval=5 mode author:email-user file-size date:relative-compact id:no file-name
+
+# Pager-based views hide line numbers; diff titles have no overflow highlighting.
+set pager-view	= line-number:no,interval=5 text
+set stage-view	= line-number:no,interval=5 text
+set log-view	= line-number:no,interval=5 text
+set blob-view	= line-number:no,interval=5 text
+set diff-view	= line-number:no,interval=5 text:yes,commit-title-overflow=no
+
+set tab-size = 4
+# Keep parent/child histories together rather than sorting strictly by date.
+set commit-order = topo
+# Views stay unchanged until explicitly refreshed; use auto for cross-view updates.
+set refresh-mode = manual
