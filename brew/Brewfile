@@ -49,6 +49,10 @@ brew "git"
 # 🚀 automatic side-by-side based on column width? · Issue #359 · dandavison/delta https://github.com/dandavison/delta/issues/359
 brew "git-delta"
 
+# difftastic - structural diff that understands code syntax https://difftastic.wilfred.me.uk/
+# not the default git pager (delta is), use it on demand: git -c diff.external=difft diff
+brew "difftastic"
+
 # A simple terminal UI for git commands
 brew "lazygit"
 
@@ -103,6 +107,9 @@ brew "httpie"
 # htop - an interactive process viewer https://htop.dev/
 brew "htop"
 
+# btop - resource monitor with graphs for CPU, memory, disks, network https://github.com/aristocratos/btop
+brew "btop"
+
 # Shell script analysis tool https://www.shellcheck.net/
 # find bugs in your shell scripts
 brew "shellcheck"
@@ -126,6 +133,9 @@ brew "jq"
 # NCurses Disk Usage https://dev.yorhel.nl/ncdu
 brew "ncdu"
 
+# dust - du with a tree view of what takes the space https://github.com/bootandy/dust
+brew "dust"
+
 # Apple Silicon Monitor Top (CPU, GPU, power) https://github.com/context-labs/mactop
 brew "mactop"
 
@@ -139,6 +149,9 @@ brew "repomix"
 # Python
 # =====================
 brew "python"
+
+# uv - fast Python package and project manager (pip, venv, pipx and Python versions) https://docs.astral.sh/uv/
+brew "uv"
 
 # =====================
 # Fonts
