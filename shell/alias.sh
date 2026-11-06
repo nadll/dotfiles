@@ -78,7 +78,7 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # brew update
-alias bupdate="brew update && brew upgrade && brew upgrade --cask && brew cleanup"
+alias bupdate="brew update && brew upgrade && brew cleanup"  # brew upgrade includes casks
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
