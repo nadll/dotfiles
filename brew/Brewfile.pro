@@ -5,3 +5,6 @@
 
 # JFrog CLI for Artifactory https://jfrog.com/getcli/
 brew "jfrog-cli"
+
+# Configurable static site generator
+brew "hugo"
