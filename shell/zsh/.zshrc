@@ -153,11 +153,6 @@ bindkey -M menuselect '^[' undo
 
 zstyle ':completion:*' menu select
 
-# Load "pyenv" shell helper
-# if command -v pyenv 1>/dev/null 2>&1; then
-#   eval "$(pyenv init -)"
-# fi
-
 # copy the active line from the command line buffer
 # onto the system clipboard
 # borrowed from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
@@ -175,10 +170,6 @@ function _accept_line_almostontop {
   zle .accept-line
 }
 zle -N accept-line _accept_line_almostontop
-
-# shell command completion for gcloud.
-# export PATH="$PATH:/usr/local/google-cloud-sdk/bin"
-# if [ -f '/usr/local/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/google-cloud-sdk/completion.zsh.inc'; fi
 
 # source all extra rc files
 export SHELLRCDIR="$ZDOTDIR/.rc"
