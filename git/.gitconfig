@@ -213,6 +213,8 @@
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	# followTags = true
 
+	# On the first `git push` of a new branch, create and track origin/<branch> (no `-u` needed)
+	autoSetupRemote = true
 
 [branch "master"]
 
