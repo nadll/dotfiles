@@ -93,7 +93,8 @@
     "workbench.settings.openDefaultSettings": true,
     "workbench.settings.useSplitJSON": true,
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.panel.defaultLocation": "right",
+    // where the panel (terminal, problems, output) opens: bottom, left or right
+    "workbench.panel.defaultLocation": "bottom",
     "workbench.colorCustomizations": {
         "titleBar.activeBackground": "#ffb70097"
     },
