@@ -20,14 +20,6 @@ fi
 # See: https://github.com/ohmyzsh/ohmyzsh/issues/5569
 export DISABLE_MAGIC_FUNCTIONS="true"
 
-# Change default command line prompt symbol
-# see https://github.com/sindresorhus/pure
-export PURE_PROMPT_SYMBOL=">"
-
-# https://github.com/sindresorhus/pure
-# the max execution time of a process before its run time is shown when it exits
-export PURE_CMD_MAX_EXEC_TIME=0
-
 # configure zsh history behavior (history options are set after oh-my-zsh, see "History" below)
 # HISTSIZE: lines kept in memory, SAVEHIST: lines saved to HISTFILE
 export SAVEHIST=100000
