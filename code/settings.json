@@ -102,10 +102,6 @@
     // Nerd Font so the p10k prompt icons render. brew/Brewfile installs it as "MesloLGS Nerd Font";
     // "MesloLGS NF" is the name of p10k's own copy, used if that one is installed instead
     "terminal.integrated.fontFamily": "'MesloLGS NF', 'MesloLGS Nerd Font', monospace",
-    "terminal.integrated.env.osx": {
-      "FIG_NEW_SESSION": "1",
-      "CW_NEW_SESSION": "1"
-    },
     "[html]": {
       "editor.defaultFormatter": "vscode.html-language-features"
     },
