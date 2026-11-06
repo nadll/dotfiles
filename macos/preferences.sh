@@ -50,10 +50,11 @@ defaults write com.apple.helpviewer DevMode -bool true
 # =====================
 
 # Enable applications installed from Internet to run without restrictions
-# Then go to System Preferences -> Security and Privacy. And enable "Run applications -> Allow from anywhere"
+# On macOS 15 Sequoia and later this only unlocks the option: then go to System Settings ->
+# Privacy & Security -> Security and choose "Allow applications from: Anywhere"
 sudo spctl --master-disable
 
-# Enable the “Are you sure you want to open this application?” dialog
+# Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # ===========================
@@ -232,7 +233,7 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 # 12: Notification Center
 # 13: Lock Screen
 
-# Top right screen corner → Desktop
+# Top right screen corner → Mission Control
 defaults write com.apple.dock wvous-tr-corner -int 2
 defaults write com.apple.dock wvous-tr-modifier -int 0
 
@@ -259,8 +260,8 @@ defaults write com.apple.universalaccess reduceMotion -bool true
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
 # showing and hiding sheets, resizing preference windows, zooming windows
-# float 0 doesn't work
-defaults write -g NSWindowResizeTime -float 0.00
+# 0 is ignored, so use the smallest non-zero value
+defaults write -g NSWindowResizeTime -float 0.001
 
 # opening and closing Quick Look windows
 defaults write -g QLPanelAnimationDuration -float 0
