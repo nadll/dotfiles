@@ -106,4 +106,6 @@
       "editor.defaultFormatter": "vscode.html-language-features"
     },
     "security.workspace.trust.untrustedFiles": "open",
+    "claudeCode.preferredLocation": "panel",
+    "claudeCode.useTerminal": true,
 }
