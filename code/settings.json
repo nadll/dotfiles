@@ -108,4 +108,7 @@
     "security.workspace.trust.untrustedFiles": "open",
     "claudeCode.preferredLocation": "panel",
     "claudeCode.useTerminal": true,
+    "workbench.colorTheme": "Tomorrow Night Blue",
+    "update.mode": "start",
+    "update.showPostInstallInfo": true,
 }
