@@ -12,7 +12,7 @@ set -o pipefail
 # General
 # ===================
 
-# Set sidebar icon size to medium
+# Set sidebar icon size to medium (1: small, 2: medium, 3: large)
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
 # Disable automatic termination of inactive apps
@@ -40,7 +40,7 @@ defaults write -g NSNavPanelExpandedStateForSaveMode2 -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# Always show scrollbars
+# Always show scrollbars (other values: "WhenScrolling", "Automatic")
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 # Set Help Viewer windows to non-floating mode
@@ -63,7 +63,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Power Management
 # ===========================
 
-# on power
+# on power (values in minutes, 0 = never)
 sudo pmset -c displaysleep 10
 sudo pmset -c sleep 11
 # disksleep only spins down hard disks, no effect on an SSD
@@ -84,7 +84,7 @@ sudo systemsetup -setrestartfreeze on
 # just make it fully off
 sudo pmset -a halfdim 0
 
-# disable screen saver
+# disable screen saver (idleTime is in seconds, 0 = never)
 defaults -currentHost write com.apple.screensaver idleTime 0
 
 # Require password immediately after sleep or screen saver begins
@@ -101,7 +101,9 @@ defaults -currentHost write com.apple.screensaver idleTime 0
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-# increase key repeat rate
+# increase key repeat rate; both values are in units of 15 ms
+# KeyRepeat 1 = 15 ms between repeats (fastest in System Settings is 2 = 30 ms)
+# InitialKeyRepeat 15 = 225 ms before repeating starts (shortest in System Settings)
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
@@ -129,6 +131,7 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
+# 0: text boxes and lists only (default), 2 or 3: all controls
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
@@ -142,6 +145,7 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 # ===========================
 
 # Trackpad: enable tap to click for this user and for the login screen
+# tapBehavior 1 = tap to click, 0 = off
 # Note: com.apple.driver.AppleBluetoothMultitouch.trackpad is the Magic Trackpad only;
 # the built-in trackpad reads com.apple.AppleMultitouchTrackpad
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -156,6 +160,8 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
 
 # Mouse sensitivity
+# mouse.scaling is the tracking speed slider (about 0 to 3, -1 turns acceleration off)
+# scrollwheel.scaling is the scrolling speed slider (about 0 to 1)
 defaults write NSGlobalDomain com.apple.mouse.scaling -float 1.5
 defaults write NSGlobalDomain com.apple.scrollwheel.scaling -float 0.1265
 
@@ -174,6 +180,8 @@ defaults write com.apple.dock orientation -string "right"
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock "show-process-indicators" -int 1
 
+# Marks the Dock's Trash icon as full. macOS sets this flag itself whenever the Trash
+# changes, so writing it has no lasting effect
 defaults write com.apple.dock "trash-full" -int 1
 
 # Automatically hide and show the Dock
@@ -185,7 +193,7 @@ defaults write com.apple.dock showhidden -bool true
 # Use magnigification when hovering mouse over the icon
 defaults write com.apple.dock magnification -int 1
 
-# Change minimize/maximize window effect
+# Change minimize/maximize window effect ("genie" is the default, "suck" is hidden)
 defaults write com.apple.dock mineffect -string "scale"
 
 # Don’t animate opening applications from the Dock
@@ -223,10 +231,13 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bo
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 
 # Show all processes in Activity Monitor
+# 0 is the pre-10.10 value; current Activity Monitor uses 100: All Processes,
+# 101: hierarchically, 102: My Processes, 103: System, 105: Active, 107: Windowed
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
 # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+# SortDirection 0 = descending, 1 = ascending
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 # =======================
@@ -245,6 +256,10 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 # 11: Launchpad
 # 12: Notification Center
 # 13: Lock Screen
+# 14: Quick Note (macOS 12 Monterey and later)
+#
+# The *-modifier keys are the key to hold down for the corner to fire:
+# 0: none, 131072: Shift, 262144: Control, 524288: Option, 1048576: Command
 
 # Top right screen corner → Mission Control
 defaults write com.apple.dock wvous-tr-corner -int 2
@@ -408,10 +423,12 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 defaults write -g AppleShowAllFiles -bool true
 
 # When performing a search, search the current folder by default
+# SCcf: current folder, SCev: This Mac, SCsp: the previous search scope
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 # Use list view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+# Nlsv: list, icnv: icons, clmv: columns, glyv: gallery
+# (`Flwv` was Cover Flow, replaced by gallery in macOS 10.14 Mojave)
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Empty Trash securely by default
@@ -447,6 +464,8 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Set Desktop as the default location for new Finder windows
 # For other paths, use `PfLo` and `file:///full/path/here/`
+# Other codes: PfHm: home, PfDo: Documents, PfCm: Computer, PfVo: startup volume,
+# PfAF: Recents (all files). If you change it, point NewWindowTargetPath at the same folder
 defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
 
