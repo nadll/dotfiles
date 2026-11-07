@@ -182,7 +182,7 @@ defaults write com.apple.dock "show-process-indicators" -int 1
 
 # Marks the Dock's Trash icon as full. macOS sets this flag itself whenever the Trash
 # changes, so writing it has no lasting effect
-defaults write com.apple.dock "trash-full" -int 1
+# defaults write com.apple.dock "trash-full" -int 1
 
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
@@ -233,7 +233,8 @@ defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 # Show all processes in Activity Monitor
 # 0 is the pre-10.10 value; current Activity Monitor uses 100: All Processes,
 # 101: hierarchically, 102: My Processes, 103: System, 105: Active, 107: Windowed
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
+# defaults write com.apple.ActivityMonitor ShowCategory -int 0
+defaults write com.apple.ActivityMonitor ShowCategory -int 100
 
 # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
