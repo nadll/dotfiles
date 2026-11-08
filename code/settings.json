@@ -15,7 +15,8 @@
     },
     "window.zoomLevel": 0,
     "editor.bracketPairColorization.enabled": true,
-    "editor.detectIndentation": false,
+    // existing files keep their own indentation; new/empty files use editor.tabSize (2, 4 in [python]). Was false
+    "editor.detectIndentation": true,
     "editor.fontSize": 14,
     "editor.guides.bracketPairs": true,
     "editor.minimap.enabled": false,
