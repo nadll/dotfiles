@@ -5,10 +5,20 @@
     "DISABLE_TELEMETRY": "1",
     "DISABLE_ERROR_REPORTING": "1"
   },
+  "feedbackSurveyRate": 0,
+  "cleanupPeriodDays": 14,
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
   "permissions": {
     "deny": [
       "Read(./.env)",
-      "Read(./.env.*)",
+      "Read(./.env*)",
+      "Read(**/.env*)",
+      "Read(./secrets/**)",
+      "Read(./config/credentials.json)",
       "Read(~/.ssh/**)",
       "Read(~/.gitconfig.local)",
       "Read(~/.config/gh/**)"
@@ -37,7 +47,8 @@
       "Bash(mkdir *)",
       "Bash(touch *)",
       "Bash(pip list *)"
-    ]
+    ],
+    "disableBypassPermissionsMode": "disable"
   },
   "sandbox": {
     "enabled": true,
@@ -55,7 +66,14 @@
     },
     "excludedCommands": [
       "gh *"
-    ]
+    ],
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "pypi.org",
+        "files.pythonhosted.org"
+      ]
+    }
   },
   "hooks": {
     "Notification": [
