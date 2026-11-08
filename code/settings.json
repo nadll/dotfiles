@@ -3,7 +3,10 @@
         "editor.bracketPairColorization.enabled": false,
         "editor.guides.bracketPairs": false,
         "editor.insertSpaces": true,
-        "editor.tabSize": 2,
+        // 4 to match what Ruff/black write (PEP 8); was 2
+        "editor.tabSize": 4,
+        // needs the Ruff extension (charliermarsh.ruff); replaces "python.formatting.provider", which VS Code dropped
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSaveMode": "file",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
@@ -42,7 +45,7 @@
         ".sass-cache": true,
         ".svn": true,
         "**/.DS_Store": true,
-        "**/.egg-info": true,
+        "**/*.egg-info": true,
         "**/.git": true,
         "build": true,
         "coverage": true,
@@ -71,7 +74,8 @@
     "notebook.markup.fontSize": 13,
     "python.analysis.typeCheckingMode": "basic",
     //"python.defaultInterpreterPath": "~/.pyenv/shims/python",
-    "python.formatting.provider": "black",
+    // removed from VS Code in 2023, the formatter is now set per language ([python] editor.defaultFormatter)
+    //"python.formatting.provider": "black",
     "python.languageServer": "Pylance",
     //"python.linting.enabled": true,
     //"python.linting.flake8Enabled": false,
