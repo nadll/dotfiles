@@ -21,6 +21,8 @@
     "editor.minimap.enabled": false,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.renderControlCharacters": true,
+    // show trailing spaces as dots
+    "editor.renderWhitespace": "trailing",
     "editor.rulers": [
         80,
         120
@@ -69,6 +71,8 @@
     },
     // built-in Source Control panel and git gutter markers (was false, which turned them off)
     "git.enabled": true,
+    // fetch in the background so the status bar shows when the branch is behind the remote
+    "git.autofetch": true,
     "notebook.diff.ignoreMetadata": true,
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 13,
