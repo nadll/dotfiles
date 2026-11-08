@@ -81,6 +81,8 @@
     //"python.linting.flake8Enabled": false,
     //"python.linting.pylintEnabled": true,
     "python.terminal.activateEnvironment": false,
+    // no A/B experiments in the Python extension
+    "python.experiments.enabled": false,
     // from the old Ruby extension (rebornix.ruby, deprecated); Shopify's Ruby LSP ignores it
     // and runs RuboCop by itself when the project uses it
     //"ruby.lint": {
@@ -91,6 +93,15 @@
         "**/.venv": true
     },
     "telemetry.telemetryLevel": "off",
+    // privacy: telemetryLevel off doesn't cover these
+    // no A/B experiments downloaded from Microsoft
+    "workbench.enableExperiments": false,
+    // Settings search stays local (otherwise sent to a Microsoft service)
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    // no surveys or feedback prompts
+    "telemetry.feedback.enabled": false,
+    // hide the built-in GitHub Copilot chat and inline suggestions (not used; Claude Code is a separate extension)
+    "chat.disableAIFeatures": true,
     "window.restoreWindows": "none",
     // needs the Vim extension (vscodevim.vim), not used for now
     //"vim.smartRelativeLine": true,
