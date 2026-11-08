@@ -51,6 +51,7 @@
     ],
     "disableBypassPermissionsMode": "disable"
   },
+  "alwaysThinkingEnabled": true,
   "sandbox": {
     "enabled": true,
     "credentials": {
