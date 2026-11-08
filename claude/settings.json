@@ -39,6 +39,24 @@
       "Bash(pip list *)"
     ]
   },
+  "sandbox": {
+    "enabled": true,
+    "credentials": {
+      "files": [
+        {
+          "path": "~/.ssh",
+          "mode": "deny"
+        },
+        {
+          "path": "~/.config/gh",
+          "mode": "deny"
+        }
+      ]
+    },
+    "excludedCommands": [
+      "gh *"
+    ]
+  },
   "hooks": {
     "Notification": [
       {
