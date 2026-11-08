@@ -3,7 +3,8 @@
   "theme": "dark-ansi",
   "env": {
     "DISABLE_TELEMETRY": "1",
-    "DISABLE_ERROR_REPORTING": "1"
+    "DISABLE_ERROR_REPORTING": "1",
+    "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1"
   },
   "feedbackSurveyRate": 0,
   "cleanupPeriodDays": 14,
