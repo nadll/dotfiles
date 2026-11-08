@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "theme": "dark-ansi",
+  "env": {
+    "DISABLE_TELEMETRY": "1",
+    "DISABLE_ERROR_REPORTING": "1"
+  },
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gitconfig.local)",
+      "Read(~/.config/gh/**)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git commit --amend *)",
+      "Bash(git reset *)",
+      "Bash(git checkout -- *)",
+      "Bash(git stash drop *)",
+      "Bash(git stash clear *)"
+    ],
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git fetch *)",
+      "Bash(git stash list *)",
+      "Bash(git stash show *)",
+      "Bash(git rev-parse *)",
+      "Bash(git remote -v)",
+      "Bash(rg *)",
+      "Bash(jq *)",
+      "Bash(tree *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(mkdir *)",
+      "Bash(touch *)",
+      "Bash(pip list *)"
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ]
+  }
+}
