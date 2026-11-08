@@ -81,9 +81,11 @@
     //"python.linting.flake8Enabled": false,
     //"python.linting.pylintEnabled": true,
     "python.terminal.activateEnvironment": false,
-    "ruby.lint": {
-        "rubocop": true
-    },
+    // from the old Ruby extension (rebornix.ruby, deprecated); Shopify's Ruby LSP ignores it
+    // and runs RuboCop by itself when the project uses it
+    //"ruby.lint": {
+    //    "rubocop": true
+    //},
     "search.exclude": {
         // Inherits all glob patterns from the `files.exclude` setting.
         "**/.venv": true
