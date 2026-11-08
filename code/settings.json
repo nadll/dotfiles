@@ -111,8 +111,6 @@
     "workbench.settings.enableNaturalLanguageSearch": false,
     // no surveys or feedback prompts
     "telemetry.feedback.enabled": false,
-    // hide the built-in GitHub Copilot chat and inline suggestions (not used; Claude Code is a separate extension)
-    "chat.disableAIFeatures": true,
     "window.restoreWindows": "none",
     // needs the Vim extension (vscodevim.vim), not used for now
     //"vim.smartRelativeLine": true,
