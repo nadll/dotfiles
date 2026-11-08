@@ -14,10 +14,14 @@ run mkdir -p "$SHELLENVDIR" "$SHELLRCDIR"
 link "$DOTFILES/shell/zsh/.zshenv" "$ZDOTDIR/.zshenv"
 link "$DOTFILES/shell/zsh/.zprofile" "$ZDOTDIR/.zprofile"
 link "$DOTFILES/shell/zsh/.zshrc" "$ZDOTDIR/.zshrc"
+# powerlevel10k prompt config. `p10k configure` rewrites this file; afterwards check `git status`:
+# if the link was replaced by a plain file, copy it to shell/zsh/.p10k.zsh and run install.sh again
+link "$DOTFILES/shell/zsh/.p10k.zsh" "$ZDOTDIR/.p10k.zsh"
 link "$DOTFILES/shell/.inputrc" "$HOME/.inputrc"
 
-# zsh now reads everything from $ZDOTDIR: carry over history and powerlevel10k config from $HOME once
-for file in .zsh_history .p10k.zsh; do
+# zsh now reads everything from $ZDOTDIR: carry over history from $HOME once
+# (the powerlevel10k config used to be copied here too, it's now linked from the repo above)
+for file in .zsh_history; do
   if [ -f "$HOME/$file" ] && [ ! -e "$ZDOTDIR/$file" ]; then
     info "Copying ~/$file to $(pretty "$ZDOTDIR/$file")"
     run cp "$HOME/$file" "$ZDOTDIR/$file"

@@ -21,7 +21,7 @@ Then:
 1. Open a new terminal (or run `exec zsh`).
 2. Set your git identity for this machine: `./git_setup.sh`. It writes your name and email to `~/.gitconfig.local`, which `git/.gitconfig` includes and which stays out of the repo; put signing keys or work-only settings there too. Until you run it, git refuses to commit.
 3. In iTerm2, open Settings → Profiles and make the dotfiles **Default** (or **tmux**) profile the default. Both come from `iterm2/settings/profiles.json` and already use the Droid Sans Mono Nerd Font, so prompt icons render.
-4. Set up the prompt: `p10k configure`.
+4. The prompt (powerlevel10k) is already set up from `shell/zsh/.p10k.zsh`, which needs the Nerd Font from step 3. To change it, run `p10k configure`, then check `git status` (see the comment in `shell/configure.sh`).
 5. In tmux, install the plugins with `Ctrl-a` then `I` (the prefix is `Ctrl-a`).
 6. Optional, by hand in iTerm2 Settings: import a color preset from `iterm2/colors/` (Profiles → Colors → Color Presets → Import) and the key map `iterm2/settings/keys.itermkeymap` (Profiles → Keys → Key Mappings → Presets → Import).
 
@@ -68,7 +68,7 @@ vendor/      clones made by install.sh, not tracked
 - `.zshenv` loads every file in `~/.config/zsh/.env/` (for all shells: PATH, Homebrew, environment variables).
 - `.zprofile` loads `.zshenv` again after macOS's `path_helper`, so Homebrew and the GNU tools stay ahead of `/usr/bin`.
 - `.zshrc` loads oh-my-zsh, then every file in `~/.config/zsh/.rc/` (interactive shells: aliases, functions, key bindings).
-- History is in `~/.config/zsh/.zsh_history`, the powerlevel10k config in `~/.config/zsh/.p10k.zsh`.
+- History is in `~/.config/zsh/.zsh_history`. The powerlevel10k config `~/.config/zsh/.p10k.zsh` is a link to `shell/zsh/.p10k.zsh`.
 - `~/.aliases` and `~/.functions` are sourced if they exist, for machine-local additions you don't want in the repo.
 
 ## Adding a tool
