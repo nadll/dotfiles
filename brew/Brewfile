@@ -151,6 +151,19 @@ brew "python"
 brew "uv"
 
 # =====================
+# AI
+# =====================
+
+# Claude Code CLI https://code.claude.com, stable channel (about a week behind the latest release).
+# A cask, not a formula. Off for now: this Mac uses Anthropic's native installer (~/.local/bin/claude),
+# remove that copy first or both get installed (~/.local/bin comes first in PATH)
+#cask "claude-code"
+
+# RTK: shortens command output before AI agents read it, to save tokens https://github.com/rtk-ai/rtk
+# Off for now. For Claude Code, `rtk init -g` adds a hook to ~/.claude/settings.json
+#brew "rtk"
+
+# =====================
 # Fonts
 # =====================
 cask "font-meslo-lg-nerd-font"
