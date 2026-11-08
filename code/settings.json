@@ -13,6 +13,9 @@
             "source.organizeImports": "explicit"
         },
     },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
     "window.zoomLevel": 0,
     // diff view also shows whitespace-only changes, so it matches what gets committed
     // (files.trimTrailingWhitespace can change many lines on save)
@@ -127,9 +130,6 @@
     // Nerd Font so the p10k prompt icons render. brew/Brewfile installs it as "MesloLGS Nerd Font";
     // "MesloLGS NF" is the name of p10k's own copy, used if that one is installed instead
     "terminal.integrated.fontFamily": "'MesloLGS NF', 'MesloLGS Nerd Font', monospace",
-    "[html]": {
-      "editor.defaultFormatter": "vscode.html-language-features"
-    },
     // a single file from an untrusted place (e.g. ~/Downloads) opens in the current trusted window, no prompt.
     // Fine with the current extensions; switch to "prompt" if extensions that run code from config files
     // found next to the file (ESLint's eslint.config.js, RuboCop's .rubocop.yml require) get installed
