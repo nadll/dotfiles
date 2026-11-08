@@ -37,13 +37,15 @@ export EZA_COLORS="reset:uu=${GREY_COLOR_2}:un=${GREY_COLOR_2}:gu=${GREY_COLOR_2
 
 # 'ls' itself is the eza alias in shell/alias.sh
 
+# --color-scale=all, not a bare --color-scale: newer eza takes an optional value there
+# and would read a path typed after the alias (ll ~/.config) as that value
 # Long listing like "ls -la"
-alias l='eza -1a --group-directories-first --color-scale'
-alias ll='eza -la --group-directories-first --time-style long-iso --color-scale'
+alias l='eza -1a --group-directories-first --color-scale=all'
+alias ll='eza -la --group-directories-first --time-style long-iso --color-scale=all'
 
 # Tree-like listing with 2-level depth
-alias lt="eza -a --group-directories-first --color-scale -T -L 2"
-alias llt="eza -la --group-directories-first --time-style long-iso --color-scale -T -L 2"
+alias lt="eza -a --group-directories-first --color-scale=all -T -L 2"
+alias llt="eza -la --group-directories-first --time-style long-iso --color-scale=all -T -L 2"
 
 # Use bat in place of cat
 alias cat="bat"
