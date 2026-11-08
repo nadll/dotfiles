@@ -6,3 +6,5 @@
 # stays out of the repo.
 link "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
 link "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+# status line script, set as "statusLine" in settings.json
+link "$DOTFILES/claude/statusline.sh" "$HOME/.claude/statusline.sh"
