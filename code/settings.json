@@ -111,6 +111,9 @@
     "[html]": {
       "editor.defaultFormatter": "vscode.html-language-features"
     },
+    // a single file from an untrusted place (e.g. ~/Downloads) opens in the current trusted window, no prompt.
+    // Fine with the current extensions; switch to "prompt" if extensions that run code from config files
+    // found next to the file (ESLint's eslint.config.js, RuboCop's .rubocop.yml require) get installed
     "security.workspace.trust.untrustedFiles": "open",
     "claudeCode.preferredLocation": "panel",
     "claudeCode.useTerminal": true,
