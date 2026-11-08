@@ -162,6 +162,17 @@ cask "font-droid-sans-mono-nerd-font"
 # ================================
 cask "visual-studio-code"
 
+# VS Code extensions (brew bundle runs `code --install-extension`)
+vscode "anthropic.claude-code"
+# file icons, set in code/settings.json (workbench.iconTheme)
+vscode "pkief.material-icon-theme"
+# Shopify Liquid themes
+vscode "shopify.theme-check-vscode"
+# Python, brings Pylance (python.languageServer in code/settings.json)
+vscode "ms-python.python"
+# Ruff, the Python formatter set in code/settings.json
+vscode "charliermarsh.ruff"
+
 # Terminal emulator, profiles linked by iterm2/configure.sh
 cask "iterm2"
 

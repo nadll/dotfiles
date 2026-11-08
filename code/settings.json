@@ -92,10 +92,10 @@
     },
     "telemetry.telemetryLevel": "off",
     "window.restoreWindows": "none",
-    "vim.smartRelativeLine": true,
+    // needs the Vim extension (vscodevim.vim), not used for now
+    //"vim.smartRelativeLine": true,
     "window.newWindowDimensions": "maximized",
     "workbench.editor.enablePreview": true,
-    "workbench.iconTheme": "vscode-great-icons",
     "workbench.settings.editor": "json",
     "workbench.settings.openDefaultSettings": true,
     "workbench.settings.useSplitJSON": true,
@@ -117,4 +117,7 @@
     "workbench.colorTheme": "Tomorrow Night Blue",
     "update.mode": "start",
     "update.showPostInstallInfo": true,
+    // Material Icon Theme (pkief.material-icon-theme, in brew/Brewfile); was Great Icons, few updates lately
+    //"workbench.iconTheme": "vscode-great-icons",
+    "workbench.iconTheme": "material-icon-theme",
 }
