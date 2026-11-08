@@ -14,6 +14,9 @@
         },
     },
     "window.zoomLevel": 0,
+    // diff view also shows whitespace-only changes, so it matches what gets committed
+    // (files.trimTrailingWhitespace can change many lines on save)
+    "diffEditor.ignoreTrimWhitespace": false,
     "editor.bracketPairColorization.enabled": true,
     // existing files keep their own indentation; new/empty files use editor.tabSize (2, 4 in [python]). Was false
     "editor.detectIndentation": true,
