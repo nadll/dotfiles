@@ -182,6 +182,9 @@ cask "sourcetree"
 # One menu bar icon doing the job of a dozen paid Mac apps
 cask "vorssaint"
 
+# LocalSend: AirDrop-like file sharing over the local network, works with Windows, Linux, Android, iOS https://localsend.org
+cask "localsend"
+
 # Docker Sandboxes: run coding agents in isolated sandboxes
 cask "docker/tap/sbx", trusted: true
 
