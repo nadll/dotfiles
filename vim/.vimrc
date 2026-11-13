@@ -27,9 +27,12 @@ let mapleader=","
 " set noeol
 set nofixendofline
 
-" Respect modeline in files
-set modeline
-set modelines=4
+" Don't run settings written inside the files being opened (modelines):
+" a crafted file could run commands this way (e.g. CVE-2019-12735)
+" set modeline
+" set modelines=4
+set nomodeline
+set modelines=0
 " Enable per-directory .vimrc files and disable unsafe commands in them
 set exrc
 set secure
