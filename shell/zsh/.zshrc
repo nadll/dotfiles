@@ -176,4 +176,8 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # with ZDOTDIR set, `p10k configure` writes to $ZDOTDIR/.p10k.zsh
 [[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh
 
+# Machine-local settings, not tracked in this repo (PATH additions, work-only setup, ...).
+# Loaded last so it can override anything above.
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
 [[ -n "$ZPROF" ]] && zprof

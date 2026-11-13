@@ -71,7 +71,7 @@ vendor/      clones made by install.sh, not tracked
 - `.zprofile` loads `.zshenv` again after macOS's `path_helper`, so Homebrew and the GNU tools stay ahead of `/usr/bin`.
 - `.zshrc` loads oh-my-zsh, then every file in `~/.config/zsh/.rc/` (interactive shells: aliases, functions, key bindings).
 - History is in `~/.config/zsh/.zsh_history`. The powerlevel10k config `~/.config/zsh/.p10k.zsh` is a link to `shell/zsh/.p10k.zsh`.
-- `~/.aliases` and `~/.functions` are sourced if they exist, for machine-local additions you don't want in the repo.
+- `~/.aliases` and `~/.functions` are sourced if they exist, for machine-local additions you don't want in the repo; `~/.zshrc.local` is sourced last of all (any other machine-local setting), and tmux reads `~/.tmux.conf.local`.
 
 ## Adding a tool
 
