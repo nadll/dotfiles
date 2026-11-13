@@ -206,6 +206,10 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 
+	# Conflict markers also show the common ancestor (|||||||), minus lines both sides share
+	# (git 2.35+). https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeconflictStyle
+	conflictStyle = zdiff3
+
 [rerere]
 
 	# Remember how a merge conflict was resolved and reuse it when the same conflict comes back
