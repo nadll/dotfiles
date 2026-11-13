@@ -11,3 +11,4 @@ if [ -e "$SHELLRCDIR/tmux.rc.sh" ]; then
 fi
 
 # NOTE: when opening Tmux for the first time, make sure to install all plugins manually (<prefix>+I)
+# (same after adding a plugin to tmux.conf, e.g. tmux-resurrect and tmux-continuum)
