@@ -331,7 +331,10 @@
   tool = vscode
   guitool = vscode
   submodule = log
-  algorithm = patience
+  # histogram: an improved patience, the one git's own developers recommend
+  # https://blog.gitbutler.com/how-git-core-devs-configure-git/
+  # algorithm = patience
+  algorithm = histogram
   indentHeuristic = true
   colorMoved = default
 
