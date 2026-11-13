@@ -45,6 +45,8 @@ brew "git"
 
 # GnuPG (gpg) - encrypt and sign files, sign git commits and tags https://gnupg.org
 brew "gnupg"
+# macOS passphrase dialog for gpg, set in gpg/gpg-agent.conf
+brew "pinentry-mac"
 
 # A viewer for git and diff output https://github.com/dandavison/delta
 # https://github.com/dandavison/delta
