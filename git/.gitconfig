@@ -206,6 +206,14 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 
+[rerere]
+
+	# Remember how a merge conflict was resolved and reuse it when the same conflict comes back
+	# (e.g. re-running a rebase). autoUpdate also stages the reused resolution.
+	# https://git-scm.com/book/en/v2/Git-Tools-Rerere
+	enabled = true
+	autoUpdate = true
+
 [push]
 
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
