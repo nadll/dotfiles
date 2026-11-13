@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+# lazygit settings, linked to ~/Library/Application Support/lazygit/config.yml by lazygit/configure.sh
+# Only changes from the defaults; all options: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+gui:
+  # File and branch icons (needs a Nerd Font, e.g. MesloLGS Nerd Font from the Brewfile)
+  nerdFontsVersion: "3"
+  # No "tip of the day" on startup
+  showRandomTip: false
+
+git:
+  # How diffs are shown; press | to cycle through them (lazygit 0.66+)
+  # https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_DiffRenderers.md
+  diffRenderers:
+    # delta, the same pager as git on the command line ([delta] settings in git/.gitconfig)
+    - command: delta --{{colorScheme}} --paging=never
+    # difftastic: structural diff that understands code syntax
+    - type: extDiff
+      command: difft --color=always --background={{colorScheme}} --context={{diffContext}}
+
+os:
+  # Open files in VS Code (e: edit, o: open)
+  editPreset: "vscode"
