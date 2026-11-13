@@ -1,0 +1,12 @@
+
+
+# area: what changed, in the imperative          (subject: ~50 chars max)
+#   e.g. "git: sign commits and tags by default", "zsh, tmux: ..."
+#
+# Body after one blank line, wrapped at 72 characters. Answer:
+#   - Why was this change needed?
+#   - How does it solve it? Any side effects?
+#
+# Co-authored-by: Full Name <email@example.com>
+#
+# Lines starting with # are removed. Template: git/.gitmessage, linked to ~/.gitmessage

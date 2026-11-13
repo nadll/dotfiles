@@ -216,6 +216,10 @@
 	# Show the diff below the message in the commit editor (git ignores it, it's not part of the message)
 	verbose = true
 
+	# Reminder of the message format when the editor opens (git/.gitmessage, linked by git/configure.sh).
+	# `git commit` (with editor) fails if ~/.gitmessage is missing: run ./install.sh after pulling
+	template = ~/.gitmessage
+
 [tag]
 
 	# Sign annotated tags too (key: user.signingkey in ~/.gitconfig.local)

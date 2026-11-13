@@ -52,7 +52,7 @@ brew/        Brewfile, Homebrew env and helper functions
 code/        VS Code settings.json and keybindings.json
 coreutils/   GNU tools ahead of the macOS ones, eza/bat/less settings, LS_COLORS
 fd/ fzf/     file finder and fuzzy finder settings
-git/         .gitconfig, global gitignore, git aliases and functions
+git/         .gitconfig, global gitignore, commit message template, git aliases and functions
 gpg/         gpg-agent.conf (macOS passphrase dialog via pinentry-mac), GPG_TTY
 lazygit/     icons, delta and difftastic diffs (cycle with |), VS Code as editor
 macos/       Finder helpers, Terminal.app theme, key bindings (Home/End = line start/end); preferences.sh (applied with --macos; read it first, preferences-diff.sh shows what it would change)

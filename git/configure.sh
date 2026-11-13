@@ -15,4 +15,5 @@ fi
 
 link "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 link "$DOTFILES/git/.gitignore_global" "$HOME/.gitignore"
+link "$DOTFILES/git/.gitmessage" "$HOME/.gitmessage"
 link "$DOTFILES/git/git.rc.sh" "$SHELLRCDIR/"
