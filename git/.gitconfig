@@ -20,6 +20,21 @@
     # Commits on this branch that are not on origin/<default branch> (2 dots), merges left out
     diffcommitsfrommain = !git log --no-merges origin/$(git defaultBranch)..
 
+    # The 10 most recently committed local branches: name, when, last commit subject
+    recent = for-each-ref --sort=-committerdate --count=10 --format='%(color:blue)%(align:30)%(refname:short)%(end)%(color:reset) %(color:yellow)%(align:16)%(committerdate:relative)%(end)%(color:reset) %(subject)' refs/heads/
+    # Files that still have merge conflicts
+    wtf = diff --name-only --diff-filter=U
+    # My commits since midnight, with lines added/removed
+    today = !git log --no-merges --since=midnight --author=\"$(git config user.email)\" --oneline --shortstat
+    # Worktrees: a second checkout of another branch in its own folder (git wta ../repo-fix fix-branch)
+    wta = worktree add
+    wtl = worktree list
+    wtr = worktree remove
+    # Force push, but only if the remote branch is still where you last saw it
+    puf = push --force-with-lease
+    # Commit with no changes (e.g. to re-trigger CI): git empty "message"
+    empty = commit --allow-empty -m
+
     # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
     sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
 
