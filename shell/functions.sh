@@ -298,6 +298,23 @@ function ports() {
     lsof -iTCP -sTCP:LISTEN -P -n
 }
 
+# What uses a given TCP port (listening or connected): whats-in-port 3000
+function whats-in-port() {
+    [ -n "$1" ] || { echo "Usage: whats-in-port <port>" >&2; return 1; }
+    lsof -nP -iTCP:"$1"
+}
+
+# Stop whatever is listening on a TCP port (all processes, e.g. a server and its workers): clear-port 3000
+function clear-port() {
+    [ -n "$1" ] || { echo "Usage: clear-port <port>" >&2; return 1; }
+    local pids
+    pids=$(lsof -t -nP -iTCP:"$1" -sTCP:LISTEN)
+    [ -n "$pids" ] || { echo "Nothing is listening on port $1"; return 1; }
+    echo "Stopping:"
+    echo "$pids" | xargs -n1 ps -o pid=,command= -p
+    echo "$pids" | xargs kill
+}
+
 # Pull IPs from any text
 function extract-ip() {
     grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" "$1" | sort -u
