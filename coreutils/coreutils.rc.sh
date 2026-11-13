@@ -14,6 +14,8 @@ export BAT_THEME="TwoDark"
 # -i, ignore case in searches that do not contain uppercase (smart case)
 # -S, disables line wrapping. Side-scroll to see long lines.
 export LESS="-iMRS+Gg"
+# don't keep ~/.lesshst (history of searches and commands typed in less)
+export LESSHISTFILE=-
 
 # enable LS colored output
 export CLICOLOR=1
