@@ -69,6 +69,8 @@ setopt HIST_EXPIRE_DUPS_FIRST  # when history is full, drop duplicates first
 setopt SHARE_HISTORY           # share history between open terminals
 setopt HIST_REDUCE_BLANKS      # remove extra spaces before saving a command
 setopt HIST_FIND_NO_DUPS       # history search (Ctrl-R, Up/Down) skips commands already shown
+# Don't save these exact command lines (whole line must match: `ls` is skipped, `ls src` is kept)
+HISTORY_IGNORE='(ls|l|ll|la|lt|cd|cd ..|..|...|pwd|exit|clear|history)'
 
 # machine-local aliases and functions, not tracked in this repo
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
