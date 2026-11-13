@@ -30,7 +30,10 @@
       "Bash(git reset *)",
       "Bash(git checkout -- *)",
       "Bash(git stash drop *)",
-      "Bash(git stash clear *)"
+      "Bash(git stash clear *)",
+      "Bash(git clean *)",
+      "Bash(rm -rf *)",
+      "Bash(chmod *)"
     ],
     "allow": [
       "Bash(git add *)",
