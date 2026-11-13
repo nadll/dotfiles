@@ -43,7 +43,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Useful oh-my-zsh plugins
 # extract: `extract <file>` (or `x <file>`) unpacks any archive type (tar.gz, zip, 7z, rar, ...)
-plugins=(git gitfast last-working-dir common-aliases zsh-autosuggestions zsh-syntax-highlighting history-substring-search web-search extract)
+# colored-man-pages: man pages with colored headings and keywords
+plugins=(git gitfast last-working-dir common-aliases zsh-autosuggestions zsh-syntax-highlighting history-substring-search web-search extract colored-man-pages)
 
 # Disable warning about insecure completion-dependent directories
 ZSH_DISABLE_COMPFIX=true
