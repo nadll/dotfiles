@@ -8,3 +8,5 @@ link "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
 link "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 # status line script, set as "statusLine" in settings.json
 link "$DOTFILES/claude/statusline.sh" "$HOME/.claude/statusline.sh"
+# hook scripts, set in "hooks" in settings.json
+link "$DOTFILES/claude/hooks/stop-notify.sh" "$HOME/.claude/hooks/stop-notify.sh"

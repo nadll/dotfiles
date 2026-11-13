@@ -88,6 +88,16 @@
     }
   },
   "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/stop-notify.sh"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "hooks": [
