@@ -254,6 +254,11 @@
 	# `git stash show` prints the full diff, not only the file list
 	showPatch = true
 
+[fetch]
+
+	# Delete local copies of remote branches (origin/xyz) that were deleted on the server
+	prune = true
+
 [push]
 
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
