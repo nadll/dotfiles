@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+# tat [name]: go to the tmux session named after the current folder (or [name]),
+# creating it (started in this folder) if it doesn't exist yet.
+# Outside tmux it attaches; inside tmux it switches the current client to it.
+#   cd ~/code/my.project && tat   -> session "my-project"
+
+# tmux session names can't contain "." or ":"
+name=${1:-$(basename "$PWD" | tr '.:' '--')}
+
+if [ -z "$TMUX" ]; then
+  exec tmux new-session -A -s "$name" -c "$PWD"
+fi
+
+if ! tmux has-session -t "=$name" 2>/dev/null; then
+  # TMUX= : allow creating a (detached) session from inside tmux
+  TMUX='' tmux new-session -d -s "$name" -c "$PWD"
+fi
+exec tmux switch-client -t "=$name"
