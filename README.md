@@ -56,7 +56,8 @@ git/         .gitconfig, global gitignore, commit message template, git aliases 
 gpg/         gpg-agent.conf (macOS passphrase dialog via pinentry-mac), GPG_TTY
 lazygit/     icons, delta and difftastic diffs (cycle with |), VS Code as editor
 macos/       Finder helpers, Terminal.app theme, key bindings (Home/End = line start/end); preferences.sh (applied with --macos; read it first, preferences-diff.sh shows what it would change)
-python/ thefuck/ zoxide/   one setting each
+python/      uv.toml and pip.conf (7-day cooldown on new package versions), PYTHONBREAKPOINT
+thefuck/ zoxide/   one setting each
 shell/       zsh startup files, aliases, functions, scripts for ~/bin
 ssh/ tmux/ vim/
 tig/         colors for tig (readable selected line)

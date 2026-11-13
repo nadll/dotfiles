@@ -1,0 +1,9 @@
+# uv user settings, linked to ~/.config/uv/uv.toml by python/configure.sh
+# https://docs.astral.sh/uv/reference/settings/
+
+# Supply-chain cooldown: ignore package versions published less than 7 days ago.
+# Hijacked releases are usually found and pulled within days, so they never get installed.
+# Applies to uv add/lock/sync, uv pip, uvx and uv tool.
+# One-off bypass: uv ... --exclude-newer "0 days"; for one package, in this file:
+#   exclude-newer-package = { some-package = "0 days" }
+exclude-newer = "7 days"
