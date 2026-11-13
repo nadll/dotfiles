@@ -113,3 +113,9 @@ alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time
 
 # ---- Zoxide (better cd) ----
 alias cd="z"
+
+# ---- Suffix aliases (zsh): type a file name to open it ----
+# e.g. `README.md` opens it in VS Code. oh-my-zsh's common-aliases plugin defines more (txt, c, ...)
+alias -s {md,json,toml,yaml,yml}=code
+# Paste a repository URL ending in .git to clone it: https://github.com/user/repo.git
+alias -s git='git clone'
