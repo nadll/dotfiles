@@ -92,6 +92,20 @@ alias spoton="sudo mdutil -a -i on"
 # sets the default output format for ps
 alias psf='ps -eo pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
 
+# Edit /etc/hosts in VS Code: sudo -e edits a copy as you (VS Code not run as root), then writes it back
+alias hosts='SUDO_EDITOR="code --wait" sudo -e /etc/hosts'
+
+# Count identical lines, most frequent first (or least frequent first with -asc)
+#   e.g. git log --format=%an | sorteduniq
+alias sorteduniq="sort | uniq -c | sort --reverse --ignore-leading-blanks --numeric-sort"
+alias sorteduniq-asc="sort | uniq -c | sort --ignore-leading-blanks --numeric-sort"
+
+# Free/used space of the main disk, in powers of 1000 like Finder
+alias diskspace_report="df --si /"
+
+# ripgrep including .gitignore'd and hidden files (-uu = --no-ignore --hidden)
+alias rgu='rg -uu'
+
 # ---- Eza (better ls) -----
 
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
