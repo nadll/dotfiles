@@ -242,6 +242,10 @@
 	# On the first `git push` of a new branch, create and track origin/<branch> (no `-u` needed)
 	autoSetupRemote = true
 
+	# `push --force-with-lease` also refuses when the remote has commits you never fetched/saw locally
+	# (git 2.30+). https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushuseForceIfIncludes
+	useForceIfIncludes = true
+
 [branch "master"]
 
     mergeoptions = --no-edit
