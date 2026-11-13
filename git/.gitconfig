@@ -186,6 +186,9 @@
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	# gpgsign = true
 
+	# Show the diff below the message in the commit editor (git ignores it, it's not part of the message)
+	verbose = true
+
 [diff]
 
 	# Detect copies as well as renames
