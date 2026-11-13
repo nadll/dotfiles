@@ -3,6 +3,8 @@
     st = status -sb
     br = branch
     ci = commit
+    # Stage parts of files, chunk by chunk (y/n/s=split/e=edit)
+    ap = add --patch
     fo = fetch origin
     d = !git --no-pager diff
     dt  = difftool
