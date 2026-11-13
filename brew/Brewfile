@@ -69,6 +69,11 @@ brew "onefetch"
 # Recommended by git's own docs instead of filter-branch https://github.com/newren/git-filter-repo
 brew "git-filter-repo"
 
+# About 80 extra git commands: git summary, git effort, git changelog, git delete-squashed-branches, ...
+# https://github.com/tj/git-extras/blob/main/Commands.md
+# Note: an external git-<name> command runs before a git alias of the same name (none clash today)
+brew "git-extras"
+
 # =========================
 #  Apps & utilities
 # =========================
