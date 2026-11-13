@@ -369,6 +369,8 @@
   algorithm = histogram
   indentHeuristic = true
   colorMoved = default
+  # Code that was moved and only re-indented still counts as moved
+  colorMovedWS = allow-indentation-change
 
 [difftool]
   prompt = false
