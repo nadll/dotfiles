@@ -246,6 +246,16 @@
 	# (git 2.30+). https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushuseForceIfIncludes
 	useForceIfIncludes = true
 
+[branch]
+
+	# `git branch` lists the most recently committed branches first
+	sort = -committerdate
+
+[column]
+
+	# Lists in columns when output goes to the terminal: git branch, git tag, untracked files in git status
+	ui = auto
+
 [branch "master"]
 
     mergeoptions = --no-edit
