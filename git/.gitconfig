@@ -14,6 +14,12 @@
     # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
     defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
 
+    # Like GitHub's compare view: everything this branch changes since it left origin/<default branch>,
+    # working tree included (3 dots = from the merge base).
+    diffbranch = !git diff origin/$(git defaultBranch)...
+    # Commits on this branch that are not on origin/<default branch> (2 dots), merges left out
+    diffcommitsfrommain = !git log --no-merges origin/$(git defaultBranch)..
+
     # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
     sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
 
