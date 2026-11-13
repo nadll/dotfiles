@@ -9,6 +9,11 @@ __MACOSX/
 
 # Not macOS, but useful in every repo
 .envrc
+# Secrets: never commit a .env file by accident (files a repo already tracks are not affected;
+# add one anyway with git add -f). .env.example and similar names are not ignored.
+.env
+# vim swap files
+*.sw[nop]
 Desktop.ini
 Thumbs.db
 *.pyc
