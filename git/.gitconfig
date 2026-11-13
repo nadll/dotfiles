@@ -221,6 +221,11 @@
 	enabled = true
 	autoUpdate = true
 
+[stash]
+
+	# `git stash show` prints the full diff, not only the file list
+	showPatch = true
+
 [push]
 
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
