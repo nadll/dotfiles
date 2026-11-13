@@ -281,7 +281,13 @@ function mans() {
 # Usage: mans tar extract  -> Shows 'tar' man page entries near 'extract'
 
 # A "Safe" Delete
+# Uses macOS's own `trash` command (macOS 15+): files go to the Finder Trash, so "Put Back" works.
+# Without it, falls back to the old behaviour: a folder that Finder doesn't show.
 function trash() {
+    if [ -x /usr/bin/trash ]; then
+        /usr/bin/trash "$@"
+        return
+    fi
     mkdir -p ~/.local/share/Trash/files
     mv "$@" ~/.local/share/Trash/files/
     echo "Moved to ~/.local/share/Trash/files/"
