@@ -22,7 +22,12 @@
       "Read(./config/credentials.json)",
       "Read(~/.ssh/**)",
       "Read(~/.gitconfig.local)",
-      "Read(~/.config/gh/**)"
+      "Read(~/.config/gh/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/id_rsa)",
+      "Read(**/id_ed25519)",
+      "Edit(**/.env*)"
     ],
     "ask": [
       "Bash(git push *)",
