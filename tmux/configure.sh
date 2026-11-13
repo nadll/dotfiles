@@ -16,3 +16,4 @@ fi
 # helper scripts bound in tmux.conf
 link "$DOTFILES/tmux/scripts/popup.sh" "$HOME/.tmux/scripts/popup.sh"
 link "$DOTFILES/tmux/scripts/switch-pane.sh" "$HOME/.tmux/scripts/switch-pane.sh"
+link "$DOTFILES/tmux/scripts/swap.sh" "$HOME/.tmux/scripts/swap.sh"
