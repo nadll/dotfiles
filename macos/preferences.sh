@@ -483,4 +483,29 @@ defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 # Enable Debug Menu in the Mac App Store
 defaults write com.apple.appstore ShowDebugMenu -bool true
 
+# =================================
+# Software Update
+# =================================
+
+# Check for updates automatically, download them in the background, and install
+# security responses and system data files (System Settings > General > Software Update > Automatic Updates)
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool true
+
+# =================================
+# TextEdit, Preview, Time Machine
+# =================================
+
+# New TextEdit documents are plain text, opened and saved as UTF-8 (4 = UTF-8)
+defaults write com.apple.TextEdit RichText -bool false
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+# Preview doesn't reopen the files that were open last time
+defaults write com.apple.Preview ApplePersistenceIgnoreState -bool true
+
+# Time Machine doesn't ask to use every new disk as a backup disk
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
 echo "Done. Note that some of these changes require a logout/restart to take effect."
