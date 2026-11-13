@@ -67,6 +67,8 @@ setopt EXTENDED_HISTORY        # save when each command ran and how long it took
 setopt HIST_IGNORE_DUPS        # don't save a command twice in a row
 setopt HIST_EXPIRE_DUPS_FIRST  # when history is full, drop duplicates first
 setopt SHARE_HISTORY           # share history between open terminals
+setopt HIST_REDUCE_BLANKS      # remove extra spaces before saving a command
+setopt HIST_FIND_NO_DUPS       # history search (Ctrl-R, Up/Down) skips commands already shown
 
 # machine-local aliases and functions, not tracked in this repo
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
