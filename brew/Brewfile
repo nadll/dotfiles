@@ -43,6 +43,9 @@ brew "make"
 # =====================
 brew "git"
 
+# GnuPG (gpg) - encrypt and sign files, sign git commits and tags https://gnupg.org
+brew "gnupg"
+
 # A viewer for git and diff output https://github.com/dandavison/delta
 # https://github.com/dandavison/delta
 # TODO: choose between side-by-side and inline based on viewport width
