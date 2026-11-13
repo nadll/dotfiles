@@ -80,6 +80,8 @@
     "network": {
       "allowedDomains": [
         "github.com",
+        "api.github.com",
+        "*.githubusercontent.com",
         "pypi.org",
         "files.pythonhosted.org"
       ]
