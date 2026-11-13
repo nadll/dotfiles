@@ -84,6 +84,9 @@ alias bupdate="brew update && brew upgrade && brew cleanup"  # brew upgrade incl
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
+# Keep the Mac awake for 4 hours (display, idle and system sleep; Ctrl-C to stop early)
+alias stayawake="caffeinate -disu -t 14400"
+
 # Disable Spotlight
 alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
