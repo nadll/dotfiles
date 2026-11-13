@@ -72,6 +72,10 @@ setopt HIST_FIND_NO_DUPS       # history search (Ctrl-R, Up/Down) skips commands
 # Don't save these exact command lines (whole line must match: `ls` is skipped, `ls src` is kept)
 HISTORY_IGNORE='(ls|l|ll|la|lt|cd|cd ..|..|...|pwd|exit|clear|history)'
 
+# File name patterns ignore case, like Finder: *.jpg also matches IMG_001.JPG
+# (only wildcards *, ?, [...]; careful: rm *.JPG also removes .jpg files)
+unsetopt CASE_GLOB
+
 # machine-local aliases and functions, not tracked in this repo
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
