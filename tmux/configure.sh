@@ -12,3 +12,6 @@ fi
 
 # NOTE: when opening Tmux for the first time, make sure to install all plugins manually (<prefix>+I)
 # (same after adding a plugin to tmux.conf, e.g. tmux-resurrect and tmux-continuum)
+
+# helper scripts bound in tmux.conf
+link "$DOTFILES/tmux/scripts/switch-pane.sh" "$HOME/.tmux/scripts/switch-pane.sh"
