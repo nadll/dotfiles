@@ -65,6 +65,10 @@ brew "tig"
 # Command-line Git information tool
 brew "onefetch"
 
+# Rewrite git history (remove a file or secret from all commits, move a folder to the root, ...)
+# Recommended by git's own docs instead of filter-branch https://github.com/newren/git-filter-repo
+brew "git-filter-repo"
+
 # =========================
 #  Apps & utilities
 # =========================
