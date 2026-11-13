@@ -225,6 +225,9 @@
 	# Sign annotated tags too (key: user.signingkey in ~/.gitconfig.local)
 	gpgsign = true
 
+	# `git tag` sorts by version: v1.9 before v1.10 (not alphabetically)
+	sort = version:refname
+
 [diff]
 
 	# Detect copies as well as renames
