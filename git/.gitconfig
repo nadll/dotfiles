@@ -22,6 +22,8 @@
 
     # The 10 most recently committed local branches: name, when, last commit subject
     recent = for-each-ref --sort=-committerdate --count=10 --format='%(color:blue)%(align:30)%(refname:short)%(end)%(color:reset) %(color:yellow)%(align:16)%(committerdate:relative)%(end)%(color:reset) %(subject)' refs/heads/
+    # Like recent, for remote branches: most recently committed first, with author
+    rrecent = for-each-ref --sort=-committerdate --format='%(color:blue)%(align:40)%(refname:short)%(end)%(color:reset) %(color:yellow)%(align:16)%(committerdate:relative)%(end)%(color:reset) %(authorname)' --exclude='refs/remotes/*/HEAD' refs/remotes/
     # Files that still have merge conflicts
     wtf = diff --name-only --diff-filter=U
     # My commits since midnight, with lines added/removed
