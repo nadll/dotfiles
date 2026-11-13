@@ -14,6 +14,10 @@ __MACOSX/
 .env
 # vim swap files
 *.sw[nop]
+# Claude Code: personal per-project settings (the shared .claude/settings.json is not ignored)
+# and a temporary folder it can leave behind
+**/.claude/settings.local.json
+**/.claude/.cc-writes/
 Desktop.ini
 Thumbs.db
 *.pyc
