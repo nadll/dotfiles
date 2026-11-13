@@ -204,11 +204,18 @@
 
 [commit]
 
-	# https://help.github.com/articles/signing-commits-using-gpg/
-	# gpgsign = true
+	# Sign every commit with gpg. The key is per machine: user.signingkey in ~/.gitconfig.local.
+	# A machine without a gpg key can turn it off there: commit.gpgsign = false (and tag.gpgsign)
+	# https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
+	gpgsign = true
 
 	# Show the diff below the message in the commit editor (git ignores it, it's not part of the message)
 	verbose = true
+
+[tag]
+
+	# Sign annotated tags too (key: user.signingkey in ~/.gitconfig.local)
+	gpgsign = true
 
 [diff]
 
