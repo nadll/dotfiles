@@ -80,6 +80,8 @@
     "git.enabled": true,
     // fetch in the background so the status bar shows when the branch is behind the remote
     "git.autofetch": true,
+    // don't add an AI "Co-authored-by" trailer to commit messages (Copilot chat/agent)
+    "git.addAICoAuthor": "off",
     "notebook.diff.ignoreMetadata": true,
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 13,
