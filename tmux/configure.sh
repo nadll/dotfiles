@@ -14,4 +14,5 @@ fi
 # (same after adding a plugin to tmux.conf, e.g. tmux-resurrect and tmux-continuum)
 
 # helper scripts bound in tmux.conf
+link "$DOTFILES/tmux/scripts/popup.sh" "$HOME/.tmux/scripts/popup.sh"
 link "$DOTFILES/tmux/scripts/switch-pane.sh" "$HOME/.tmux/scripts/switch-pane.sh"
