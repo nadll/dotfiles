@@ -93,6 +93,9 @@
 	# Files that git ignores here (.gitignore, global ignore), e.g. to find build output or secrets
 	ignored = ls-files --others --ignored --exclude-standard
 
+	# How big the repo is on disk (objects and packs, human-readable)
+	count = count-objects -vH
+
 	# Amend the currently staged files to the latest commit
 	amend = commit --amend --reuse-message=HEAD
 

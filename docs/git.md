@@ -55,6 +55,7 @@ Your name, email and signing key go in `~/.gitconfig.local` (`./git_setup.sh`).
 | `contributors` | Commit count per author |
 | `authors` | Every author with email, once each |
 | `whoami` | `user.email` for this repo |
+| `count` | Repo size on disk |
 
 ### Branches, tags, worktrees
 
