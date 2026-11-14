@@ -1,0 +1,29 @@
+# Editors
+
+`$EDITOR` and `$VISUAL` are VS Code (`code`). git commits (`core.editor = code --wait`), `hosts` and lazygit use it too.
+
+## VS Code
+
+Config: `code/settings.json`, `code/keybindings.json` (linked into `~/Library/Application Support/Code/User/`).
+
+| Keys | Action |
+|---|---|
+| `Cmd-Shift-V` / `Ctrl-Shift-V` | Paste and indent (needs the "Paste and Indent" extension, which the Brewfile doesn't install) |
+| `Shift-Enter` (terminal) | New line in Claude Code instead of sending |
+
+The extensions the Brewfile installs: Claude Code, Material Icon Theme, Python (Pylance), Ruff (Python formatter), Shopify Theme Check.
+Settings highlights: Ruff formats Python on save, indentation detected per file, trailing whitespace shown, git auto-fetch, AI co-author trailer off, telemetry and experiments off.
+`code` from the shell; `git difftool` / `git mergetool` open VS Code.
+
+## Vim
+
+Config: `vim/.vimrc`. Solarized Dark, relative line numbers, mouse, OS clipboard, invisible characters shown, case-insensitive search highlighted as you type.
+
+| Keys | Action |
+|---|---|
+| `,` | Leader key |
+| `,ss` | Strip trailing whitespace |
+| `,W` | Save as root (`sudo tee`) |
+
+- Modelines are off (a file can't run commands); per-folder `.vimrc` files are read in safe mode.
+- `todos`, `rgq` (see [shell.md](shell.md)) open search results in Vim's quickfix list: `:cn` / `:cp` next / previous.

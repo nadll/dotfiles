@@ -3,6 +3,8 @@
 My macOS setup: zsh with oh-my-zsh and powerlevel10k, Homebrew packages, git, fzf, tmux and VS Code.
 It started from [lewagon/dotfiles](https://github.com/lewagon/dotfiles) and takes its per-tool layout from [samoshkin/dotfiles](https://github.com/samoshkin/dotfiles).
 
+For a list of key bindings, aliases, functions and tools, see [docs/](docs/README.md).
+
 ## New Mac
 
 ```sh
