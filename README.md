@@ -56,7 +56,7 @@ fd/ fzf/     file finder and fuzzy finder settings
 git/         .gitconfig, global gitignore, commit message template, git aliases and functions
 gpg/         gpg-agent.conf (macOS passphrase dialog via pinentry-mac), GPG_TTY
 lazygit/     icons, delta and difftastic diffs (cycle with |), VS Code as editor
-macos/       Finder helpers, Terminal.app theme, key bindings (Home/End = line start/end); preferences.sh (applied with --macos; read it first, preferences-diff.sh shows what it would change)
+macos/       Finder helpers, Terminal.app theme, key bindings (Home/End = line start/end); preferences.sh (applied with --macos; read it first, preferences-diff.sh shows what it would change); security-check.sh lists FileVault, firewall, Gatekeeper, ... (read-only)
 python/      uv.toml and pip.conf (7-day cooldown on new package versions), PYTHONBREAKPOINT
 thefuck/ zoxide/   one setting each
 shell/       zsh startup files, aliases, functions, scripts for ~/bin

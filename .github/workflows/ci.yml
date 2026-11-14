@@ -35,6 +35,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # read-only, no sudo; shows that every check gets an answer (✓/✗) on a real Mac
+      - name: Security check runs
+        run: |
+          macos/security-check.sh | tee security-check.log
+          if grep -F '?' security-check.log; then
+            echo "::warning::security-check.sh could not read some settings"
+          fi
+
       - name: Brewfile parses
         run: |
           brew bundle list --all --file=brew/Brewfile
