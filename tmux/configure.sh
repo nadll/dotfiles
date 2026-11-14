@@ -24,5 +24,5 @@ fi
 link "$DOTFILES/tmux/scripts/popup.sh" "$HOME/.tmux/scripts/popup.sh"
 link "$DOTFILES/tmux/scripts/switch-pane.sh" "$HOME/.tmux/scripts/switch-pane.sh"
 link "$DOTFILES/tmux/scripts/swap.sh" "$HOME/.tmux/scripts/swap.sh"
-link "$DOTFILES/tmux/yank.sh" "$HOME/.tmux/scripts/yank.sh"
-link "$DOTFILES/tmux/renew_env.sh" "$HOME/.tmux/scripts/renew_env.sh"
+link "$DOTFILES/tmux/scripts/yank.sh" "$HOME/.tmux/scripts/yank.sh"
+link "$DOTFILES/tmux/scripts/renew_env.sh" "$HOME/.tmux/scripts/renew_env.sh"
