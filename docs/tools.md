@@ -33,6 +33,11 @@ Not from Homebrew: oh-my-zsh, powerlevel10k, the zsh plugins, tpm, and `vendor/`
 | GNU tools | `coreutils`, `findutils`, `diffutils`, `gnu-sed`, `gnu-tar`, `grep`, `gawk`, `gnu-which`, `gzip`, `watch`, `wget`, `ed`, `gnu-indent`, `gnutls`: ahead of the macOS versions on PATH |
 | Newer versions | `less`, `nano`, `curl`, `make` |
 
+## curl settings (`~/.curlrc`)
+
+- Downloads show a simple progress bar.
+- `curl -s` still prints the reason when it fails.
+
 ## git
 
 `git`, `git-delta` (pager), `difftastic` (`difft`, structural diff), `lazygit`, `tig`, `onefetch` (repo summary), `git-filter-repo` (rewrite history), `git-extras` (~80 extra commands), `gnupg` + `pinentry-mac` (signing). See [git.md](git.md).
