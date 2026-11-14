@@ -44,6 +44,7 @@ git ones are in [git.md](git.md).
 | `fd` | fd with hidden files, follows links, ignores `fd/.ignore` patterns |
 | `ff <part>` | Files whose name contains `<part>` |
 | `hist <text>` | History lines containing text |
+| `top-history [n]` | Your n (default 25) most used commands, with their share |
 | `mans <cmd> <word>` | Lines around `<word>` in a man page |
 | `grep` / `egrep` / `fgrep` | Colored |
 

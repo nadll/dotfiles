@@ -247,6 +247,13 @@ function hist() {
     history | grep -i "$1"
 }
 
+# Your most used commands (first word of each history line), with share: top-history [count]
+function top-history() {
+    fc -ln 1 | awk '{ n[$1]++; total++ }
+        END { for (c in n) printf "%6d %5.1f%%  %s\n", n[c], n[c] * 100 / total, c }' |
+        sort -rn | head -n "${1:-25}"
+}
+
 # Fast recursive file finder (name search)
 function ff() {
     find . -type f -iname "*$1*" 2>/dev/null
