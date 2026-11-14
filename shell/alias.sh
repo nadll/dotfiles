@@ -124,7 +124,9 @@ alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time
 #alias ls="eza"
 
 # ---- Zoxide (better cd) ----
-alias cd="z"
+# off: `cd` is the fzf folder picker from fzf/fzf.rc.sh (no argument = pick a subfolder);
+# jump to frequent folders with `z <name>` (or `zi` to pick in fzf)
+# alias cd="z"
 
 # ---- Suffix aliases (zsh): type a file name to open it ----
 # e.g. `README.md` opens it in VS Code. oh-my-zsh's common-aliases plugin defines more (txt, c, ...)

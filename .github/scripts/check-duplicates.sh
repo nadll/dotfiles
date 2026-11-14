@@ -11,7 +11,7 @@ files=(shell/zsh/.zshrc */*.rc.sh shell/alias.sh shell/functions.sh git/funcs.sh
 
 # known duplicates, kept on purpose
 allowed=(
-  cd # fzf/fzf.rc.sh cd() is kept unchanged; `alias cd="z"` (zoxide) in shell/alias.sh wins
+  cd # fzf/fzf.rc.sh cd() is the one in use; `alias cd="z"` in shell/alias.sh is commented out
 )
 
 # print "<kind> <name> <file>:<line>" for every alias and function definition
