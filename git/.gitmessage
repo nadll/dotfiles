@@ -2,8 +2,10 @@
 
 # area: what changed, in the imperative          (subject: ~50 chars max)
 #   e.g. "git: sign commits and tags by default", "zsh, tmux: ..."
+# |------ subject ends here: 50 characters ------|
 #
 # Body after one blank line, wrapped at 72 characters. Answer:
+# |--------------- wrap body lines here: 72 characters ----------------|
 #   - Why was this change needed?
 #   - How does it solve it? Any side effects?
 #
