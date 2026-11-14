@@ -80,6 +80,7 @@ From `vendor/fzf-git.sh`. Each one pastes what you pick onto the command line.
 - Type a file name to open it: `README.md`, `*.json`, `*.toml`, `*.yaml` open in VS Code. Paste a URL ending in `.git` to clone it.
 - File name patterns ignore case: `*.jpg` also matches `IMG_001.JPG` (careful with `rm`).
 - `>` won't overwrite an existing file ("file exists"); `>|` does. `>>` still creates new files.
+- Files you create from the terminal are private to you (`umask 077`); `umask 022` in `~/.zshrc.local` undoes it on a machine.
 - A new shell opens in the last folder you used (oh-my-zsh `last-working-dir`).
 - No beep.
 

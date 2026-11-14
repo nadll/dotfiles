@@ -100,6 +100,13 @@ unsetopt CASE_GLOB
 # Only for what you type: scripts run in their own shell and are not affected.
 setopt NO_CLOBBER APPEND_CREATE
 
+# New files and folders made from this shell (and the programs it starts, tmux included)
+# are private to you: rw------- / rwx------ instead of readable by everyone (umask 022).
+# If another user or a service has to read something you create (e.g. a shared folder),
+# fix it with chmod, or put `umask 022` in ~/.zshrc.local on that machine.
+# Only interactive shells; apps started from Finder/Dock keep macOS's default.
+umask 077
+
 # machine-local aliases and functions, not tracked in this repo
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
