@@ -518,4 +518,7 @@ defaults write com.apple.Preview ApplePersistenceIgnoreState -bool true
 # Time Machine doesn't ask to use every new disk as a backup disk
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+# Restart Dock and Finder so their settings apply now (both relaunch by themselves)
+killall Dock Finder >/dev/null 2>&1 || true
+
+echo "Done. Dock and Finder were restarted; other changes may need a logout/restart."
