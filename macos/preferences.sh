@@ -206,6 +206,9 @@ defaults write com.apple.dock mineffect -string "scale"
 # Minimize windows into their app's Dock icon (not as separate icons at the right end of the Dock)
 defaults write com.apple.dock minimize-to-application -bool true
 
+# Scroll up on a Dock icon to show all that app's windows, scroll down to hide them
+defaults write com.apple.dock scroll-to-open -bool true
+
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
 
