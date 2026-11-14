@@ -76,10 +76,10 @@ git ones are in [git.md](git.md).
 | `sorteduniq` / `sorteduniq-asc` | Count identical lines, most / least frequent first |
 | `trim <text>` | Strip leading and trailing whitespace |
 | `extract-ip <file>` | IP addresses found in a file |
-| `extract-url [file]` | URLs found in a file or piped text, once each |
+| `grepUrl [file]` | URLs found in a file or piped text, once each |
 | `path` | `$PATH`, one per line |
-| `epoch [timestamp]` | Unix timestamp (seconds or ms) to local date; no argument: the current timestamp |
-| `hms <seconds>` | `5000` → `1h 23m 20s` |
+| `convertEpoch [timestamp]` | Unix timestamp (seconds or ms) to local date; no argument: the current timestamp |
+| `convertSecs <seconds>` | `5000` → `1h 23m 20s` |
 | `colors` | 256-color test palette |
 
 ## Network
