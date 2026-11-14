@@ -96,6 +96,8 @@ endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
+" Clear the search highlight (Space, then Enter)
+noremap <space><cr>     :nohlsearch<cr>
 
 " Automatic commands
 if has("autocmd")

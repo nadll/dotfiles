@@ -24,6 +24,7 @@ Config: `vim/.vimrc`. Solarized Dark, relative line numbers, mouse, OS clipboard
 | `,` | Leader key |
 | `,ss` | Strip trailing whitespace |
 | `,W` | Save as root (`sudo tee`) |
+| `Space` `Enter` | Clear the search highlight |
 
 - Modelines are off (a file can't run commands); per-folder `.vimrc` files are read in safe mode.
 - No `.swp` swap files (and so no recovery after a crash).
