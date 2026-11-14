@@ -512,7 +512,7 @@ defaults write com.apple.appstore InAppReviewEnabled -int 0
 # sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool true
 
 # =================================
-# TextEdit, Preview, Time Machine
+# TextEdit, Preview, Calendar, Time Machine
 # =================================
 
 # New TextEdit documents are plain text, opened and saved as UTF-8 (4 = UTF-8)
@@ -522,6 +522,9 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 # Preview doesn't reopen the files that were open last time
 defaults write com.apple.Preview ApplePersistenceIgnoreState -bool true
+
+# Calendar shows week numbers
+defaults write com.apple.iCal "Show Week Numbers" -bool true
 
 # Time Machine doesn't ask to use every new disk as a backup disk
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
