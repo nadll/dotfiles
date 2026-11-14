@@ -76,6 +76,11 @@ HISTORY_IGNORE='(ls|l|ll|la|lt|cd|cd ..|..|...|pwd|exit|clear|history)'
 # (only wildcards *, ?, [...]; careful: rm *.JPG also removes .jpg files)
 unsetopt CASE_GLOB
 
+# `>` doesn't overwrite an existing file ("file exists"); use `>|` when you mean it.
+# APPEND_CREATE: `>>` still creates a missing file (noclobber alone would refuse).
+# Only for what you type: scripts run in their own shell and are not affected.
+setopt NO_CLOBBER APPEND_CREATE
+
 # machine-local aliases and functions, not tracked in this repo
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"

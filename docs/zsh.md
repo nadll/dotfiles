@@ -79,6 +79,7 @@ From `vendor/fzf-git.sh`. Each one pastes what you pick onto the command line.
 - Type a folder name without `cd` to go there (`auto_cd`).
 - Type a file name to open it: `README.md`, `*.json`, `*.toml`, `*.yaml` open in VS Code. Paste a URL ending in `.git` to clone it.
 - File name patterns ignore case: `*.jpg` also matches `IMG_001.JPG` (careful with `rm`).
+- `>` won't overwrite an existing file ("file exists"); `>|` does. `>>` still creates new files.
 - A new shell opens in the last folder you used (oh-my-zsh `last-working-dir`).
 - No beep.
 
