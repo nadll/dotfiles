@@ -298,6 +298,17 @@ function trash() {
     echo "Moved to ~/.local/share/Trash/files/"
 }
 
+# Copy files or folders to <name>.<date-time> next to them, e.g. before editing:
+#   backup nginx.conf   -> nginx.conf.20261114-153012
+function backup() {
+    [ $# -gt 0 ] || { echo "Usage: backup <file or folder>..." >&2; return 1; }
+    local stamp f
+    stamp=$(date +%Y%m%d-%H%M%S)
+    for f in "$@"; do
+        cp -pRv "${f%/}" "${f%/}.$stamp" || return 1
+    done
+}
+
 # What's listening?
 function ports() {
     lsof -iTCP -sTCP:LISTEN -P -n

@@ -52,6 +52,7 @@ git ones are in [git.md](git.md).
 | Command | What it does |
 |---|---|
 | `trash <files>` | Move to the Finder Trash (macOS `trash`; "Put Back" works) |
+| `backup <files>` | Copy to `<name>.<date-time>` next to the original |
 | `x <archive>` / `extract` | Unpack any archive |
 | `targz <dir>` | `.tar.gz` with the best compressor available (zopfli, pigz, gzip) |
 | `gz <file>` | Original vs gzipped size |
