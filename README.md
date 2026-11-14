@@ -50,6 +50,7 @@ Then:
 ```
 brew/        Brewfile, Homebrew env and helper functions
 code/        VS Code settings.json and keybindings.json
+curl/        .curlrc (simple progress bar for downloads)
 coreutils/   GNU tools ahead of the macOS ones, eza/bat/less settings, LS_COLORS
 fd/ fzf/     file finder and fuzzy finder settings
 git/         .gitconfig, global gitignore, commit message template, git aliases and functions
