@@ -134,6 +134,11 @@ git ones are in [git.md](git.md).
 | `open_in_split_pane <cmd>` | Run a command in a new tmux split (picks horizontal/vertical from the window shape) |
 | `editor_in_split_pane <file>` | `$EDITOR` in a split; used by `E` and by `nnn` |
 
+## less
+
+Search ignores case unless you type a capital, long lines don't wrap (scroll sideways), the status line shows the position.
+Secure mode: `less` can't run commands (`!`, `|`, `v` to open the editor are off) and keeps no history file.
+
 ## Machine-local additions
 
 Not in the repo: `~/.aliases`, `~/.functions` and `~/.zshrc.local` (loaded last).

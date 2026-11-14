@@ -16,6 +16,9 @@ export BAT_THEME="TwoDark"
 export LESS="-iMRS+Gg"
 # don't keep ~/.lesshst (history of searches and commands typed in less)
 export LESSHISTFILE=-
+# less can't run commands: no !cmd, |, v (open in editor), :e, -o log files.
+# A file viewed in less (or a man page, git log) can't make you run anything by accident.
+export LESSSECURE=1
 
 # enable LS colored output
 export CLICOLOR=1
