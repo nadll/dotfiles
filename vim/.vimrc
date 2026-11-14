@@ -53,6 +53,8 @@ set hlsearch
 set ignorecase
 " …unless the search has a capital letter
 set smartcase                   " do not ignore capital letter search
+" No .swp files next to the files you edit (no crash recovery either)
+set noswapfile                  " no swap files
 " Highlight dynamically as pattern is typed
 set incsearch
 " Always show status line
