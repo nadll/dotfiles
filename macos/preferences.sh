@@ -399,8 +399,10 @@ defaults write com.apple.screencapture type -string "png"
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
-# Save location for the screenshots
-defaults write com.apple.screencapture location -string "${HOME}/Screenshots"
+# Save location for the screenshots (the folder must exist, so create it first)
+# defaults write com.apple.screencapture location -string "${HOME}/Screenshots"
+mkdir -p "${HOME}/Pictures/Screenshots"
+defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots"
 
 # ===========================
 # Finder
