@@ -150,6 +150,9 @@ bindkey -M menuselect '^[' undo
 
 zstyle ':completion:*' menu select
 
+# don't offer . , .. and .DS_Store files in completion (.git and other dotfiles still show)
+zstyle ':completion:*' ignored-patterns '.|..|.DS_Store|**/.DS_Store'
+
 # copy the active line from the command line buffer
 # onto the system clipboard
 # borrowed from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
