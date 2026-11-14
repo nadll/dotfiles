@@ -63,7 +63,13 @@ alias egrep='egrep --color=auto'
 alias week='date +%V'
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+# was DNS only, which fails on networks that block outside DNS servers (company networks):
+# alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+# Public IP: over HTTPS first, then a second service, then DNS as a last resort
+function ip {
+  curl -s "https://icanhazip.com/" || \
+    curl -s "https://am.i.mullvad.net/ip" || \
+      dig @resolver1.opendns.com ANY myip.opendns.com +short }
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 

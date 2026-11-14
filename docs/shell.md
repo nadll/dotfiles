@@ -86,7 +86,7 @@ git ones are in [git.md](git.md).
 
 | Command | What it does |
 |---|---|
-| `ip` | Public IP |
+| `ip` | Public IP (icanhazip.com, then am.i.mullvad.net, then OpenDNS over DNS) |
 | `localip` | IP of `en0` |
 | `ips` | All IPs of all interfaces |
 | `ifactive` | Active network interfaces |
