@@ -28,10 +28,11 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-# Same thing by number of levels: ..2 to ..5
-alias ..2="cd ../.."
-alias ..3="cd ../../.."
-alias ..4="cd ../../../.."
+# Same thing by number of levels: ..2 to ..4 duplicate ... to ..... above, so they are off
+# alias ..2="cd ../.."
+# alias ..3="cd ../../.."
+# alias ..4="cd ../../../.."
+# 5 levels up has no dot form, so ..5 stays
 alias ..5="cd ../../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
