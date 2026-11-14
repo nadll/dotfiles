@@ -55,6 +55,8 @@ set ignorecase
 set smartcase                   " do not ignore capital letter search
 " No .swp files next to the files you edit (no crash recovery either)
 set noswapfile                  " no swap files
+" Typing a closing bracket briefly jumps to its matching opening one
+set showmatch                   " show matching brackets
 " Highlight dynamically as pattern is typed
 set incsearch
 " Always show status line

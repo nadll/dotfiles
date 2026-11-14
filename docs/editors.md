@@ -27,4 +27,5 @@ Config: `vim/.vimrc`. Solarized Dark, relative line numbers, mouse, OS clipboard
 
 - Modelines are off (a file can't run commands); per-folder `.vimrc` files are read in safe mode.
 - No `.swp` swap files (and so no recovery after a crash).
+- Typing `)`, `]` or `}` briefly shows the matching opening bracket.
 - `todos`, `rgq` (see [shell.md](shell.md)) open search results in Vim's quickfix list: `:cn` / `:cp` next / previous.
