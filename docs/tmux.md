@@ -31,7 +31,7 @@ Sessions are also saved every 15 minutes and restored when tmux starts (tmux-con
 | `Ctrl-a r` | Rename window |
 | `Ctrl-a 1`…`9` | Go to window n |
 | `Ctrl-a C-[` / `Ctrl-a C-]` | Previous / next window (repeatable) |
-| `Ctrl-a Tab` | Last used window |
+| `Ctrl-a Tab` or `Ctrl-a Ctrl-a` | Last used window |
 | `Ctrl-a w` | Pick a window or pane in a tree (tmux default) |
 | `Ctrl-a X` | Kill window |
 | `Ctrl-a C-x` | Kill all other windows (asks) |
