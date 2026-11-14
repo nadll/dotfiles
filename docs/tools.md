@@ -38,6 +38,7 @@ Not from Homebrew: oh-my-zsh, powerlevel10k, the zsh plugins, tpm, and `vendor/`
 - Downloads show a simple progress bar.
 - `curl -s` still prints the reason when it fails.
 - A downloaded file keeps the date the server gives it.
+- HTTPS needs TLS 1.2 or newer.
 
 ## git
 
