@@ -112,9 +112,10 @@ function dotfiles-update() {
 }
 
 # Create a new directory and enter it
-function mkd() {
-    mkdir -p "$@" && cd "$_";
-}
+# off: same as mkcd below
+# function mkd() {
+#     mkdir -p "$@" && cd "$_";
+# }
 
 # Create directory (with parents) and cd into it immediately
 function mkcd() {
