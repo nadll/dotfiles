@@ -16,4 +16,5 @@
     "@\UF701" = moveToEndOfDocument:;        // cmd-down
     "@$\UF700" = moveToBeginningOfDocumentAndModifySelection:; // cmd-shift-up
     "@$\UF701" = moveToEndOfDocumentAndModifySelection:;   // cmd-shift-down
+    "~ " = ("insertText:", " "); // option-space: normal space instead of a non-breaking one
 }
