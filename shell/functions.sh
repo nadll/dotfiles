@@ -309,6 +309,21 @@ function backup() {
     done
 }
 
+# Encrypt a file with a passphrase (gpg, AES-256), no key needed:
+#   secret notes.txt   -> notes.txt.gpg
+# The original stays; delete it yourself (trash notes.txt) once reveal works.
+function secret() {
+    [ -f "$1" ] || { echo "Usage: secret <file>" >&2; return 1; }
+    gpg --symmetric --cipher-algo AES256 --output "$1.gpg" "$1" && echo "$1 -> $1.gpg"
+}
+
+# Decrypt a file made by secret (gpg asks before overwriting):
+#   reveal notes.txt.gpg   -> notes.txt
+function reveal() {
+    [ -f "$1" ] && [ "${1%.gpg}" != "$1" ] || { echo "Usage: reveal <file>.gpg" >&2; return 1; }
+    gpg --output "${1%.gpg}" --decrypt "$1" && echo "$1 -> ${1%.gpg}"
+}
+
 # What's listening?
 function ports() {
     lsof -iTCP -sTCP:LISTEN -P -n

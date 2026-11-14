@@ -53,6 +53,7 @@ git ones are in [git.md](git.md).
 |---|---|
 | `trash <files>` | Move to the Finder Trash (macOS `trash`; "Put Back" works) |
 | `backup <files>` | Copy to `<name>.<date-time>` next to the original |
+| `secret <file>` / `reveal <file>.gpg` | Encrypt with a passphrase (gpg, AES-256) to `<file>.gpg` / decrypt it back; the original stays |
 | `x <archive>` / `extract` | Unpack any archive |
 | `targz <dir>` | `.tar.gz` with the best compressor available (zopfli, pigz, gzip) |
 | `gz <file>` | Original vs gzipped size |
