@@ -1,6 +1,6 @@
 # Sourced by install.sh (uses its link/run helpers and $DOTFILES, $SHELLRCDIR, $SHELLENVDIR)
-# Only gpg-agent.conf is managed here: keys (pubring.kbx, private-keys-v1.d/, trustdb.gpg)
-# and gpg.conf in ~/.gnupg are never touched.
+# Manages gpg-agent.conf and gpg.conf; keys (pubring.kbx, private-keys-v1.d/, trustdb.gpg)
+# in ~/.gnupg are never touched, and neither is a gpg.conf you already had.
 
 run mkdir -p "$HOME/.gnupg"
 # gpg warns about "unsafe permissions" if others can read ~/.gnupg
@@ -24,6 +24,14 @@ if [ -f "$agent_conf" ] && [ ! -L "$agent_conf" ]; then
   fi
 else
   link "$DOTFILES/gpg/gpg-agent.conf" "$agent_conf"
+fi
+
+# gpg.conf: linked only when there is none yet; your own gpg.conf (a real file) is kept as it is
+gpg_conf="$HOME/.gnupg/gpg.conf"
+if [ -f "$gpg_conf" ] && [ ! -L "$gpg_conf" ]; then
+  warn "Keeping your own ~/.gnupg/gpg.conf (compare it with $(pretty "$DOTFILES/gpg/gpg.conf"))"
+else
+  link "$DOTFILES/gpg/gpg.conf" "$gpg_conf"
 fi
 
 link "$DOTFILES/gpg/gpg.rc.sh" "$SHELLRCDIR/"
