@@ -12,3 +12,6 @@ fi
 
 # (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
+
+# Refuse downloads where an https:// URL redirects to plain http:// (could be tampered with on the way)
+export HOMEBREW_NO_INSECURE_REDIRECT=1
