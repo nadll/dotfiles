@@ -256,7 +256,11 @@ function ff() {
 # Quick Python HTTP server (Python 3)
 function serve() {
     local port=${1:-8000}
-    echo "Serving on http://localhost:$port"
+    # the network address is what other devices (phone, other computers) open
+    local lan_ip=$(ipconfig getifaddr en0 2>/dev/null)
+    echo "Serving $PWD (whole folder, no password, Ctrl-C to stop)"
+    echo "  this Mac:      http://localhost:$port"
+    [ -n "$lan_ip" ] && echo "  other devices: http://$lan_ip:$port"
     python3 -m http.server "$port"
 }
 
