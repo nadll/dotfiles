@@ -375,6 +375,12 @@ function extract-ip() {
 }
 # Usage: extract-ip access.log
 
+# Pull URLs (http, https, ftp, file) out of any text, once each; reads stdin without a file
+#   extract-url page.html    or    pbpaste | extract-url
+function extract-url() {
+    grep -Eoh "(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]" "$@" | sort -u
+}
+
 # Find the space hogs
 function top-size() {
     du -hs * | sort -rh | head -10
