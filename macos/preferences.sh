@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # WARNING: inherited from samoshkin/dotfiles and not reviewed yet. Read it before running:
-# it disables Gatekeeper (`spctl --master-disable`) and download quarantine (LSQuarantine),
-# sets the time zone to Europe/Kiev and the locale to en_UA, and changes Dock, Finder,
-# trackpad and keyboard settings. install.sh runs it only with --macos, after asking.
+# it disables download quarantine (LSQuarantine), sets the locale to en_DE (Berlin), and
+# changes Dock, Finder, trackpad and keyboard settings (Gatekeeper and time zone lines need
+# sudo and are commented out). install.sh runs it only with --macos, after asking.
 
 # sudo: every command that needs it is commented out ("# sudo ..."), so the script never
 # asks for your password. Uncomment the ones you want, or run them by hand.
@@ -216,12 +216,15 @@ defaults write com.apple.dock show-recents -bool true
 # Locale and language
 # ===========================
 
-defaults write NSGlobalDomain AppleLocale -string "en_UA"
+# defaults write NSGlobalDomain AppleLocale -string "en_UA"
+# English with German formats: 1.234,56, 24h, Monday first
+defaults write NSGlobalDomain AppleLocale -string "en_DE"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
 # sudo systemsetup -settimezone "Europe/Kiev" > /dev/null
+# sudo systemsetup -settimezone "Europe/Berlin" > /dev/null
 
 # Show language menu in the top right corner of the boot screen
 # sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true

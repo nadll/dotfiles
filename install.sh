@@ -230,8 +230,8 @@ if [ "$MACOS_PREFS" = 1 ]; then
   elif [ "$DRY_RUN" = 1 ]; then
     echo "[dry-run] sh $DOTFILES/macos/preferences.sh (after asking for confirmation)"
   else
-    warn "macos/preferences.sh changes system settings, including turning off Gatekeeper and"
-    warn "download quarantine, and sets the time zone to Europe/Kiev and the locale to en_UA."
+    warn "macos/preferences.sh changes system settings, including turning off download"
+    warn "quarantine, and sets the locale to en_DE (no sudo commands run)."
     printf 'Apply macOS preferences now? [y/N] '
     read -r answer || answer=""
     case "$answer" in
