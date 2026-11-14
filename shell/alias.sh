@@ -104,13 +104,13 @@ alias hosts='SUDO_EDITOR="code --wait" sudo -e /etc/hosts'
 # Count identical lines, most frequent first (or least frequent first with -asc)
 #   e.g. git log --format=%an | sorteduniq
 alias sorteduniq="sort | uniq -c | sort --reverse --ignore-leading-blanks --numeric-sort"
+alias sorteduniq-asc="sort | uniq -c | sort --ignore-leading-blanks --numeric-sort"
 
 # Copy piped output to the clipboard without newlines, e.g. git rev-parse HEAD | c
 alias c="tr -d '\n' | pbcopy"
 
 # Run a command once per input line, e.g. fd .gitattributes | map dirname
 alias map="xargs -n1"
-alias sorteduniq-asc="sort | uniq -c | sort --ignore-leading-blanks --numeric-sort"
 
 # Free/used space of the main disk, in powers of 1000 like Finder
 alias diskspace_report="df --si /"
