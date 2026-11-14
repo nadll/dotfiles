@@ -72,6 +72,25 @@ setopt HIST_FIND_NO_DUPS       # history search (Ctrl-R, Up/Down) skips commands
 # Don't save these exact command lines (whole line must match: `ls` is skipped, `ls src` is kept)
 HISTORY_IGNORE='(ls|l|ll|la|lt|cd|cd ..|..|...|pwd|exit|clear|history)'
 
+# Don't save typos: a command line whose command doesn't exist is not written to the history.
+# It stays available until the next command, so Up still brings it back to fix it.
+# Folders (auto_cd), suffix aliases (README.md) and anything more complex than a plain word are kept.
+_history_skip_unknown() {
+  setopt localoptions extendedglob
+  local w
+  for w in ${(z)1}; do
+    [[ $w == [[:alpha:]_][[:alnum:]_]#=* ]] || break  # skip leading VAR=value
+  done
+  w=${(Q)w}
+  [[ $w == [[:alnum:]./~_-]## ]] || return 0
+  whence -- "$w" >/dev/null && return 0
+  [[ -d ${w/#\~/$HOME} ]] && return 0
+  [[ -n ${w:e} && -n ${saliases[${w:e}]} ]] && return 0
+  return 1
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook zshaddhistory _history_skip_unknown
+
 # File name patterns ignore case, like Finder: *.jpg also matches IMG_001.JPG
 # (only wildcards *, ?, [...]; careful: rm *.JPG also removes .jpg files)
 unsetopt CASE_GLOB

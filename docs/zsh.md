@@ -87,6 +87,7 @@ From `vendor/fzf-git.sh`. Each one pastes what you pick onto the command line.
 
 - 100,000 entries in `~/.config/zsh/.zsh_history`, shared between open terminals, with timestamps.
 - A command starting with a space is not saved.
+- Typos aren't saved: a line whose command doesn't exist is dropped (Up still brings it back once, to fix it).
 - Repeats in a row are saved once; searches skip duplicates.
 - Plain `ls`, `l`, `ll`, `la`, `lt`, `cd`, `cd ..`, `..`, `...`, `pwd`, `exit`, `clear`, `history` are not saved.
 
