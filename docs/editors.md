@@ -17,7 +17,7 @@ Settings highlights: Ruff formats Python on save, indentation detected per file,
 
 ## Vim
 
-Config: `vim/.vimrc`. Solarized Dark, relative line numbers, mouse, OS clipboard, invisible characters shown, case-insensitive search highlighted as you type.
+Config: `vim/.vimrc`. Solarized Dark, relative line numbers, mouse, OS clipboard, invisible characters shown, search highlighted as you type (ignores case unless you type a capital).
 
 | Keys | Action |
 |---|---|
