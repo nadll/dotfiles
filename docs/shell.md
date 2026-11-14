@@ -76,6 +76,8 @@ git ones are in [git.md](git.md).
 | `trim <text>` | Strip leading and trailing whitespace |
 | `extract-ip <file>` | IP addresses found in a file |
 | `path` | `$PATH`, one per line |
+| `epoch [timestamp]` | Unix timestamp (seconds or ms) to local date; no argument: the current timestamp |
+| `hms <seconds>` | `5000` → `1h 23m 20s` |
 | `colors` | 256-color test palette |
 
 ## Network

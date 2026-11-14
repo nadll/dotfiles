@@ -286,6 +286,22 @@ function path() {
     echo "$PATH" | tr ":" "\n"
 }
 
+# Unix timestamp to local date and time; without argument, prints the current timestamp
+#   epoch 1763130000   (13 digits = milliseconds, also fine)
+function epoch() {
+    [ -n "$1" ] || { date +%s; return; }
+    local ts=$1
+    [ ${#ts} -ge 13 ] && ts=$((ts / 1000))
+    # GNU date (coreutils, first on PATH) takes -d @ts; macOS's /bin/date takes -r ts
+    date -d "@$ts" '+%Y-%m-%d %H:%M:%S %Z' 2>/dev/null || /bin/date -r "$ts" '+%Y-%m-%d %H:%M:%S %Z'
+}
+
+# Seconds as hours, minutes and seconds: hms 5000 -> 1h 23m 20s
+function hms() {
+    [ -n "$1" ] || { echo "Usage: hms <seconds>" >&2; return 1; }
+    printf '%dh %02dm %02ds\n' $(($1 / 3600)) $(($1 % 3600 / 60)) $(($1 % 60))
+}
+
 # Search within a Man page
 function mans() {
     man "$1" | grep -iC 5 "$2"
