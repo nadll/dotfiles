@@ -347,6 +347,13 @@ function reveal() {
     gpg --output "${1%.gpg}" --decrypt "$1" && echo "$1 -> ${1%.gpg}"
 }
 
+# Copy with rsync: keeps dates and permissions, shows progress and a summary, compresses (helps over ssh)
+#   rs ~/Photos/ nas:/backup/photos/   (a / at the end of the source copies its contents, not the folder)
+# Run again to copy only what changed. macOS ships openrsync: if it rejects an option, brew install rsync
+function rs() {
+    rsync --archive --verbose --human-readable --progress --stats --compress "$@"
+}
+
 # What's listening?
 function ports() {
     lsof -iTCP -sTCP:LISTEN -P -n
