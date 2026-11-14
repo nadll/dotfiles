@@ -235,7 +235,7 @@ if [ "$MACOS_PREFS" = 1 ]; then
     printf 'Apply macOS preferences now? [y/N] '
     read -r answer || answer=""
     case "$answer" in
-      [yY]*) info "Applying macOS preferences"; sh "$DOTFILES/macos/preferences.sh" ;;
+      [yY]*) info "Applying macOS preferences"; sh "$DOTFILES/macos/preferences.sh" || warn "macos/preferences.sh reported an error, see above" ;;
       *) info "Skipped macos/preferences.sh" ;;
     esac
   fi

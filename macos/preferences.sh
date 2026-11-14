@@ -8,7 +8,10 @@
 # sudo: every command that needs it is commented out ("# sudo ..."), so the script never
 # asks for your password. Uncomment the ones you want, or run them by hand.
 
-set -e
+# No `set -e`: the lines are independent, so one failure (e.g. Safari settings without Full Disk
+# Access for the terminal: "Could not write domain") must not skip everything after it.
+# Errors are still printed.
+# set -e
 set -o pipefail
 
 # ===================
