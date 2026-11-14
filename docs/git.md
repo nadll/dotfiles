@@ -52,6 +52,7 @@ Your name, email and signing key go in `~/.gitconfig.local` (`./git_setup.sh`).
 | `fm <text>` | Commits whose message contains `<text>` |
 | `fb <commit>` / `ft <commit>` | Branches / tags that contain a commit |
 | `contributors` | Commit count per author |
+| `authors` | Every author with email, once each |
 | `whoami` | `user.email` for this repo |
 
 ### Branches, tags, worktrees

@@ -87,6 +87,9 @@
 	# List aliases
 	aliases = config --get-regexp alias
 
+	# Every author of this repo, with email, once each
+	authors = !git log --format='%aN <%aE>' | sort -u
+
 	# Amend the currently staged files to the latest commit
 	amend = commit --amend --reuse-message=HEAD
 
