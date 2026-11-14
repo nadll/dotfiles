@@ -16,6 +16,12 @@ Host *
   # reduce the default connect timeout to 5s
   ConnectTimeout 5
 
+  # store new server names in ~/.ssh/known_hosts hashed, so the file doesn't list where you connect
+  # (existing entries stay readable; hash them with: ssh-keygen -H, which keeps known_hosts.old)
+  # find or remove a host with: ssh-keygen -F <host> / ssh-keygen -R <host>
+  # side effect: zsh no longer offers these hosts after `ssh <Tab>` (hosts in ssh config still are)
+  HashKnownHosts yes
+
   # OSX specific
   # Use passwords stored in Keychain
   # plus, automatically add keys to ssh-agent when private key is used for the first time
