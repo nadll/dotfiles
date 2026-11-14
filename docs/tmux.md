@@ -47,6 +47,7 @@ Sessions are also saved every 15 minutes and restored when tmux starts (tmux-con
 | `Ctrl-a _` | Split top/bottom (current folder) |
 | `Ctrl-a [` / `Ctrl-a ]` | Previous / next pane (repeatable) |
 | `Ctrl-a ←↑→↓` | Pane in that direction (tmux default) |
+| `Ctrl-a h/j/k/l` | Pane left / down / up / right (Vim style) |
 | `Ctrl-a C-←↑→↓` | Resize (tmux default) |
 | `Ctrl-a z` | Zoom / unzoom pane |
 | `Ctrl-a C-o` | Rotate panes |
