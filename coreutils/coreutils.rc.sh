@@ -50,4 +50,8 @@ alias lt="eza -a --group-directories-first --color-scale=all -T -L 2"
 alias llt="eza -la --group-directories-first --time-style long-iso --color-scale=all -T -L 2"
 
 # Use bat in place of cat
-alias cat="bat"
+# alias cat="bat"
+# cat: syntax colors only, like plain cat (no line numbers, no header, no pager)
+alias cat="bat --style=plain --paging=never"
+# catn: with line numbers and git change marks (BAT_STYLE above), long files open in the pager
+alias catn="bat"
