@@ -38,6 +38,7 @@ Your name, email and signing key go in `~/.gitconfig.local` (`./git_setup.sh`).
 | `diffbranch` | Everything this branch changes vs `origin/<default>`, working tree included |
 | `diffcommitsfrommain` | Commits on this branch that aren't on `origin/<default>` |
 | `wtf` | Files that still have merge conflicts |
+| `ignored` | Files git is ignoring in this repo |
 
 ### Log and search
 
