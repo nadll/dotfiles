@@ -156,6 +156,10 @@ brew "mole"
 # Pack repository contents into a single AI-friendly file https://github.com/yamadashy/repomix
 brew "repomix"
 
+# Send files/folders to another computer anywhere, end-to-end encrypted, via a relay https://github.com/schollz/croc
+#   croc send file.zip   -> prints a code; on the other side: croc <code>
+brew "croc"
+
 # =====================
 # Python
 # =====================
