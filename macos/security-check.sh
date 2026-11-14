@@ -77,7 +77,15 @@ out=$(launchctl print-disabled system 2>/dev/null | grep '"com.openssh.sshd"')
 case "$out" in
   *"=> disabled"* | *"=> true"*) ok "Remote Login (SSH)" "off" ;;
   *"=> enabled"* | *"=> false"*) fail "Remote Login (SSH)" "on" "System Settings > General > Sharing > Remote Login" ;;
-  *) unknown "Remote Login (SSH)" "could not read its state" ;;
+  # not listed: never switched on or off, so it has macOS's default (off);
+  # double-check that nothing answers on the SSH port
+  "")
+    if nc -z -G 1 127.0.0.1 22 >/dev/null 2>&1; then
+      unknown "Remote Login (SSH)" "not switched on, but something answers on port 22"
+    else
+      ok "Remote Login (SSH)" "off (never turned on)"
+    fi ;;
+  *) unknown "Remote Login (SSH)" "$out" ;;
 esac
 
 # Lock screen: password required right after sleep or screen saver
