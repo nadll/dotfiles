@@ -5,6 +5,9 @@
 # sets the time zone to Europe/Kiev and the locale to en_UA, and changes Dock, Finder,
 # trackpad and keyboard settings. install.sh runs it only with --macos, after asking.
 
+# sudo: every command that needs it is commented out ("# sudo ..."), so the script never
+# asks for your password. Uncomment the ones you want, or run them by hand.
+
 set -e
 set -o pipefail
 
@@ -27,7 +30,7 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock
 # in the login window
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+# sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
@@ -54,7 +57,7 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 # Enable applications installed from Internet to run without restrictions
 # On macOS 15 Sequoia and later this only unlocks the option: then go to System Settings ->
 # Privacy & Security -> Security and choose "Allow applications from: Anywhere"
-sudo spctl --master-disable
+# sudo spctl --master-disable
 
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
@@ -64,25 +67,25 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # ===========================
 
 # on power (values in minutes, 0 = never)
-sudo pmset -c displaysleep 10
-sudo pmset -c sleep 11
+# sudo pmset -c displaysleep 10
+# sudo pmset -c sleep 11
 # disksleep only spins down hard disks, no effect on an SSD
 # sudo pmset -c disksleep 20
 
 # on battery
-sudo pmset -b displaysleep 5
-sudo pmset -b sleep 6
+# sudo pmset -b displaysleep 5
+# sudo pmset -b sleep 6
 # sudo pmset -b disksleep 10
 
 # Wake up the machine when lid is opened
-sudo pmset -a lidwake 1
+# sudo pmset -a lidwake 1
 
 # Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze on
+# sudo systemsetup -setrestartfreeze on
 
 # disable display sleep to use an intermediate half-brightness state between full brightness and fully off  (value = 0/1)
 # just make it fully off
-sudo pmset -a halfdim 0
+# sudo pmset -a halfdim 0
 
 # disable screen saver (idleTime is in seconds, 0 = never)
 defaults -currentHost write com.apple.screensaver idleTime 0
@@ -218,10 +221,10 @@ defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
-sudo systemsetup -settimezone "Europe/Kiev" > /dev/null
+# sudo systemsetup -settimezone "Europe/Kiev" > /dev/null
 
 # Show language menu in the top right corner of the boot screen
-sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
+# sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 
 # ===========================
 # Activity Monitor
@@ -443,10 +446,11 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Show the ~/Library folder
-sudo chflags nohidden ~/Library
+# sudo chflags nohidden ~/Library
+chflags nohidden ~/Library  # your own folder, no sudo needed
 
 # Show the /Volumes folder
-sudo chflags nohidden /Volumes
+# sudo chflags nohidden /Volumes
 
 # Expand the following File Info panes:
 # “General”, “Open with”, and “Sharing & Permissions”
@@ -489,9 +493,9 @@ defaults write com.apple.appstore ShowDebugMenu -bool true
 
 # Check for updates automatically, download them in the background, and install
 # security responses and system data files (System Settings > General > Software Update > Automatic Updates)
-sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
-sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool true
+# sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+# sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
+# sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool true
 
 # =================================
 # TextEdit, Preview, Time Machine
