@@ -216,6 +216,9 @@ defaults write com.apple.dock mru-spaces -bool false
 # Show recent applications in Dock
 defaults write com.apple.dock show-recents -bool true
 
+# Dock icons don't bounce when an app opens or wants attention
+defaults write com.apple.dock no-bouncing -bool true
+
 # ===========================
 # Locale and language
 # ===========================
