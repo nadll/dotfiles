@@ -87,6 +87,9 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 # Keep the Mac awake for 4 hours (display, idle and system sleep; Ctrl-C to stop early)
 alias stayawake="caffeinate -disu -t 14400"
 
+# Away from keyboard: turn the display off now (locks the Mac when a password is required after sleep)
+alias afk="pmset displaysleepnow"
+
 # Disable Spotlight
 alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
