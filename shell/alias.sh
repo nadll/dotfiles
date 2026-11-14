@@ -18,7 +18,8 @@ alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Goo
 alias as-tree='tree --fromfile'
 
 # Get External IP / Internet Speed
-alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
+# off: `ip` below also prints the public IP; for location/ISP details: curl https://ipinfo.io/json
+# alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
 # macOS built-in test (Apple's servers); -s measures download and upload one after the other
 # was: curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -
 alias speedtest="networkQuality -s"
