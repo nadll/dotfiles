@@ -24,6 +24,7 @@ Working agreements for every project: small agreed steps, minimal changes, keep 
 |---|---|
 | Never read | `.env*`, `secrets/`, `config/credentials.json`, `~/.ssh`, `~/.gitconfig.local`, `~/.config/gh`, `*.pem`, `*.key`, `id_rsa`, `id_ed25519` |
 | Never edit | `.env*` |
+| Never run | `dd`, `diskutil`, `mkfs`, `rm -rf` on `/`, `/*`, `~` or `$HOME` (also with `sudo`) |
 | Ask first | `git push`, `git commit --amend`, `git reset`, `git checkout --`, `git stash drop/clear`, `git clean`, `rm -rf`, `chmod` |
 | Allowed | `git add/commit/fetch`, `git stash list/show`, `git rev-parse`, `git remote -v`, `rg`, `jq`, `tree`, `sort`, `uniq`, `mkdir`, `touch`, `pip list` |
 

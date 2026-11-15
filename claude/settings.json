@@ -27,7 +27,16 @@
       "Read(**/*.key)",
       "Read(**/id_rsa)",
       "Read(**/id_ed25519)",
-      "Edit(**/.env*)"
+      "Edit(**/.env*)",
+      "Bash(dd *)",
+      "Bash(diskutil *)",
+      "Bash(mkfs *)",
+      "Bash(rm -rf / *)",
+      "Bash(rm -rf /* *)",
+      "Bash(rm -rf ~ *)",
+      "Bash(rm -rf $HOME *)",
+      "Bash(sudo rm -rf / *)",
+      "Bash(sudo rm -rf /* *)"
     ],
     "ask": [
       "Bash(git push *)",
