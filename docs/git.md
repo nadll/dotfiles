@@ -63,6 +63,7 @@ Your name, email and signing key go in `~/.gitconfig.local` (`./git_setup.sh`).
 |---|---|
 | `branches` / `tags` / `remotes` | List them |
 | `sweep` | Delete branches merged into the default branch, prune origin |
+| `stale-branches [--prune] [YYYY-MM-DD]` | List local branches with no commit since the date (default 6 months ago), unmerged ones marked; `--prune` deletes them (`shell/bin/git-stale-branches`) |
 | `dm` | Delete branches merged into the current one |
 | `defaultBranch` | Print the default branch (`remoteSetHead` refreshes it) |
 | `reb <n>` | Interactive rebase of the last n commits |
