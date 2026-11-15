@@ -133,6 +133,7 @@ git ones are in [git.md](git.md).
 | `fuck` / `fk` | Correct the last command (thefuck, loads on first use) |
 | `tldr <cmd>` | Short examples (tlrc) |
 | `diff <a> <b>` | git's colored word diff for any two files |
+| `lpath` | `$PATH`, one folder per line |
 
 ## Scripts in `~/bin`
 
