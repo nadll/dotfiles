@@ -31,6 +31,7 @@ Working agreements for every project: small agreed steps, minimal changes, keep 
 ## Sandbox
 
 Commands run sandboxed. `~/.ssh` and `~/.config/gh` are blocked; `gh` runs outside the sandbox.
+Secret environment variables (`GITHUB_TOKEN`, `GH_TOKEN`, `NPM_TOKEN`, `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `AWS_*` and similar) are hidden from sandboxed commands.
 Network: github.com, api.github.com, `*.githubusercontent.com`, pypi.org, files.pythonhosted.org.
 The repo's remotes use SSH, so `git fetch/pull/push` fail inside the sandbox and Claude retries them outside (push asks first).
 
