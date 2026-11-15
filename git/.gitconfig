@@ -6,7 +6,8 @@
     # Stage parts of files, chunk by chunk (y/n/s=split/e=edit)
     ap = add --patch
     fo = fetch origin
-    d = !git --no-pager diff
+    # duplicate, overridden by the later d (diff with stat):
+    # d = !git --no-pager diff
     dt  = difftool
     stat = !git --no-pager diff --stat
 
@@ -56,7 +57,8 @@
     unstage = reset HEAD --
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+	# duplicate, overridden by the later l (log --pretty=custom):
+	# l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
 	# View the current working tree status using the short format
 	s = status -s
