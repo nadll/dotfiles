@@ -14,6 +14,7 @@ Written from the config files on 2026-11-14; if something here and a config file
 | [macos.md](macos.md) | Text-field key bindings, Finder helpers, macOS scripts |
 | [tools.md](tools.md) | What the Brewfile installs, grouped |
 | [claude-code.md](claude-code.md) | Claude Code settings, status line, hooks |
+| [internals.md](internals.md) | Full install steps and options, layout, how zsh starts, adding a tool, CI, moving from the old setup |
 
 ## Most used
 

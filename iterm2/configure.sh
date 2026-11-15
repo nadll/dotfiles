@@ -5,4 +5,4 @@
 link "$DOTFILES/iterm2/settings/profiles.json" "$HOME/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json"
 
 # NOTE: color presets (iterm2/colors/) and the key map (iterm2/settings/keys.itermkeymap)
-# are imported by hand, see README.md
+# are imported by hand, see docs/internals.md

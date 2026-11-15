@@ -1,129 +1,65 @@
 # dotfiles
 
-My macOS setup: zsh with oh-my-zsh and powerlevel10k, Homebrew packages, git, fzf, tmux and VS Code.
-It started from [lewagon/dotfiles](https://github.com/lewagon/dotfiles) and takes its per-tool layout from [samoshkin/dotfiles](https://github.com/samoshkin/dotfiles).
+My macOS setup: zsh with oh-my-zsh and powerlevel10k, Homebrew, git, fzf, tmux and VS Code.
 
-For a list of key bindings, aliases, functions and tools, see [docs/](docs/README.md).
+## Requirements
 
-## New Mac
+- macOS
+- Homebrew and oh-my-zsh (`install.sh` installs both)
+
+## What's in there?
+
+- [Homebrew packages](brew/Brewfile)
+- [zsh config](shell/zsh/), [aliases](shell/alias.sh), [functions](shell/functions.sh) and [scripts](shell/bin/)
+- [git config](git/.gitconfig) with aliases, delta and GPG signing
+- [tmux](tmux/), [fzf](fzf/), [lazygit](lazygit/), [vim](vim/)
+- [VS Code settings](code/) and [iTerm2 profiles](iterm2/)
+- [Claude Code settings](claude/)
+- [macOS preferences](macos/) and a read-only security check
+
+Key bindings, aliases and tools are listed in [docs/](docs/README.md).
+
+## Installation
 
 ```sh
-xcode-select --install          # git and compilers, if macOS asks for them
+xcode-select --install
 git clone https://github.com/nadll/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./install.sh --dry-run          # optional: show what would change, change nothing
 ./install.sh
 ```
 
-The repo can live anywhere: `install.sh` records its location in `~/.config/zsh/.env/00-dotfiles.env.sh`.
-Keep the clone after installing, the files in `~` are symlinks into it.
+Files in `~` become symlinks into the repo, so keep the clone. Existing files are backed up first.
 
-Then:
+Options: `--dry-run` (show changes only), `--skip-brew`, `--macos` (apply macOS preferences), `--pro` (work packages), `--help`.
 
-1. Open a new terminal (or run `exec zsh`).
-2. Set your git identity for this machine: `./git_setup.sh`. It writes your name and email to `~/.gitconfig.local`, which `git/.gitconfig` includes and which stays out of the repo; put signing keys or work-only settings there too. Until you run it, git refuses to commit.
-3. In iTerm2, open Settings → Profiles and make the dotfiles **Default** (or **tmux**) profile the default. Both come from `iterm2/settings/profiles.json` and already use the Droid Sans Mono Nerd Font, so prompt icons render.
-4. The prompt (powerlevel10k) is already set up from `shell/zsh/.p10k.zsh`, which needs the Nerd Font from step 3. To change it, run `p10k configure`, then check `git status` (see the comment in `shell/configure.sh`).
-5. In tmux, install the plugins with `Ctrl-a` then `I` (the prefix is `Ctrl-a`).
-6. Optional, by hand in iTerm2 Settings: import a color preset from `iterm2/colors/` (Profiles → Colors → Color Presets → Import) and the key map `iterm2/settings/keys.itermkeymap` (Profiles → Keys → Key Mappings → Presets → Import).
+After installing:
 
-### Options
+1. Open a new terminal.
+2. Run `./git_setup.sh` to set your git name and email.
+3. In iTerm2, make the **Default** profile from these dotfiles the default.
+4. In tmux, install the plugins: `Ctrl-a` then `I`.
 
-| Option | What it does |
-|---|---|
-| `--dry-run`, `-n` | Print every change instead of making it |
-| `--skip-brew` | Skip Homebrew and `brew bundle`, for a quick re-run after editing config |
-| `--macos` | Also apply `macos/preferences.sh` (asks first; read the script before using it) |
-| `--pro` | Also install `brew/Brewfile.pro`, and remember it (`~/.dotfiles-pro`) so later runs and `dotfiles-update` do too; `rm ~/.dotfiles-pro` to stop |
-| `--help`, `-h` | Show usage |
+## Local customizations
 
-`install.sh` is safe to run again. Existing files that aren't symlinks are moved to `<name>.backup.<timestamp>` before being replaced, and links that are already correct are left alone.
+Machine-specific settings go in files that stay out of the repo:
 
-## What `install.sh` does
+- `~/.zshrc.local`: zsh, loaded last
+- `~/.gitconfig.local`: git name, email, signing key
+- `~/.ssh/config.local`: SSH hosts
+- `~/.tmux.conf.local`: tmux
 
-1. Installs Homebrew if it's missing, then the packages in `brew/Brewfile` with `brew bundle`, plus `brew/Brewfile.pro` on pro machines.
-2. Installs oh-my-zsh, the powerlevel10k theme and the `zsh-autosuggestions`, `zsh-syntax-highlighting` and `zsh-autocomplete` plugins.
-3. Clones tools that aren't in Homebrew, git-fuzzy and fzf-git.sh, into `vendor/` (ignored by git).
-4. Runs every `<tool>/configure.sh`, `shell` first. These link the config files into place; `tmux/configure.sh` also clones tpm into `~/.tmux/plugins/tpm`.
-5. Makes zsh the login shell if it isn't already.
-
-## Layout
-
-```
-brew/        Brewfile, Homebrew env and helper functions
-code/        VS Code settings.json and keybindings.json
-curl/        .curlrc (simple progress bar for downloads)
-coreutils/   GNU tools ahead of the macOS ones, eza/bat/less settings, LS_COLORS
-fd/ fzf/     file finder and fuzzy finder settings
-git/         .gitconfig, global gitignore, commit message template, git aliases and functions
-gpg/         gpg-agent.conf (macOS passphrase dialog via pinentry-mac), gpg.conf (safer defaults, only if you have none), GPG_TTY
-lazygit/     icons, delta and difftastic diffs (cycle with |), VS Code as editor
-macos/       Finder helpers, Terminal.app theme, key bindings (Home/End = line start/end); preferences.sh (applied with --macos; read it first, preferences-diff.sh shows what it would change); security-check.sh lists FileVault, firewall, Gatekeeper, ... (read-only); README.md has the manual sudo steps (firewall, stealth mode, umask)
-python/      uv.toml and pip.conf (7-day cooldown on new package versions), PYTHONBREAKPOINT
-thefuck/ zoxide/   one setting each
-shell/       zsh startup files, aliases, functions, scripts for ~/bin
-ssh/ tmux/ vim/
-tig/         colors for tig (readable selected line)
-iterm2/      profiles (linked as an iTerm2 Dynamic Profile), color presets, key map
-vendor/      clones made by install.sh, not tracked
-```
-
-### How zsh is wired
-
-- `~/.zshenv` only sets `ZDOTDIR=~/.config/zsh`, so everything else lives in `~/.config/zsh/`. No `sudo` and no changes to `/etc`.
-- `.zshenv` loads every file in `~/.config/zsh/.env/` (for all shells: PATH, Homebrew, environment variables).
-- `.zprofile` loads `.zshenv` again after macOS's `path_helper`, so Homebrew and the GNU tools stay ahead of `/usr/bin`.
-- `.zshrc` loads oh-my-zsh, then every file in `~/.config/zsh/.rc/` (interactive shells: aliases, functions, key bindings).
-- History is in `~/.config/zsh/.zsh_history`. The powerlevel10k config `~/.config/zsh/.p10k.zsh` is a link to `shell/zsh/.p10k.zsh`.
-- `~/.aliases` and `~/.functions` are sourced if they exist, for machine-local additions you don't want in the repo; `~/.zshrc.local` is sourced last of all (any other machine-local setting), and tmux reads `~/.tmux.conf.local`.
-
-## Adding a tool
-
-1. Create a folder, e.g. `foo/`.
-2. Put settings in `foo/foo.rc.sh` (interactive shells) or `foo/foo.env.sh` (all shells, e.g. PATH).
-3. Add `foo/configure.sh`, which links them into place:
-
-   ```sh
-   # Sourced by install.sh (uses its link/run helpers and $DOTFILES, $SHELLRCDIR, $SHELLENVDIR)
-
-   link "$DOTFILES/foo/foo.rc.sh" "$SHELLRCDIR/"
-   ```
-
-   A target ending in `/` means "link into this folder". `link` backs up existing files and respects `--dry-run`. Wrap any other command that changes something in `run`, so `--dry-run` only prints it.
-4. If it needs a package, add it to `brew/Brewfile`. A package only pro machines need (like `jfrog-cli`) goes in `brew/Brewfile.pro` instead; see `--pro`.
-5. Run `./install.sh --skip-brew`.
-
-Files in `.env/` and `.rc/` load in alphabetical order, so a later file wins when two set the same alias or variable.
-
-### Startup time
+## Updating
 
 ```sh
-time zsh -i -c exit      # total time for a new interactive shell
-ZPROF=1 zsh -i -c exit   # per-function breakdown from zsh/zprof
+dotfiles-update
 ```
 
-Slow tools are loaded lazily: `fuck`/`fk` start thefuck (Python) only on first use, and `brew shellenv` runs once per shell.
+Runs `git pull`, `./install.sh --skip-brew` and `brew bundle`.
 
-## Checks
+## More
 
-`.github/workflows/ci.yml` runs on every push: shellcheck, `zsh -n` and `.github/scripts/check-duplicates.sh` (an alias or function defined twice) on Ubuntu, then on a macOS runner it parses the Brewfile, does a dry run, installs into a throwaway home, checks that a second run changes nothing, and starts zsh.
+[How it works](docs/internals.md): installer steps, layout, zsh startup, adding a tool.
 
-## Day to day
+## License
 
-Edit the files in the repo, not in `~`: they are the same files through the symlinks. Commit and push as usual.
-Re-run `./install.sh --skip-brew` after adding a new file, so it gets linked.
-`dotfiles-update` does all of it on any machine: `git pull`, `./install.sh --skip-brew`, then `brew bundle` for new packages.
-
-Some settings are kept but switched off, to enable later:
-
-- `git/.gitconfig`: the second half has commented settings from the previous config (`pull.rebase = true`, colors, `merge.tool`, …). `[commit] template` needs a `~/.stCommitMsg` file before you enable it.
-- `fzf/fzf.rc.sh`: settings from the old `zshrc`, marked `(old zshrc, overridden above)`.
-
-## Moving from the old setup
-
-On a Mac that ran an earlier version of these dotfiles:
-
-- `/etc/zshenv` may still contain `export ZDOTDIR=...` and a `path_helper` block. Both are harmless; remove them with `sudo` if you like.
-- `~/.rspec` and `~/.pryrc` point to files that were removed: `rm ~/.rspec ~/.pryrc`.
-- `~/.ssh/config` is now a link to `ssh/config`. The first run moves your old one to `~/.ssh/config.local`, which `ssh/config` includes at the top, so your hosts keep working. Trim the `Host *` settings out of it that `ssh/config` already has (and a bare `IdentityFile ~/.ssh/` line, if any).
-- `~/.zshrc` and `~/.fzf.zsh` are no longer read and can be deleted.
+[MIT](LICENSE)
