@@ -13,7 +13,7 @@ Working agreements for every project: small agreed steps, minimal changes, keep 
 |---|---|
 | Telemetry, error reporting, feedback surveys | Off |
 | Terminal title | Not changed by Claude Code |
-| Old sessions | Deleted after 14 days |
+| Old sessions | Deleted after 30 days |
 | Commit / PR attribution | None (no `Co-Authored-By`) |
 | Extended thinking | Always on |
 | Bypass-permissions mode | Disabled |

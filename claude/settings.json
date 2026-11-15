@@ -7,7 +7,7 @@
     "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1"
   },
   "feedbackSurveyRate": 0,
-  "cleanupPeriodDays": 14,
+  "cleanupPeriodDays": 30,
   "attribution": {
     "commit": "",
     "pr": "",
