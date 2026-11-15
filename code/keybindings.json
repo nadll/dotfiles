@@ -1,15 +1,5 @@
 [
   {
-    "key": "ctrl+shift+v",
-    "command": "pasteAndIndent.action",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "cmd+shift+v",
-    "command": "pasteAndIndent.action",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
     // added by Claude Code /terminal-setup: Shift+Enter = new line in Claude Code
     // (sends Esc+Enter to the terminal)
     "key": "shift+enter",

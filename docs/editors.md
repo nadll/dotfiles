@@ -8,7 +8,6 @@ Config: `code/settings.json`, `code/keybindings.json` (linked into `~/Library/Ap
 
 | Keys | Action |
 |---|---|
-| `Cmd-Shift-V` / `Ctrl-Shift-V` | Paste and indent (needs the "Paste and Indent" extension, which the Brewfile doesn't install) |
 | `Shift-Enter` (terminal) | New line in Claude Code instead of sending |
 
 The extensions the Brewfile installs: Claude Code, Material Icon Theme, Python (Pylance), Ruff (Python formatter), Shopify Theme Check.
