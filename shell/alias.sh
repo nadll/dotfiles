@@ -66,9 +66,11 @@ alias week='date +%V'
 # was DNS only, which fails on networks that block outside DNS servers (company networks):
 # alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 # Public IP: over HTTPS first, then a second service, then DNS as a last resort
+# -f: an HTTP error (proxy or captive-portal page) counts as a failure, so the next one is tried
+# --max-time 5: a service that hangs doesn't block the fallback
 function ip {
-  curl -s "https://icanhazip.com/" || \
-    curl -s "https://am.i.mullvad.net/ip" || \
+  curl -sf --max-time 5 "https://icanhazip.com/" || \
+    curl -sf --max-time 5 "https://am.i.mullvad.net/ip" || \
       dig @resolver1.opendns.com ANY myip.opendns.com +short }
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
