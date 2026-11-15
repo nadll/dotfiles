@@ -21,12 +21,10 @@ link "$DOTFILES/shell/.inputrc" "$HOME/.inputrc"
 
 # zsh now reads everything from $ZDOTDIR: carry over history from $HOME once
 # (the powerlevel10k config used to be copied here too, it's now linked from the repo above)
-for file in .zsh_history; do
-  if [ -f "$HOME/$file" ] && [ ! -e "$ZDOTDIR/$file" ]; then
-    info "Copying ~/$file to $(pretty "$ZDOTDIR/$file")"
-    run cp "$HOME/$file" "$ZDOTDIR/$file"
-  fi
-done
+if [ -f "$HOME/.zsh_history" ] && [ ! -e "$ZDOTDIR/.zsh_history" ]; then
+  info "Copying ~/.zsh_history to $(pretty "$ZDOTDIR/.zsh_history")"
+  run cp "$HOME/.zsh_history" "$ZDOTDIR/.zsh_history"
+fi
 
 # disable "Last Login" prompt when terminal starts new login shell
 # macos - Remove "Last login" message for new tabs in terminal - Stack Overflow https://stackoverflow.com/questions/15769615/remove-last-login-message-for-new-tabs-in-terminal
