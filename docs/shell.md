@@ -64,6 +64,7 @@ git ones are in [git.md](git.md).
 | `rs <src> <dst>` | rsync with progress, summary and compression; re-run copies only changes |
 | `diskspace_report` | Free/used space, like Finder counts it |
 | `cleanup` | Delete `.DS_Store` files below here |
+| `clsym` | Delete broken symlinks in this folder (not subfolders), without listing them first |
 | `as-tree` | Show a list of paths as a tree: `fd foo \| as-tree` |
 | `e <file>` / `E <file>` | Open in `$EDITOR` / in a split pane (tmux) |
 

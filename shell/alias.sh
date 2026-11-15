@@ -86,6 +86,8 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+# remove broken symlinks
+alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
 
 # brew update
 alias bupdate="brew update && brew upgrade && brew cleanup"  # brew upgrade includes casks
