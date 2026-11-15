@@ -143,6 +143,7 @@ git ones are in [git.md](git.md).
 | `open_in_split_pane <cmd>` | Run a command in a new tmux split (picks horizontal/vertical from the window shape) |
 | `editor_in_split_pane <file>` | `$EDITOR` in a split; used by `E` and by `nnn` |
 | `jwt <token> [1]` | Decode a JWT: the payload, or the header with `1` (needs `jq`) |
+| `wifi-password [--system] [--quiet] [SSID]` | Saved Wi-Fi password from the keychain; current network if no SSID; `--system` also searches the System keychain (sudo) |
 
 ## less
 
