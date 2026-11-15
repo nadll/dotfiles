@@ -142,6 +142,7 @@ git ones are in [git.md](git.md).
 | `tat [name]` | Attach to (or switch to) the tmux session named after this folder, creating it here |
 | `open_in_split_pane <cmd>` | Run a command in a new tmux split (picks horizontal/vertical from the window shape) |
 | `editor_in_split_pane <file>` | `$EDITOR` in a split; used by `E` and by `nnn` |
+| `jwt <token> [1]` | Decode a JWT: the payload, or the header with `1` (needs `jq`) |
 
 ## less
 
