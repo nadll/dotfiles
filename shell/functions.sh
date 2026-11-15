@@ -46,8 +46,8 @@ rgq() {
 frg() {
   if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
 
-  local rg_command="rg --column --line-number --no-heading --color=always --smart-case $*"
-  selection=$(($rg_command || true) | fzf +m --ansi \
+  # "$@" keeps each argument whole: frg "foo bar" searches for "foo bar", frg foo src searches src
+  selection=$( (rg --column --line-number --no-heading --color=always --smart-case "$@" || true) | fzf +m --ansi \
     --delimiter : --preview-window="right:wrap:+{2}-/2" \
     --preview "bat --style=numbers --color=always --highlight-line {2} {1}")
 
@@ -66,7 +66,7 @@ frg() {
 frgi() {
   local rg_command="rg --column --line-number --no-heading --color=always --smart-case "
   local query="$1"
-  selection=$(($rg_command '$query' || true ) | \
+  selection=$(($rg_command "$query" || true ) | \
     fzf +m --bind "change:reload:$rg_command {q} || true" --ansi --disabled --query "$query" \
     --delimiter : --preview-window="right:wrap:+{2}-/2" \
     --preview "bat --style=numbers --color=always --highlight-line {2} {1}")
