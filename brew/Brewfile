@@ -200,6 +200,8 @@ cask "visual-studio-code"
 vscode "anthropic.claude-code"
 # file icons, set in code/settings.json (workbench.iconTheme)
 vscode "pkief.material-icon-theme"
+# color theme, set in code/settings.json (workbench.colorTheme)
+vscode "catppuccin.catppuccin-vsc"
 # Shopify Liquid themes
 vscode "shopify.theme-check-vscode"
 # Python, brings Pylance (python.languageServer in code/settings.json)

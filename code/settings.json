@@ -149,7 +149,9 @@
     "claudeCode.useTerminal": true,
     // skip the Claude Code extension welcome screen
     "claudeCode.hideOnboarding": true,
-    "workbench.colorTheme": "Tomorrow Night Blue",
+    // Catppuccin extension (catppuccin.catppuccin-vsc, in brew/Brewfile), matches the iTerm2 colors
+    //"workbench.colorTheme": "Tomorrow Night Blue",
+    "workbench.colorTheme": "Catppuccin Mocha",
     "update.mode": "start",
     "update.showPostInstallInfo": true,
     // Material Icon Theme (pkief.material-icon-theme, in brew/Brewfile); was Great Icons, few updates lately
