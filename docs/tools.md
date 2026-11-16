@@ -19,7 +19,7 @@ Not from Homebrew: oh-my-zsh, powerlevel10k, the zsh plugins, tpm, and `vendor/`
 | `thefuck` | `fuck` / `fk`: fix the last command |
 | `fx`, `jq` | JSON viewer / processor |
 | `httpie` | `http` / `https` requests |
-| `htop`, `btop`, `mactop` | Process / resource / Apple Silicon monitors |
+| `htop`, `btop`, `mactop` | Process / resource / Apple Silicon monitors (btop: Catppuccin Mocha theme from `btop/`, pick it in Esc -> Options) |
 | `fastfetch` | System information summary next to a logo |
 | `ncdu`, `dust` | Disk usage, interactive / as a tree |
 | `bandwhich` | Bandwidth per process |

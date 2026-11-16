@@ -50,6 +50,7 @@ Then:
 
 ```
 bat/         Catppuccin Mocha theme for bat, linked into ~/.config/bat/themes
+btop/        Catppuccin Mocha theme for btop, linked into ~/.config/btop/themes
 brew/        Brewfile, Homebrew env and helper functions
 code/        VS Code settings.json and keybindings.json
 curl/        .curlrc (simple progress bar for downloads)
