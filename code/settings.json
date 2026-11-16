@@ -36,6 +36,9 @@
     ],
     "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "top",
+    // animated scrolling in the editor and in lists/trees (explorer, Source Control)
+    "editor.smoothScrolling": true,
+    "workbench.list.smoothScrolling": true,
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
     "emmet.includeLanguages": {
