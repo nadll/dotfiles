@@ -26,9 +26,9 @@ export FZF_DEFAULT_OPTS="\
   --bind='ctrl-\:change-preview-window(hidden|bottom,50%|right:60%)'"
 
 # Catppuccin Mocha colors from https://github.com/catppuccin/fzf (MIT), themes/catppuccin-fzf-mocha.sh,
-# appended to the options above instead of replacing them
+# appended to the options above instead of replacing them; bg:#1E1E2E dropped so fzf keeps the terminal background (iTerm2 transparency)
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
---color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+--color=bg+:#313244,spinner:#F5E0DC,hl:#F38BA8 \
 --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
 --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
 --color=selected-bg:#45475A \
