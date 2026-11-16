@@ -38,6 +38,7 @@ After installing:
 2. Run `./git_setup.sh` to set your git name and email.
 3. In iTerm2, make the **Default** profile from these dotfiles the default.
 4. In tmux, install the plugins: `Ctrl-a` then `I`.
+5. In btop, pick the theme once: `Esc` -> Options -> Color theme: `catppuccin_mocha` (btop rewrites its config, so the dotfiles cannot set it). If the background is not transparent, also set "Theme background" off there.
 
 ## Local customizations
 
