@@ -86,6 +86,8 @@
     "git.addAICoAuthor": "off",
     // a subfolder of a repo opened on its own still gets Source Control, without asking first
     "git.openRepositoryInParentFolders": "always",
+    // who changed the current line and when, in gray at the end of the line
+    "git.blame.editorDecoration.enabled": true,
     "notebook.diff.ignoreMetadata": true,
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 13,
