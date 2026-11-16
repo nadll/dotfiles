@@ -49,6 +49,7 @@ Then:
 ## Layout
 
 ```
+bat/         Catppuccin Mocha theme for bat, linked into ~/.config/bat/themes
 brew/        Brewfile, Homebrew env and helper functions
 code/        VS Code settings.json and keybindings.json
 curl/        .curlrc (simple progress bar for downloads)

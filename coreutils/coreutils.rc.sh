@@ -5,7 +5,9 @@ export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 # Configure "sharkdp/bat", cat analogue with syntax highlighting
 export BAT_PAGER="less -R"
 export BAT_STYLE="changes,numbers"
-export BAT_THEME="TwoDark"
+# export BAT_THEME="TwoDark"
+# Catppuccin Mocha is installed by bat/configure.sh
+export BAT_THEME="Catppuccin Mocha"
 
 # LESS configuration:
 # -M, always show prompt with line number / total number of lines

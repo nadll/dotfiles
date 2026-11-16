@@ -8,7 +8,7 @@ Not from Homebrew: oh-my-zsh, powerlevel10k, the zsh plugins, tpm, and `vendor/`
 | Tool | Use it for |
 |---|---|
 | `eza` | `ls` with icons and git status (`ls`, `l`, `ll`, `lt`) |
-| `bat` | `cat` with syntax colors (`cat`, `catn`), fzf previews |
+| `bat` | `cat` with syntax colors (`cat`, `catn`), fzf previews; Catppuccin Mocha theme from `bat/` |
 | `fd` | Finding files (`fd <name>`), feeds fzf |
 | `ripgrep` (`rg`) | Searching file contents (`frg`, `rgu`, ...) |
 | `fzf` | Fuzzy picker behind `Ctrl-T`, `Ctrl-R`, `Alt-C`, `cd` and many functions |
