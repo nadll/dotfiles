@@ -32,7 +32,8 @@ export CLICOLOR=1
 # export LS_COLORS="$(vivid generate lava)";
 # export LS_COLORS="$(vivid generate iceberg-dark)";
 # export LS_COLORS="$(vivid generate jellybeans)";
-command -v vivid >/dev/null && export LS_COLORS="$(vivid generate gruvbox-dark)";
+# command -v vivid >/dev/null && export LS_COLORS="$(vivid generate gruvbox-dark)";
+command -v vivid >/dev/null && export LS_COLORS="$(vivid generate catppuccin-mocha)";
 
 # tell "eza" to use LS_COLORS via 'reset' command and specify eza specific extra coloring
 GREY_COLOR="38;5;248"

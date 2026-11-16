@@ -14,7 +14,7 @@ Not from Homebrew: oh-my-zsh, powerlevel10k, the zsh plugins, tpm, and `vendor/`
 | `fzf` | Fuzzy picker behind `Ctrl-T`, `Ctrl-R`, `Alt-C`, `cd` and many functions |
 | `zoxide` | `z <name>` / `zi`: jump to frequent folders |
 | `tree` | Tree listings, fzf folder previews |
-| `vivid` | Generates `LS_COLORS` (gruvbox-dark) |
+| `vivid` | Generates `LS_COLORS` (catppuccin-mocha) |
 | `tlrc` | `tldr <cmd>`: short examples |
 | `thefuck` | `fuck` / `fk`: fix the last command |
 | `fx`, `jq` | JSON viewer / processor |
