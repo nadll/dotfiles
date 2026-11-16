@@ -147,6 +147,8 @@
     "security.workspace.trust.untrustedFiles": "open",
     "claudeCode.preferredLocation": "panel",
     "claudeCode.useTerminal": true,
+    // skip the Claude Code extension welcome screen
+    "claudeCode.hideOnboarding": true,
     "workbench.colorTheme": "Tomorrow Night Blue",
     "update.mode": "start",
     "update.showPostInstallInfo": true,
