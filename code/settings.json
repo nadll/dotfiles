@@ -44,6 +44,8 @@
     "emmet.showSuggestionsAsSnippets": true,
     "emmet.triggerExpansionOnTab": true,
     "explorer.confirmDelete": false,
+    // no pop-ups suggesting the extensions a repo recommends (.vscode/extensions.json)
+    "extensions.ignoreRecommendations": true,
     "files.exclude": {
         "__pycache__": true,
         "_site": true,

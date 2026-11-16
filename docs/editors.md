@@ -11,7 +11,7 @@ Config: `code/settings.json`, `code/keybindings.json` (linked into `~/Library/Ap
 | `Shift-Enter` (terminal) | New line in Claude Code instead of sending |
 
 The extensions the Brewfile installs: Claude Code, Material Icon Theme, Python (Pylance), Ruff (Python formatter), Shopify Theme Check.
-Settings highlights: Ruff formats Python on save, indentation detected per file, trailing whitespace shown, git auto-fetch, AI co-author trailer off, telemetry and experiments off.
+Settings highlights: Ruff formats Python on save, indentation detected per file, trailing whitespace shown, git auto-fetch, AI co-author trailer off, no extension recommendation pop-ups, telemetry and experiments off.
 `code` from the shell; `git difftool` / `git mergetool` open VS Code.
 
 ## Vim
