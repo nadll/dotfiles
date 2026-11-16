@@ -36,6 +36,8 @@ Completion skips `.`, `..` and `.DS_Store`, and uses `LS_COLORS` colors.
 
 ## fzf
 
+Colors: Catppuccin Mocha.
+
 | Keys | Action |
 |---|---|
 | `Ctrl-T` | Pick files (git files, else `fd`) and paste them on the command line |
