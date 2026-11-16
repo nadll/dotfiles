@@ -1,6 +1,7 @@
 # iTerm2
 
 Config: `iterm2/settings/profiles.json` (linked as a Dynamic Profile), `iterm2/settings/keys.itermkeymap` (import by hand), `iterm2/colors/`.
+Colors: Catppuccin Mocha (also in `iterm2/colors/` as a preset), slightly transparent with blur.
 Both profiles use Droid Sans Mono Nerd Font. Make one of them the default in Settings → Profiles.
 
 ## Both profiles
