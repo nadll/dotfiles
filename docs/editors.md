@@ -10,7 +10,7 @@ Config: `code/settings.json`, `code/keybindings.json` (linked into `~/Library/Ap
 |---|---|
 | `Shift-Enter` (terminal) | New line in Claude Code instead of sending |
 
-The extensions the Brewfile installs: Claude Code, Catppuccin (color theme, Mocha), Material Icon Theme, Python (Pylance), Ruff (Python formatter), Shopify Theme Check.
+The extensions the Brewfile installs: Claude Code, Catppuccin (color theme, Mocha), Catppuccin Icons (file icons, Mocha; Material Icon Theme also installed), Python (Pylance), Ruff (Python formatter), Shopify Theme Check.
 Settings highlights: Ruff formats Python on save, indentation detected per file, trailing whitespace shown, git auto-fetch, AI co-author trailer off, no extension recommendation pop-ups, repo found from a subfolder, inline blame, merge editor for conflicts, smooth scrolling, no Claude Code welcome screen, telemetry and experiments off.
 `code` from the shell; `git difftool` / `git mergetool` open VS Code.
 
