@@ -88,6 +88,8 @@
     "git.openRepositoryInParentFolders": "always",
     // who changed the current line and when, in gray at the end of the line
     "git.blame.editorDecoration.enabled": true,
+    // merge conflicts open in the 3-pane merge editor (incoming / current / result)
+    "git.mergeEditor": true,
     "notebook.diff.ignoreMetadata": true,
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 13,
