@@ -156,7 +156,5 @@
     "update.showPostInstallInfo": true,
     // Material Icon Theme (pkief.material-icon-theme, in brew/Brewfile); was Great Icons, few updates lately
     //"workbench.iconTheme": "vscode-great-icons",
-    //"workbench.iconTheme": "material-icon-theme",
-    // Catppuccin Icons (catppuccin.catppuccin-vsc-icons, in brew/Brewfile), matches the Catppuccin Mocha colors
-    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.iconTheme": "material-icon-theme",
 }

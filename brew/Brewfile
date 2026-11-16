@@ -200,8 +200,6 @@ cask "visual-studio-code"
 vscode "anthropic.claude-code"
 # file icons, set in code/settings.json (workbench.iconTheme)
 vscode "pkief.material-icon-theme"
-# Catppuccin file icons (the one in use), set in code/settings.json (workbench.iconTheme)
-vscode "catppuccin.catppuccin-vsc-icons"
 # color theme, set in code/settings.json (workbench.colorTheme)
 vscode "catppuccin.catppuccin-vsc"
 # Shopify Liquid themes
