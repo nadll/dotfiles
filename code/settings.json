@@ -84,6 +84,8 @@
     "git.autofetch": true,
     // don't add an AI "Co-authored-by" trailer to commit messages (Copilot chat/agent)
     "git.addAICoAuthor": "off",
+    // a subfolder of a repo opened on its own still gets Source Control, without asking first
+    "git.openRepositoryInParentFolders": "always",
     "notebook.diff.ignoreMetadata": true,
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 13,
