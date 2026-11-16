@@ -1,5 +1,7 @@
 # Main background, empty for terminal default, need to be empty if you want transparent background
-theme[main_bg]="#1e1e2e"
+#theme[main_bg]="#1e1e2e"
+# empty: keeps the terminal background (iTerm2 transparency), like fzf
+theme[main_bg]=""
 
 # Main text color
 theme[main_fg]="#cdd6f4"
