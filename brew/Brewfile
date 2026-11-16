@@ -121,6 +121,9 @@ brew "htop"
 # btop - resource monitor with graphs for CPU, memory, disks, network https://github.com/aristocratos/btop
 brew "btop"
 
+# Fastfetch - shows system information (OS, hardware, shell) next to a logo https://github.com/fastfetch-cli/fastfetch
+brew "fastfetch"
+
 # Shell script analysis tool https://www.shellcheck.net/
 # find bugs in your shell scripts
 brew "shellcheck"

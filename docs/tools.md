@@ -20,6 +20,7 @@ Not from Homebrew: oh-my-zsh, powerlevel10k, the zsh plugins, tpm, and `vendor/`
 | `fx`, `jq` | JSON viewer / processor |
 | `httpie` | `http` / `https` requests |
 | `htop`, `btop`, `mactop` | Process / resource / Apple Silicon monitors |
+| `fastfetch` | System information summary next to a logo |
 | `ncdu`, `dust` | Disk usage, interactive / as a tree |
 | `bandwhich` | Bandwidth per process |
 | `nnn` | Terminal file manager |
