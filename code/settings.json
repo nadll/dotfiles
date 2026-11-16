@@ -135,8 +135,13 @@
     "workbench.startupEditor": "newUntitledFile",
     // where the panel (terminal, problems, output) opens: bottom, left or right
     "workbench.panel.defaultLocation": "bottom",
+    // old orange title bar
+    //"workbench.colorCustomizations": {
+    //    "titleBar.activeBackground": "#ffb70097"
+    //},
+    // Catppuccin Mocha Mauve title bar (#cba6f7, ~60% opaque like the old orange), matches fzf/tmux accents
     "workbench.colorCustomizations": {
-        "titleBar.activeBackground": "#ffb70097"
+        "titleBar.activeBackground": "#cba6f797"
     },
     // Nerd Font so the p10k prompt icons render. brew/Brewfile installs it as "MesloLGS Nerd Font";
     // "MesloLGS NF" is the name of p10k's own copy, used if that one is installed instead
