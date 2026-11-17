@@ -6,6 +6,28 @@ Both profiles use MesloLGS Nerd Font 14 (`font-meslo-lg-nerd-font` in brew/Brewf
 
 Change profile settings in `iterm2/settings/profiles.json`, not in iTerm2 Settings: editing a Dynamic Profile there makes iTerm2 write it back to the file, keeping only a few keys (`"Rewritable": true`). If that happens, restore the file with `git checkout -- iterm2/settings/profiles.json`.
 
+## Option keys and German layout characters
+
+On a German Mac keyboard these characters need Option:
+
+| Character | Keys |
+|---|---|
+| `\` | `Shift-Option-7` |
+| `\|` | `Option-7` |
+| `~` | `Option-N` |
+| `@` | `Option-L` |
+| `[` / `]` | `Option-5` / `Option-6` |
+| `{` / `}` | `Option-8` / `Option-9` |
+
+In iTerm2 they only work with an Option key set to **Normal**. A key set to **Esc+** sends Escape plus the key instead (the terminal Alt/Meta key, e.g. `Alt-C`, `Alt-.`). Current settings in `profiles.json`:
+
+| Profile | Left Option | Right Option |
+|---|---|---|
+| Default | Esc+ (`"Option Key Sends": 2`) | Normal (`"Right Option Key Sends": 0`) |
+| tmux | Esc+ (`2`) | Meta (`1`, deprecated, no characters either) |
+
+So for now: type these characters with the **right** Option key in the Default profile; in the tmux profile neither Option key types them. Values: `0` Normal, `1` Meta, `2` Esc+.
+
 ## Both profiles
 
 These send the key codes zsh, tmux and Vim expect:
