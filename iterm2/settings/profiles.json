@@ -369,7 +369,7 @@
     "Color Space" : "sRGB"
   },
   "Blur" : true,
-  "Normal Font" : "MesloLGS-NF-Regular 14",
+  "Normal Font" : "MesloLGSNF-Regular 14",
   "Vertical Spacing" : 1,
   "Ansi 7 Color" : {
     "Red Component" : 0.6509803921568628,
@@ -951,7 +951,7 @@
     "Color Space" : "sRGB"
   },
   "Blur" : true,
-  "Normal Font" : "MesloLGS-NF-Regular 14",
+  "Normal Font" : "MesloLGSNF-Regular 14",
   "Vertical Spacing" : 1,
   "Ansi 7 Color" : {
     "Red Component" : 0.6509803921568628,
@@ -997,7 +997,7 @@
   "Screen" : -1,
   "Initial Use Transparency" : true,
   "HotKey Characters Ignoring Modifiers" : "`",
-  "Non Ascii Font" : "MesloLGS-NF-Regular 14",
+  "Non Ascii Font" : "MesloLGSNF-Regular 14",
   "Ansi 13 Color" : {
     "Red Component" : 0.9490196078431372,
     "Green Component" : 0.6823529411764706,
