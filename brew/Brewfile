@@ -224,6 +224,9 @@ cask "localsend"
 # KeePassXC: offline password manager for KeePass (.kdbx) databases https://keepassxc.org
 cask "keepassxc"
 
+# Firefox web browser https://www.firefox.com
+cask "firefox"
+
 # Docker Sandboxes: run coding agents in isolated sandboxes
 cask "docker/tap/sbx", trusted: true
 

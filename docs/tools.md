@@ -62,6 +62,7 @@ Not in the Brewfile.
 | Sourcetree | git GUI |
 | LocalSend | AirDrop-like sharing with Windows, Linux, Android |
 | KeePassXC | Offline password manager (KeePass `.kdbx` databases) |
+| Firefox | Web browser |
 | Vorssaint | Menu bar utilities |
 | sbx | Docker Sandboxes for coding agents |
 | Fonts | MesloLGS Nerd Font, Droid Sans Mono (Powerline and Nerd Font) |
