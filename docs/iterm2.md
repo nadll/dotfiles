@@ -2,7 +2,9 @@
 
 Config: `iterm2/settings/profiles.json` (linked as a Dynamic Profile), `iterm2/settings/keys.itermkeymap` (import by hand), `iterm2/colors/`.
 Colors: Catppuccin Mocha (also in `iterm2/colors/` as a preset), slightly transparent with blur.
-Both profiles use Droid Sans Mono Nerd Font. Make one of them the default in Settings → Profiles.
+Both profiles use MesloLGS NF 14 (the p10k copy of the Meslo Nerd Font). Make one of them the default in Settings → Profiles.
+
+Change profile settings in `iterm2/settings/profiles.json`, not in iTerm2 Settings: editing a Dynamic Profile there makes iTerm2 write it back to the file, keeping only a few keys (`"Rewritable": true`). If that happens, restore the file with `git checkout -- iterm2/settings/profiles.json`.
 
 ## Both profiles
 
