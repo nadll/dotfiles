@@ -61,6 +61,7 @@ Not in the Brewfile.
 | iTerm2 | Profiles from `iterm2/` ([iterm2.md](iterm2.md)) |
 | Sourcetree | git GUI |
 | LocalSend | AirDrop-like sharing with Windows, Linux, Android |
+| KeePassXC | Offline password manager (KeePass `.kdbx` databases) |
 | Vorssaint | Menu bar utilities |
 | sbx | Docker Sandboxes for coding agents |
 | Fonts | MesloLGS Nerd Font, Droid Sans Mono (Powerline and Nerd Font) |
