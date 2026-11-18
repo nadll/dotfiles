@@ -13,3 +13,6 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 vendor/
+
+# Company MCP server (URL stays out of the repo), created by hand per machine
+claude/mcp/gitlab.json
