@@ -11,3 +11,5 @@ link "$DOTFILES/claude/statusline.sh" "$HOME/.claude/statusline.sh"
 # hook scripts, set in "hooks" in settings.json
 link "$DOTFILES/claude/hooks/stop-notify.sh" "$HOME/.claude/hooks/stop-notify.sh"
 link "$DOTFILES/claude/hooks/format-python.sh" "$HOME/.claude/hooks/format-python.sh"
+# custom theme, selected as "theme": "custom:catppuccin-mocha" in settings.json
+link "$DOTFILES/claude/themes/catppuccin-mocha.json" "$HOME/.claude/themes/catppuccin-mocha.json"

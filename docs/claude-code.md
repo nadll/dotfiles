@@ -1,6 +1,6 @@
 # Claude Code
 
-Config: `claude/`, linked into `~/.claude/` (`settings.json`, `CLAUDE.md`, `statusline.sh`, `hooks/`).
+Config: `claude/`, linked into `~/.claude/` (`settings.json`, `CLAUDE.md`, `statusline.sh`, `hooks/`, `themes/`).
 Claude Code writes `settings.json` itself (`/config`, theme), so those changes show up in `git status`.
 
 ## `CLAUDE.md`
@@ -11,6 +11,7 @@ Working agreements for every project: small agreed steps, minimal changes, keep 
 
 | Setting | Value |
 |---|---|
+| Theme | `custom:catppuccin-mocha` (`themes/catppuccin-mocha.json`, was `dark-ansi`) |
 | Telemetry, error reporting, feedback surveys | Off |
 | Terminal title | Not changed by Claude Code |
 | Old sessions | Deleted after 30 days |
