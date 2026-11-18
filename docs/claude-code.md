@@ -1,6 +1,6 @@
 # Claude Code
 
-Config: `claude/`, linked into `~/.claude/` (`settings.json`, `CLAUDE.md`, `statusline.sh`, `hooks/`, `themes/`).
+Config: `claude/`, linked into `~/.claude/` (`settings.json`, `CLAUDE.md`, `statusline.sh`, `hooks/`, `themes/`; MCP servers from `mcp/`).
 Claude Code writes `settings.json` itself (`/config`, theme), so those changes show up in `git status`.
 
 ## `CLAUDE.md`
@@ -43,6 +43,27 @@ The repo's remotes use SSH, so `git fetch/pull/push` fail inside the sandbox and
 | After Claude edits a file | `hooks/format-python.sh`: Ruff formats it, if it's Python |
 | Claude finishes | `hooks/stop-notify.sh`: macOS notification with the Hero sound |
 | Claude needs you | Glass sound |
+
+## MCP servers
+
+`claude/configure.sh` adds every `claude/mcp/<name>.json` as a user-scope server (`claude mcp add-json --scope user <name>`) unless `claude mcp get <name>` already finds it. Never put tokens in these files.
+
+The company GitLab server is gitignored (`claude/mcp/gitlab.json`) so its URL stays out of the repo. Create it by hand on each machine:
+
+```json
+{ "type": "http", "url": "https://<company-gitlab-host>/api/v4/mcp" }
+```
+
+Then `./install.sh --skip-brew`, and in Claude Code `/mcp` → gitlab → log in in the browser (OAuth; the token stays out of any file).
+To change a server: `claude mcp remove <name>`, then run the install again. Existing servers: `jq '.mcpServers' ~/.claude.json`.
+
+If the login works but the server still fails:
+
+- The URL must end in `/api/v4/mcp` (not just `/api/v4`).
+- `curl -i https://<host>/api/v4/mcp`: 401 = endpoint exists; 404 = MCP not enabled on that GitLab (GitLab 18.x, Premium/Ultimate with Duo, beta features on: ask IT).
+- Company TLS certificate: `export NODE_EXTRA_CA_CERTS=/path/to/company-root-ca.pem` (e.g. in `~/.zshrc.local`), restart Claude.
+- Fallback transport: `claude mcp add --scope user gitlab -- npx -y mcp-remote https://<host>/api/v4/mcp`.
+- Details: `claude --debug`, look for the gitlab lines.
 
 ## Status line
 
