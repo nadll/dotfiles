@@ -396,14 +396,15 @@ function top-size() {
 # Claude in an sbx sandbox for the current folder. First time: create it with the dotfiles
 # repo ($DOTFILES, set by install.sh) mounted read-only and run claude/sandbox-init.sh inside
 # (theme, status line, light settings). Afterwards it just re-attaches.
-#   cd ~/code/myproject && sbxc
+#   cd ~/code/myproject && sbxc            # sandbox claude-myproject
+#   cd ~/code/myproject && sbxc work-api   # sandbox work-api (same name again re-attaches)
 function sbxc() {
     if [ -z "$DOTFILES" ] || [ ! -x "$DOTFILES/claude/sandbox-init.sh" ]; then
         echo "sbxc: \$DOTFILES not set or no claude/sandbox-init.sh there (re-run install.sh)" >&2
         return 1
     fi
-    # same name sbx uses by default (claude-<folder>), invalid characters replaced by -
-    local name="claude-${${PWD:t}//[^A-Za-z0-9.-]/-}"
+    # name from the first argument, else the one sbx uses by default (claude-<folder>, invalid characters replaced by -)
+    local name="${1:-claude-${${PWD:t}//[^A-Za-z0-9.-]/-}}"
     if ! sbx inspect "$name" >/dev/null 2>&1; then
         if [ "${PWD:A}" = "${DOTFILES:A}" ]; then
             sbx create --name "$name" claude . || return
