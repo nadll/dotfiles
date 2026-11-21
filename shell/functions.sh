@@ -392,3 +392,25 @@ function grepUrl() {
 function top-size() {
     du -hs * | sort -rh | head -10
 }
+
+# Claude in an sbx sandbox for the current folder. First time: create it with the dotfiles
+# repo ($DOTFILES, set by install.sh) mounted read-only and run claude/sandbox-init.sh inside
+# (theme, status line, light settings). Afterwards it just re-attaches.
+#   cd ~/code/myproject && sbxc
+function sbxc() {
+    if [ -z "$DOTFILES" ] || [ ! -x "$DOTFILES/claude/sandbox-init.sh" ]; then
+        echo "sbxc: \$DOTFILES not set or no claude/sandbox-init.sh there (re-run install.sh)" >&2
+        return 1
+    fi
+    # same name sbx uses by default (claude-<folder>), invalid characters replaced by -
+    local name="claude-${${PWD:t}//[^A-Za-z0-9.-]/-}"
+    if ! sbx inspect "$name" >/dev/null 2>&1; then
+        if [ "${PWD:A}" = "${DOTFILES:A}" ]; then
+            sbx create --name "$name" claude . || return
+        else
+            sbx create --name "$name" claude . "${DOTFILES}:ro" || return
+        fi
+        sbx exec "$name" "$DOTFILES/claude/sandbox-init.sh" || return
+    fi
+    sbx run --name "$name"
+}

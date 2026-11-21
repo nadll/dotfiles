@@ -36,6 +36,13 @@ Secret environment variables (`GITHUB_TOKEN`, `GH_TOKEN`, `NPM_TOKEN`, `ANTHROPI
 Network: github.com, api.github.com, `*.githubusercontent.com`, pypi.org, files.pythonhosted.org.
 The repo's remotes use SSH, so `git fetch/pull/push` fail inside the sandbox and Claude retries them outside (push asks first).
 
+## sbx sandboxes (Docker Sandboxes)
+
+An sbx sandbox is a Linux VM with its own `~/.claude`, so the Mac setup above isn't there.
+`sbxc` (in `shell/functions.sh`) starts Claude in a sandbox for the current folder. The first time, it creates the sandbox with this repo (`$DOTFILES`) mounted read-only and runs `claude/sandbox-init.sh` inside it. After that, it re-attaches.
+`claude/sandbox-init.sh` links the theme, status line, `CLAUDE.md` and the Python format hook, and merges a light part of `settings.json` (env, attribution, deny/ask rules, theme, status line, format hook) into the sandbox's own settings. It leaves out allow rules, the Claude sandbox, the macOS sound hooks and MCP servers.
+For a sandbox created without `sbxc` that mounts this repo, run `./claude/sandbox-init.sh` in it once, then restart `claude`.
+
 ## Hooks
 
 | When | What happens |
