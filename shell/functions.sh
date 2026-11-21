@@ -412,6 +412,9 @@ function sbxc() {
             sbx create --name "$name" claude . "${DOTFILES}:ro" || return
         fi
         sbx exec "$name" "$DOTFILES/claude/sandbox-init.sh" || return
+        # git identity from the Mac (~/.gitconfig.local), else commits are agent@<hostname>
+        sbx exec "$name" git config --global user.name  "$(git config --get user.name)"
+        sbx exec "$name" git config --global user.email "$(git config --get user.email)"
     fi
     sbx run --name "$name"
 }
